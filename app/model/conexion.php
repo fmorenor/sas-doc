@@ -4,9 +4,9 @@
     $usuariobase = "correcaminosu";
     $passwordbase = "beepbeep";
     
-    $link = @mysql_connect($servidor,$usuariobase, $passwordbase)
+    $link = mysqli_connect($servidor,$usuariobase, $passwordbase)
         or die ("No se pudo establecer conexión");
         
-    $db = @mysql_select_db($basedatos,$link)
+    $db = mysqli_select_db($link, $basedatos)
         or die ("No se encuentra la base de datos");
 ?>

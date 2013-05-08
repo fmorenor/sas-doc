@@ -59,6 +59,7 @@
 			
 			while($row = mysqli_fetch_array($sql)){
 				$userDataTemp['id_usuario'][] = $row['id'];
+				$userDataTemp['nombre'][] = $row['nombre'];
 				$userDataTemp['id_privilegios'][] = $row['id_privilegios'];
 				$userDataTemp['id_grupo'][] = $row['id_grupo'];
 				$userDataTemp['recibir_correo'][] = $row['recibir_correo'];
@@ -69,13 +70,13 @@
 		// Consultar en la base de datos si el grupo ya existe
 			$id_grupo = 0;
 			$sql = mysqli_query($link, "SELECT * FROM catalogo_grupos
-								WHERE nombre_grupo = '".utf8_decode($grupo)."'; ");
+								WHERE nombre_grupo = '".$grupo."'; ");
 			while($row = mysqli_fetch_array($sql)){				
 				$id_grupo = $row['id'];
 			}		
 			if($id_grupo == 0){
 				$insert_grupo = mysqli_query($link, "INSERT INTO catalogo_grupos
-													SET nombre_grupo = '".utf8_decode($grupo)."'; ");
+													SET nombre_grupo = '".$grupo."'; ");
 				$id_grupo = mysqli_insert_id($link);
 			}	
 		
@@ -89,15 +90,23 @@
 					$id_usuario_anterior = (implode(",",$idUTemp) != "") ? implode(",",$idUTemp) : null;				
 					
 					$_SESSION['id_usuario'] = $userDataTemp['id_usuario'][0];
+					$_SESSION['nombre'] = $userDataTemp['nombre'][0];
 					$_SESSION['id_privilegios'] = $userDataTemp['id_privilegios'][0];
 					$_SESSION['id_grupo'] = $userDataTemp['id_grupo'][0];
 					$_SESSION['recibir_correo'] = $userDataTemp['recibir_correo'][0];
 					$_SESSION['alerta_pendientes'] = $userDataTemp['alerta_pendientes'][0];
-					$_SESSION['id_usuario_anterior'] = $id_usuario_anterior;				
+					$_SESSION['id_usuario_anterior'] = $id_usuario_anterior;
+					
+					if($userDataTemp['nombre'][0] != $nombre_completo){
+						$update = mysqli_query($link, "UPDATE catalogo_usuarios
+														SET nombre = '".$nombre_completo."'
+														WHERE user = '".$login."'; ");
+					}
+					
 			} else {
 				// Si no existe el usuario, como es válido se agrega a la base de datos				
-					$insert = mysqli_query($link, "INSERT INTO catalogo_usuarios ( `user`, `id_grupo`)
-										   VALUES ('".$login."', '".$id_grupo."');");
+					$insert = mysqli_query($link, "INSERT INTO catalogo_usuarios ( `user`, `nombre`, `id_grupo`)
+										   VALUES ('".$login."', '".$nombre_completo."', '".$id_grupo."');");
 					
 					echo mysqli_error($link);
 					

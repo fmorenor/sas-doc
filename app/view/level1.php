@@ -2,8 +2,8 @@
     
 <div class="row">
     
-    <div class="span4 itemList" id="itemListL1"></div>
+    <div class="span5 itemList" id="itemListL1"></div>
     
-    <div class="span7 offset1 itemContent"  id="itemContentL1"></div>
+    <div class="span7 itemContent"  id="itemContentL1"></div>
     
 </div>

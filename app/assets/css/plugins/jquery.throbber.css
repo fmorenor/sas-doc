@@ -1,6 +1,6 @@
 .ui-throbber-image {
 	position: absolute;
-	background-image: url("../images/spinner_black32.png");
+	background-image: url("../../img/spinner_black32.png");
 	height: 32px;
 	width: 992px;
 	margin: 0;

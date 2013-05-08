@@ -3,7 +3,8 @@
 		<div class="span2">            
 		</div>
 		 <div class="span8">
-			<div class="anlt_header">SAS-DOC .: Sistema de administración y seguimiento de documentos</div>
+			<!--<div class="anlt_header">SAS-DOC .: Sistema de administración y seguimiento de documentos</div>-->
+			<div class="anlt_header">Documentos</div>
 		</div>
 		<div class="span2 welcome-message">            
 		</div>

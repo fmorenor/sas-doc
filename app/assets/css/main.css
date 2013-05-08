@@ -1,0 +1,213 @@
+body{
+	background-image: url("../img/bg/wavegrid.png");
+	font-family:Raleway;
+	font-size: 14px;
+}
+
+#content1 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#itemContentL1{
+	position: relative;
+	left: 20px;
+}
+
+a { outline: none !important; color: #FFFFFF; font-weight: bold; }
+a:hover { color: #999999 }
+
+header {
+	padding: 10px 0 10px;
+	background: #e9e9e9;
+	background-image: url("../img/bg/px_by_Gre3g.png");
+	border-bottom: 1px solid #cfcfcf;
+	-webkit-box-shadow: 0 1px 0 #fff;
+	-moz-box-shadow: 0 1px 0 #fff;
+	-ms-box-shadow: 0 1px 0 #fff;
+	box-shadow: 0 1px 0 #fff;
+}
+	
+.anlt_header{       
+	font-size: 1.4em;
+	font-weight: bold;
+	line-height: 32px;
+	margin: 0;
+	padding: 0 0 0 50px;
+	text-align: center;
+}
+	
+.anlt_content {
+	background: #fafafa;
+	font-size: 1.4em;
+	line-height: 20px;
+	text-align: center;
+	margin: 0;
+	padding: 12px 10px;
+	font-weight: 300;
+	-webkit-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 4px;
+}	
+
+#encabezado{
+	color: #EFEFEF;
+}
+ 
+.navbar{
+	margin-bottom: 0px;
+}
+
+.navbar .nav > li > a {
+	color:#000000;
+	font-weight:normal;
+}
+
+.navbar .nav > li > a:hover {
+	font-weight: bold;
+}
+
+.input-append, .input-prepend{
+	margin-bottom:0;
+}
+
+/* LOGIN */
+
+#login{
+	padding-top: 14px;
+}
+
+.ui-widget {
+	font-family:Raleway !important;
+}
+
+.ui-dialog{
+	font-size: 0.95em !important;
+}
+
+.ui-dialog button{
+	font-size: 0.8em !important;
+}
+
+.welcome-message {
+	color: #cccccc;
+    font-size: 0.75em;
+	line-height: 12px;
+    text-align: right;
+}
+
+.hidden-desktop .welcome-message {
+	margin-left: 60px;
+}
+
+/* APP */
+
+.itemList{
+}
+
+.itemContent{
+	
+}
+
+/* LEVEL 1 */
+
+#itemContentL1 #resume{
+	background-color: #FFFFFF;
+	text-align: center;
+	padding: 20px 0px;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	cursor:default;
+}
+
+.resume-value{
+	font-size: 2em;
+	font-weight: bold;
+	padding: 10px 0;
+}
+
+.resume-subvalue{
+	font-size: 1.3em;
+	font-weight: bold;
+	text-align: left;
+	/*padding: 10px 0;*/
+}
+
+.success, .estatus-atendido{
+	color: #83c65d;
+}
+
+.error, .estatus-recibido, .estatus-pendiente{
+	color: #b23b51;
+}
+
+.info, .estatus-respuesta{
+	color: #3d6a91;
+}
+
+.estatus-enviado, .estatus-generado{
+	color: #587bb0;
+}
+
+.estatus-turnado{
+	color: #f5be6f;
+}
+
+
+
+/* GENERIC */
+
+.floatLeft{
+    position: relative;
+    float: left;
+}
+
+.left-separator{
+	margin-left:10px !important;
+}
+
+.right-separator{
+	border-right: 1px dotted #dddddd;
+	padding-right: 5px;
+	margin-right:-5px;
+}
+
+.textBold{
+	font-weight: bold;
+}
+
+.textBreak{	
+	overflow:hidden;
+	text-overflow:ellipsis;
+ }
+ 
+.listWrap{
+	list-style-position:inside;
+	margin-left:-12px;
+}
+
+
+.highlight {
+    background-color: #FFFF88;
+}
+
+.label-search-style{
+	padding: 4px 10px 0 0;
+    text-align: right;
+}
+
+#searchClear, #searchClear2{
+	position: absolute;
+    right: 70px;
+    top: 5px;
+	z-index: 2;
+}
+
+#contador-pendiente:hover,
+#contador-atendido:hover,
+#contador-enviado:hover{
+	font-weight: bold;
+}
+
+
+

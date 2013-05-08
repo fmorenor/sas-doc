@@ -8,22 +8,20 @@
         
     <!-- common stylesheets-->
         <!-- bootstrap framework css -->
-            <link rel="stylesheet" href="app/css/bootstrap.min.css">
-            <link rel="stylesheet" href="app/css/bootstrap-responsive.min.css">
+            <link rel="stylesheet" href="app/assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="app/assets/css/bootstrap-responsive.min.css">
        
-        <!-- google web fonts -->
-            <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Abel">
-            <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300">
+        <!-- google web fonts -->              
+            <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
 
     <!-- aditional stylesheets -->
 
-        <!-- main stylesheet -->
-            <link rel="stylesheet" href="app/css/beoro.css">                
-            <link rel="stylesheet" href="app/css/main.css">  
-            <link rel="stylesheet" href="app/css/ui/jquery-ui.css">
+        <!-- main stylesheet -->              
+            <link rel="stylesheet" href="app/assets/css/main.css">  
+            <link rel="stylesheet" href="app/assets/css/ui/jquery-ui.css">
 
-        <!--[if lte IE 8]><link rel="stylesheet" href="app/css/ie/ie8.css"><![endif]-->
-        <!--[if IE 9]><link rel="stylesheet" href="app/css/ie/ie9.css"><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="app/assets/css/ie/ie8.css"><![endif]-->
+        <!--[if IE 9]><link rel="stylesheet" href="app/assets/css/ie/ie9.css"><![endif]-->
             
         <!--[if lt IE 9]>
             <script src="app/controller/ie/html5shiv.min.js"></script>

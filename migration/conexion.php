@@ -9,7 +9,4 @@
         
     $db = mysqli_select_db($link, $basedatos)
         or die ("No se encuentra la base de datos");
-        
-    $acentos = mysqli_query($link, "SET NAMES 'utf8'");    
-         
 ?>

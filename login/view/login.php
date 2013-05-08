@@ -28,7 +28,7 @@
                     <label class="checkbox" style="float:left; padding-right:20px">
                         <input type="checkbox"> Recordar
                     </label>
-                    <button type="submit" class="btn"><i class="icon-ok-sign"></i> Ingresar</button>
+                    <button type="submit" class="btn"><i class="icon-ok-circle"></i> Ingresar</button>
                 </div>
             </div>
         </form>

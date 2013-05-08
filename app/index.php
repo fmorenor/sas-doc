@@ -8,19 +8,17 @@
     <link rel="icon" type="image/ico" href="favicon.ico">
 		
 	<!-- bootstrap framework css -->
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/bootstrap-responsive.min.css">
 			
 	<!-- google web fonts -->
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Abel">
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300">
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
 	
-	<!-- main stylesheet -->			
-		<link rel="stylesheet" href="css/beoro.css">                
-		<link rel="stylesheet" href="css/main.css">  
-		<link rel="stylesheet" href="css/ui/jquery-ui.css">						
-		<link rel="stylesheet" href="css/ui/jquery.ui.selectmenu.css"  />
-		<link rel="stylesheet" href="css/plugins/jquery.throbber.css" />
+	<!-- main stylesheet -->			           
+		<link rel="stylesheet" href="assets/css/main.css">  
+		<link rel="stylesheet" href="assets/css/ui/jquery-ui.css">						
+		<link rel="stylesheet" href="assets/css/ui/jquery.ui.selectmenu.css"  />
+		<link rel="stylesheet" href="assets/css/plugins/jquery.throbber.css" />
 	
 	<!-- Slick Grid-->
 		<link rel="stylesheet" href="controller/plugins/slickgrid/slick.grid.css" type="text/css"/>
@@ -35,8 +33,8 @@
         </style>
     <![endif]-->
 	
-	<!--[if lte IE 8]><link rel="stylesheet" href="app/css/ie/ie8.css"><![endif]-->
-    <!--[if IE 9]><link rel="stylesheet" href="app/css/ie/ie9.css"><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="app/assets/css/ie/ie8.css"><![endif]-->
+    <!--[if IE 9]><link rel="stylesheet" href="app/assets/css/ie/ie9.css"><![endif]-->
             
     <!--[if lt IE 9]>
         <script src="app/controller/ie/html5shiv.min.js"></script>
@@ -48,6 +46,7 @@
 		<script src="controller/ui/minified/jquery-ui.min.js"></script>
 		<script src="controller/ui/jquery.ui.selectmenu.js"></script>
 		<script src="controller/plugins/jquery.throbber.js" ></script>
+		<script src="controller/ui/minified/i18n/jquery.ui.datepicker-es.min.js"></script>
 		
 	<!-- highcharts -->	
 		<script src="controller/plugins/highcharts/highcharts.js" ></script>
@@ -59,8 +58,11 @@
 	<!-- bootstrap Framework plugins -->
         <script src="controller/bootstrap.min.js"></script>   
 	
-	 <!-- diTimeout: para executar solo una vez al redimensionar la ventana -->
+	<!-- diTimeout: para executar solo una vez al redimensionar la ventana -->
 		<script src="controller/plugins/jquery.ba-dotimeout.min.js" ></script>
+		
+	<!-- Resaltar texto de busqueda en el listado -->
+		<script src="controller/plugins/jquery.highlight.js" ></script>
 	
 	<!-- Slickgrid -->
 		<script src="controller/plugins/slickgrid/lib/firebugx.js"></script>
@@ -102,9 +104,11 @@
 </head>
 <body>	
 	<header>
-        <div class="container" id="encabezado"></div>
+        <div class="container" id="encabezado"></div>		
     </header>
+	<!-- Nav Container -->
+	<div id="nav-container"></div>
 	<!-- Contenido -->
-    <div class="container" id="content1"></div>
+    <div id="content1"></div>
 </body>
 </html>

@@ -1,0 +1,97 @@
+.slick-cell {
+    background: white !important;
+    border-color: transparent !important;
+    line-height: 19px !important;
+  }
+
+.element-cell {
+    border-color: transparent !important;
+}
+
+.cell-inner {
+    height: 160px;
+    padding: 10px;
+    background: #fafafa;
+    border-bottom: 1px dotted #dddddd;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-box-shadow: 1px 1px 5px silver;
+    -webkit-box-shadow: 1px 1px 5px silver;
+    -webkit-transition: all 0.5s;
+}
+
+.cell-inner:hover {
+    background: #f0f0f0;
+}
+
+.cell-main {
+    margin-right: 10px;
+    width: 78%;
+    float: left;
+}
+
+.cell-main-subtitle{        
+    max-height:38px;        
+    overflow:hidden;
+    white-space:normal;
+    margin: 5px 0;
+}
+
+.cell-main-content{
+    font-size: 0.85em;
+}
+
+.cell-right {
+    width: 63px;
+    height: 100%;
+    float: right;
+    background: url("../img/stack.png") no-repeat top center;
+    margin-top:15px;
+}
+
+.cell-right img{
+    width: 47px;
+    height: 60px;
+    padding-top: 5px;
+    padding-left: 7px;
+}
+
+.badge_vigencia{
+    position:absolute;
+    right:8px;
+    top:20px;
+}
+
+.badge_adjuntos{
+    position:absolute;
+    top:80px;
+}
+
+.label_estatus_class{
+    position:absolute;
+    top:115px;
+}
+
+.badge{
+    padding-left:6px;
+    padding-right:6px;
+    font-family:Raleway;
+}
+
+#myGridL1 .grid-canvas{
+    background-color: #FFFFFF;
+}
+
+#myGridL1 .slick-header-columns {
+    display: none;
+}
+
+#myGridL1 .slick-header{
+    display: none;
+}
+
+.itemListMessage{
+    width: 70%;
+    margin:auto;
+    padding-top: 20px;
+}

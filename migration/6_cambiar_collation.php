@@ -62,7 +62,9 @@ $sql = mysqli_query($link, "ALTER TABLE `catalogo_privilegios` CHANGE `id_privil
 
 $sql = mysqli_query($link, "ALTER TABLE `catalogo_tipo_documento` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 
-$sql = mysqli_query($link, "ALTER TABLE `catalogo_tipo_documento` CHANGE `nombre` `nombre` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''");
+$sql = mysqli_query($link, "ALTER TABLE `catalogo_tipo_documento`
+                    CHANGE `id_tipo_documento` `id` INT( 11 ) NOT NULL AUTO_INCREMENT,
+                    CHANGE `nombre` `nombre` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' ");
 
 $sql = mysqli_query($link, "ALTER TABLE `catalogo_usuarios` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci");
 

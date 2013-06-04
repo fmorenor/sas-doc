@@ -4,11 +4,11 @@
    
 <!-- cell template -->
 <script type="text/html" id="cell_template">
-  <div class="cell-inner">    
+  <div class="cell-inner" onclick="javascript:selectDocument(<%=id_documento%>)">    
     <div class="cell-main">
         <b><%=numero_documento%></b><br/>
         <div class="cell-main-subtitle" title='<%=asunto%>'>
-            <%=asunto%>
+            <p><%=asunto%></p>
         </div>        
         <div class="cell-main-content">
             <ul>
@@ -16,8 +16,12 @@
                 <li>Recepción: <%=fecha_recepcion%></li>
                 <li class="textBreak listWrap" title="<%=nombre_remitente%>">Remitente: <%=nombre_remitente%></li>
 				
-                <% if(nombre_destinatario){ %>
-                <li class="textBreak listWrap" title="<%=nombre_destinatario%>">Destinatario: <%=nombre_destinatario%></li>
+                <% if(id_estatus == '1' || id_estatus == '2' || id_estatus == '3'){ %>                
+                    <% if(nombre_destinatario){ %>
+                    <li class="textBreak listWrap" title="<%=nombre_destinatario%>">Destinatario: <%=nombre_destinatario%></li>
+                    <% } %>                    
+                <% } else if(destinatario_documento_enviado)  { %>
+                    <li class="textBreak listWrap" title="<%=destinatario_documento_enviado%>">Destinatario: <%=destinatario_documento_enviado%></li>
                 <% } %>
                 
                 <% if(nombre_asignado_a){ %>
@@ -28,8 +32,8 @@
         </div>
     </div>
     <div class="cell-right">
-        <% if(vigencia > 0 && id_estatus == '1,2'){ %>
-            <span class="badge badge-important badge_vigencia" title="Días de vigencia del documento: <%=vigencia%>"><%=vigencia%></span>
+        <% if(dias_restantes && (id_estatus == '1' || id_estatus == '2')){ %>
+            <span class="badge badge-important badge_vigencia" title="Vigencia: <%=vigencia%> días\nDías restantes para atender el documento: <%=dias_restantes%>"><%=dias_restantes%></span>
         <% } %>
         <span class="badge badge_adjuntos" title="Documentos adjuntos: <%=conteo_adjuntos%>"><%=conteo_adjuntos%></span>
         <span class="label label-<%=label_estatus%> label_estatus_class"><%=estatus%></span>   
@@ -87,7 +91,7 @@
       rowHeight: 185,
       editable: false,
       enableAddRow: false,
-      enableCellNavigation: false,
+      enableCellNavigation: true,
       enableColumnReorder: false
     };
   
@@ -101,12 +105,17 @@
         $('#myGridL1').height(($(document).height() - $('#encabezado').height() - 65)+'px');    
         $.throbber.show();
         $('.ui-throbber').css('left', ($('#myGridL1').width() / 2)-20+'px');
-        $.post("model/level1/itemList.php", {id_usuario: userData.id_usuario, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
+        $.post("model/level1/itemList.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
             
             $.throbber.hide();
             
             if (data.length > 0) {
                 grid = new Slick.Grid("#myGridL1", data, columns, options);
+                
+                $(".cell-main-subtitle").dotdotdot();
+                grid.onViewportChanged.subscribe(function(e,args){
+                    $(".cell-main-subtitle").dotdotdot();
+                });
                 
                 // Resaltar las palabras buscadas en la lista de documentos
                 if (userData.searchInput) {

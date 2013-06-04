@@ -10,10 +10,7 @@
         <!-- bootstrap framework css -->
             <link rel="stylesheet" href="app/assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="app/assets/css/bootstrap-responsive.min.css">
-       
-        <!-- google web fonts -->              
-            <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
-
+    
     <!-- aditional stylesheets -->
 
         <!-- main stylesheet -->              

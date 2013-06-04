@@ -1,6 +1,6 @@
 <script>    
     $(document).ready(function(){
-        $.post("model/level1/itemContent.php", {id_usuario: userData.id_usuario, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
+        $.post("model/level1/itemContent.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
             
             //Cargar los valores con los datos provenientes del POST
                 var conteo_pendientes = data['semaforo'][1]+data['semaforo'][2];

@@ -24,6 +24,9 @@
 		<link rel="stylesheet" href="controller/plugins/slickgrid/slick.grid.css" type="text/css"/>
 		<link rel="stylesheet" href="controller/plugins/slickgrid/controls/slick.pager.css" type="text/css"/>
 		<link rel="stylesheet" href="controller/plugins/slickgrid/controls/slick.columnpicker.css" type="text/css"/>
+		
+	<!-- Carrousel -->
+		<link rel="stylesheet" href="assets/css/detail-carrousel.css" >
     
 	 <!--[if gte IE 9]>
         <style type="text/css">
@@ -44,9 +47,9 @@
 	<!-- main scripts -->
         <script src="controller/jquery-1.9.1.min.js"></script>
 		<script src="controller/ui/minified/jquery-ui.min.js"></script>
-		<script src="controller/ui/jquery.ui.selectmenu.js"></script>
+		<script src="controller/ui/jquery.ui.selectmenu.js" async="true"></script>
 		<script src="controller/plugins/jquery.throbber.js" ></script>
-		<script src="controller/ui/minified/i18n/jquery.ui.datepicker-es.min.js"></script>
+		<script src="controller/ui/minified/i18n/jquery.ui.datepicker-es.min.js" async="true"></script>
 		
 	<!-- highcharts -->	
 		<script src="controller/plugins/highcharts/highcharts.js" ></script>
@@ -62,20 +65,29 @@
 		<script src="controller/plugins/jquery.ba-dotimeout.min.js" ></script>
 		
 	<!-- Resaltar texto de busqueda en el listado -->
-		<script src="controller/plugins/jquery.highlight.js" ></script>
+		<script src="controller/plugins/jquery.highlight.js" async="true" ></script>
+		
+	<!-- Plugin para agregar ellispis a textos multilineas muy largos -->
+		<script src="controller/plugins/jquery.dotdotdot-1.5.7-packed.js" ></script>
+		
+	<!-- Plugin carrusel -->
+		<script src="controller/plugins/jquery.carouFredSel-6.2.1-packed.js" async="true" ></script>		
+		<script src="controller/plugins/helper-plugins/jquery.mousewheel.min.js" async="true"></script>
+		<script src="controller/plugins/helper-plugins/jquery.touchSwipe.min.js" async="true"></script>
+
 	
 	<!-- Slickgrid -->
 		<script src="controller/plugins/slickgrid/lib/firebugx.js"></script>
 		<script src="controller/plugins/slickgrid/lib/jquery.event.drag-2.2.js"></script>  
 		<script src="controller/plugins/slickgrid/slick.core.js"></script>
-		<script src="controller/plugins/slickgrid/slick.formatters.js"></script>
-		<script src="controller/plugins/slickgrid/plugins/slick.autotooltips.js"></script>
-		<script src="controller/plugins/slickgrid/plugins/slick.rowselectionmodel.js"></script>	
+		<script src="controller/plugins/slickgrid/slick.formatters.js"></script>		
 		<script src="controller/plugins/slickgrid/slick.grid.js"></script>
-		<script src="controller/plugins/slickgrid/slick.groupitemmetadataprovider.js"></script>
-		<script src="controller/plugins/slickgrid/slick.dataview.js"></script>
-		<script src="controller/plugins/slickgrid/controls/slick.columnpicker.js"></script>
-		<script src="controller/plugins/slickgrid/slickgrid.functions.js" ></script>
+		<!--<script src="controller/plugins/slickgrid/slick.groupitemmetadataprovider.js"></script>-->
+		<!--<script src="controller/plugins/slickgrid/slick.dataview.js"></script>-->
+		<!--<script src="controller/plugins/slickgrid/controls/slick.columnpicker.js"></script>-->
+		<!--<script src="controller/plugins/slickgrid/slickgrid.functions.js" ></script>-->
+		<!--<script src="controller/plugins/slickgrid/plugins/slick.autotooltips.js"></script>-->
+		<!--<script src="controller/plugins/slickgrid/plugins/slick.rowselectionmodel.js"></script>	-->
 	
 	<?php
         @session_start();
@@ -90,15 +102,15 @@
 	
 	<script type="text/javascript">
 
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-36518081-1']);
-		_gaq.push(['_trackPageview']);
-	  
-		(function() {
-		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
+		//var _gaq = _gaq || [];
+		//_gaq.push(['_setAccount', 'UA-36518081-1']);
+		//_gaq.push(['_trackPageview']);
+		// 
+		//(function() {
+		//  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		//  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		//  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		//})();
 	  
 	</script>
 </head>
@@ -110,5 +122,6 @@
 	<div id="nav-container"></div>
 	<!-- Contenido -->
     <div id="content1"></div>
+	<div class="modal-back">&nbsp;</div>
 </body>
 </html>

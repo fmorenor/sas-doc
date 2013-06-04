@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 100;
+  src: url(fonts/Raleway.eot);
+  src: local('Raleway'), url(fonts/Raleway.eot) format('embedded-opentype'), url(fonts/Raleway.woff) format('woff');
+}
+
 body{
 	background-image: url("../img/bg/wavegrid.png");
 	font-family:Raleway;
@@ -16,6 +24,7 @@ body{
 
 a { outline: none !important; color: #FFFFFF; font-weight: bold; }
 a:hover { color: #999999 }
+.btn{ font-family:Raleway; }
 
 header {
 	padding: 10px 0 10px;
@@ -29,17 +38,25 @@ header {
 }
 	
 .anlt_header{       
-	font-size: 1.4em;
+	font-size: 1.2em;
 	font-weight: bold;
-	line-height: 32px;
+	/*line-height: 32px;*/
 	margin: 0;
 	padding: 0 0 0 50px;
 	text-align: center;
 }
+
+.anlt_subheader{
+	text-align: center;
+}
+
+.btn-new-document{
+	height: 40px;
+}
 	
 .anlt_content {
 	background: #fafafa;
-	font-size: 1.4em;
+	font-size: 1.3em;
 	line-height: 20px;
 	text-align: center;
 	margin: 0;
@@ -99,14 +116,6 @@ header {
 	margin-left: 60px;
 }
 
-/* APP */
-
-.itemList{
-}
-
-.itemContent{
-	
-}
 
 /* LEVEL 1 */
 
@@ -153,9 +162,107 @@ header {
 	color: #f5be6f;
 }
 
+/* DETAIL */
+#itemDetailTools{
+	display: none;
+	margin-top: 4px;
+}
 
+#itemDetail{
+	display: none;
+	position: absolute;
+	top:103px;
+	left: 400px;
+	
+	/*background-color: #FFFFFF;	*/
+	background-image: url(../img/bg/diagonal_lines.png);
+	padding: 20px;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.25);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.25);
+	
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	
+	-webkit-border-bottom-right-radius: 8px;
+	-moz-border-radius-bottomright: 8px;
+	border-bottom-right-radius: 8px;
+	
+	/*text-align: center;*/
+	/*cursor:default;*/
+}
+
+.label_estatus_detail_class{
+    margin-left: 20px;
+}
+
+.label_vigencia_detail{
+    margin-left: 20px;
+}
+
+.detail-title{
+	margin: 0 30px 10px 0;	
+	background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: default;
+    padding: 5px 15px;
+}
+
+.detail-asunto{
+	margin: 10px 50px 0 0;
+}
+
+.detail-scroll{
+	margin-right: -10px;
+	overflow-Y: scroll;
+}
+
+.detail-table-container{
+	margin-right: 20px;
+}
+
+.detail-table-container td{
+	font-size: 0.9em;
+}
+
+/* NEW DOCUMENT */
+#newDocument{
+	display: none;
+	position: absolute;
+	top:103px;
+	
+	/*background-color: #FFFFFF;	*/
+	background-image: url(../img/bg/diagonal_lines.png);
+	padding: 20px;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.25);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.25);
+	
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	
+	-webkit-border-bottom-right-radius: 8px;
+	-moz-border-radius-bottomright: 8px;
+	border-bottom-right-radius: 8px;
+	
+	z-index: 2;
+	
+	/*text-align: center;*/
+	/*cursor:default;*/
+}
 
 /* GENERIC */
+
+.modal-back{
+	display: none;
+	background-color: #000000;
+	opacity: 0.15;
+	position: fixed;
+	top: 60px;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
 
 .floatLeft{
     position: relative;

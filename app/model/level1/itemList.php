@@ -1,13 +1,32 @@
 <?php
 	header("Content-type: application/json");
 	include_once "../conexion.php";
-	include_once "../functions.php";	
+	include_once "../functions.php";
 	
-	// Si hay algún valor en los campos de buqueda se realiza, si no solo se ignora...
+	$hoy = time(); // Posix
+	//$fecha_hoy = date("Y-m-d") . " 23:59:59";
 	
+	// Privilegios
+	// Si es usuario regular solo se muestran los documentos donde está involucrado.
+	// Si es administrador todos los de su grupo.
+	switch($_REQUEST['id_privilegios']){
+		case '0': $id_usuario_involucrado = $_REQUEST['id_usuario']; break;
+		case '1': $sql_privilegios = mysqli_query($link, "SELECT cup.id FROM catalogo_usuarios cu
+															LEFT JOIN catalogo_usuarios cup
+															ON cu.id_grupo = cup.id_grupo
+															where cu.id = '".$_REQUEST['id_usuario']."'
+															AND cup.activo = 1;");
+					$id_usuario_array = array();
+					while($row = mysqli_fetch_array($sql_privilegios)){
+						$id_usuario_array[] = $row['id'];
+					}
+					$id_usuario_involucrado = implode(",",$id_usuario_array);
+					break;
+	}
+	
+	// Si hay algún valor en los campos de buqueda se realiza, si no solo se ignora...	
 	$orderBy = "ORDER BY d.fecha_recepcion ASC"; // Por defecto esta es la ordenación
-	if($_REQUEST['searchInput'] != ''){
-		//$fecha_hoy = date("Y-m-d") . " 23:59:59";
+	if($_REQUEST['searchInput'] != ''){		
 		switch($_REQUEST['searchType']){
 			case 'general': 	$searchQuery = "AND (";
 								$searchQuery .= "d.numero_documento LIKE '%".$_REQUEST['searchInput']."%' ";
@@ -43,9 +62,7 @@
 	}
 	else {
 		$searchQuery = "";
-	}
-	
-	
+	}	
 
 	$sql = mysqli_query($link, "SELECT
 								d.id,
@@ -57,6 +74,7 @@
 								d.remitente as nombre_remitente,
 								d.id_destinatario,
 								dest.nombre as nombre_destinatario,
+								d.destinatario_documento_enviado,
 								d.id_asignado_a,
 								asig_a.nombre as nombre_asignado_a,
 								d.id_asignado_por,
@@ -84,10 +102,10 @@
 								LEFT JOIN catalogo_estatus e
 								  ON d.id_estatus = e.id
 				
-								WHERE (d.id_remitente = ".$_REQUEST['id_usuario']."
-								OR d.id_destinatario = ".$_REQUEST['id_usuario']."
-								OR d.id_asignado_a = ".$_REQUEST['id_usuario']."
-								OR d.id_asignado_por = ".$_REQUEST['id_usuario'].")
+								WHERE (d.id_remitente IN (".$id_usuario_involucrado.")
+								OR d.id_destinatario IN (".$id_usuario_involucrado.")
+								OR d.id_asignado_a IN (".$id_usuario_involucrado.")
+								OR d.id_asignado_por IN (".$id_usuario_involucrado."))
 				
 								AND d.id_estatus IN (".$_REQUEST['estatus'].")
 								
@@ -106,7 +124,18 @@
 			case 3: $label_estatus = "success"; break;
 			case 4: 
 			case 5: $label_estatus = "info"; break;
-		}		 
+		}
+		
+		// BOF Vigencia	- Días restantes
+		$dias_restantes = null;
+		if($row['vigencia'] > 0 && ($row['id_estatus'] == 1 || $row['id_estatus'] == 2)){
+			$fecha_recepcion_date = substr($row['fecha_recepcion'],0,10);
+			$fecha = split("-",$fecha_recepcion_date);
+			$fecha_entero = mktime(0,0,0,(int)$fecha[1],(int)$fecha[2],(int)$fecha[0]);
+			$fecha_vencimiento = $fecha_entero + ($row['vigencia'] * 24 * 60 * 60);
+			$dias_restantes = (int)( ($fecha_vencimiento - $hoy) / (24*60*60) ) + 1;
+		}
+		// EOF Vigencia	- Días restantes
 		
 		$jsonData[] = array(
 					'id_documento' => $row['id'],
@@ -118,12 +147,14 @@
 					'nombre_remitente' => $row['nombre_remitente'],
 					'id_destinatario' => $row['id_destinatario'],
 					'nombre_destinatario' => $row['nombre_destinatario'],
+					'destinatario_documento_enviado' => $row['destinatario_documento_enviado'],
 					'id_asignado_a' => $row['id_asignado_a'],
 					'nombre_asignado_a' => $row['nombre_asignado_a'],
 					'id_asignado_por' => $row['id_asignado_por'],
 					'nombre_asignado_por' => $row['nombre_asignado_por'],
 					'conteo_adjuntos' => $row['conteo_adjuntos'],
 					'vigencia' => $row['vigencia'],
+					'dias_restantes' => $dias_restantes,
 					'id_estatus' => $row['id_estatus'],
 					'estatus' => $row['estatus'],
 					'label_estatus' => $label_estatus,

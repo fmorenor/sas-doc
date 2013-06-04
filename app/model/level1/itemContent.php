@@ -2,6 +2,25 @@
 	header("Content-type: application/json");
 	include_once "../conexion.php";
 	
+	// Privilegios
+	// Si es usuario regular solo se muestran los documentos donde está involucrado.
+	// Si es administrador todos los de su grupo.
+	switch($_REQUEST['id_privilegios']){
+		case '0': $id_usuario_involucrado = $_REQUEST['id_usuario']; break;
+		case '1': $sql_privilegios = mysqli_query($link, "SELECT cup.id FROM catalogo_usuarios cu
+															LEFT JOIN catalogo_usuarios cup
+															ON cu.id_grupo = cup.id_grupo
+															where cu.id = '".$_REQUEST['id_usuario']."'
+															AND cup.activo = 1;");
+					$id_usuario_array = array();
+					while($row = mysqli_fetch_array($sql_privilegios)){
+						$id_usuario_array[] = $row['id'];
+					}
+					$id_usuario_involucrado = implode(",",$id_usuario_array);
+					break;
+	}
+	
+	// Si hay algún valor en los campos de buqueda se realiza, si no solo se ignora...	
 	if($_REQUEST['searchInput'] != ''){
 		//$fecha_hoy = date("Y-m-d") . " 23:59:59";
 		switch($_REQUEST['searchType']){
@@ -50,10 +69,10 @@
 								LEFT JOIN catalogo_usuarios asig_a
 								  ON d.id_asignado_a = asig_a.id  
 								
-								WHERE (d.id_remitente = ".$_REQUEST['id_usuario']."
-								OR d.id_destinatario = ".$_REQUEST['id_usuario']."
-								OR d.id_asignado_a = ".$_REQUEST['id_usuario']."
-								OR d.id_asignado_por = ".$_REQUEST['id_usuario'].")
+								WHERE (d.id_remitente IN (".$id_usuario_involucrado.")
+								OR d.id_destinatario IN (".$id_usuario_involucrado.")
+								OR d.id_asignado_a IN (".$id_usuario_involucrado.")
+								OR d.id_asignado_por IN (".$id_usuario_involucrado."))
 								
 								".$searchQuery." 
 								
@@ -88,6 +107,8 @@
 	
 	$jsonData['chart']['type'] = "pie";
 	$jsonData['chart']['name'] = "Documentos disponibles";
+	
+	$jsonData['id_usuario_involucrado'] = $id_usuario_involucrado;
 
 	echo json_encode($jsonData);	
 ?>

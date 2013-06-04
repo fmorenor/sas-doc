@@ -2,7 +2,9 @@ var userDataL1 = new Array();
 
 $(document).ready(function(){
     
-    userData.id_usuario = 2; // PRAGMA BORRAR!!! Sólo como prueba usi el id_usuario de Bibinana
+    // PRAGMA BORRAR!!! Sólo como prueba el id_usuario de Bibiana
+    userData.id_usuario = 2; 
+    userData.id_privilegios = 1;
     
     // Cargar la vista de la lista de meses
     userData.estatus = '1,2';

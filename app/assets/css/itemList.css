@@ -3,7 +3,7 @@
     border-color: transparent !important;
     line-height: 19px !important;
   }
-
+  
 .element-cell {
     border-color: transparent !important;
 }
@@ -13,16 +13,22 @@
     padding: 10px;
     background: #fafafa;
     border-bottom: 1px dotted #dddddd;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    /*-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;*/
     -moz-box-shadow: 1px 1px 5px silver;
     -webkit-box-shadow: 1px 1px 5px silver;
     -webkit-transition: all 0.5s;
+    cursor: pointer;
 }
 
 .cell-inner:hover {
     background: #f0f0f0;
 }
+
+.active div.cell-inner{
+    background-color: #EDEDED;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.125) inset;
+} 
 
 .cell-main {
     margin-right: 10px;
@@ -31,10 +37,13 @@
 }
 
 .cell-main-subtitle{        
-    max-height:38px;        
-    overflow:hidden;
-    white-space:normal;
+    max-height:38px;    
     margin: 5px 0;
+    
+    /*Se comentó para hacer los ellipsis con un plugin de jquery que soporta multiline*/
+    /*text-overflow:ellipsis;*/
+    white-space:normal;
+    overflow:hidden;
 }
 
 .cell-main-content{

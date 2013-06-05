@@ -210,7 +210,7 @@ function newDocument() {
 		
 		var newDocumentMargin = 20;
 		$('#newDocument').width($(window).width() - (newDocumentMargin * 4)); // 80px para dejar un espacio a ambos lados
-		$('#newDocument').height($(window).height() - 160); // 160px por el top y el padding en el CSS
+		$('#newDocument').height($(window).height() - 140); // 160px por el top y el padding en el CSS
 		$('#newDocument').css('left', newDocumentMargin);
 		
 		$('#newDocument').slideDown({

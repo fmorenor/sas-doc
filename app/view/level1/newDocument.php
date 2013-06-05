@@ -42,6 +42,17 @@
                 </div>
                 <!--Tercera fila-->
                 <div class="row-fluid">
+                    <div class="span12">
+                        <div class="control-group">
+                            <label class="control-label" for="nota">Nota</label>
+                            <div class="controls">
+                                <textarea rows="1" id="nota" placeholder="Nota" class="fullsize-textarea" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Cuarta fila-->
+                <div class="row-fluid">
                     <div class="span6">
                         <div class="control-group">
                             <label class="control-label" for="remitente">Remitente</label>
@@ -93,19 +104,25 @@
                             </div>
                         </div>                       
                         <div class="control-group">
-                            <label class="control-label" for="turnado">Turnado</label>
+                            <label class="control-label" for="turnado">Turnado / cc</label>
                             <div class="controls">
-                                <input type="text" id="turnado" class="input-fullwidth" placeholder="Turnado">
+                                <!--<input type="text" id="turnado" class="input-fullwidth" placeholder="Turnado">-->
+                                <div class="ui-widget input-append">
+                                    <input type='hidden' id="turnado_a_combobox" class="input-fullwidth" />
+                                </div> 
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="asignado_a">Asignado a</label>
                             <div class="controls">
-                                <input type="text" id="asignado_a" class="input-fullwidth" placeholder="Asignado">
+                                <!--<input type="text" id="asignado_a" class="input-fullwidth" placeholder="Asignado">-->
+                                <div class="ui-widget input-append">
+                                    <input type='hidden' id="asignado_a_combobox" class="input-fullwidth" />
+                                </div> 
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="vigencia">Vigencia</label>
+                            <label class="control-label" for="vigencia">Días de vigencia</label>
                             <div class="controls">
                                 <input id="vigencia" name="vigencia" min="0" max="365" value="0">
                             </div>

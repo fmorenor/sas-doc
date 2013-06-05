@@ -119,5 +119,67 @@
 				}				
 			});
 		// BOF ComboBox destinatario
+		
+		// BOF ComboBox turnado
+			$('#turnado_a_combobox').select2({
+				placeholder: 'Elegir usuarios turnados / cc',
+				minimumInputLength: 5,
+				allowClear: true,
+				multiple: true,
+				ajax: {
+					url: "model/catalogos/catalogo_usuarios.php",
+					dataType: 'json',
+					quietMillis: 100,
+					data: function (term, page) {
+						return {
+							term: term, //search term
+							page_limit: 10, // page size
+							page: page // page number
+						};
+					},
+					results: function (data, page) {
+						//return { results: data.results};
+						var more = (page * 100) < data.total; // whether or not there are more results available
+ 
+						// notice we return the value of more so Select2 knows if more results can be loaded
+						return {results: data.results, more: more};
+					}
+				}				
+			});
+			
+			$("#turnado_a_combobox").select2("container").find("ul.select2-choices").sortable({
+				containment: 'parent',
+				start: function() { $("#turnado_a_combobox").select2("onSortStart"); },
+				update: function() { $("#turnado_a_combobox").select2("onSortEnd"); }
+			});
+		// BOF ComboBox turnado
+		
+		
+		// BOF ComboBox asignado
+			$('#asignado_a_combobox').select2({
+				placeholder: 'Usuario responsable del seguimiento',
+				minimumInputLength: 5,
+				allowClear: true,
+				ajax: {
+					url: "model/catalogos/catalogo_usuarios.php",
+					dataType: 'json',
+					quietMillis: 100,
+					data: function (term, page) {
+						return {
+							term: term, //search term
+							page_limit: 10, // page size
+							page: page // page number
+						};
+					},
+					results: function (data, page) {
+						//return { results: data.results};
+						var more = (page * 100) < data.total; // whether or not there are more results available
+ 
+						// notice we return the value of more so Select2 knows if more results can be loaded
+						return {results: data.results, more: more};
+					}
+				}				
+			});
+		// BOF ComboBox asignado
 	});
 	

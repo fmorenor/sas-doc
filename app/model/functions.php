@@ -1,5 +1,9 @@
 <?php
 
+    function getToday(){        
+        return date('Y-m-d');
+    }
+
     function getMes($mes){
         switch($mes){
             case '01': $ret = "Enero"; break;

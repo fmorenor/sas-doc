@@ -1,6 +1,7 @@
 <?php
 	header("Content-type: application/json");
 	include("../../app/model/conexion.php");
+	include("../../app/model/mcrypt.php");
 	
 	///// BOF Ldap	
 	include('Ldap.php');
@@ -50,6 +51,8 @@
 			$_SESSION['nombre_completo'] = $nombre_completo;
 			$_SESSION['grupo'] = $grupo;
 			$_SESSION['appSessionSASDOC'] = "true";
+			$_SESSION['usuario'] = $login;
+			$_SESSION['cryptkey'] = encrypt($password,$key,$iv,$bit_check);
 			
 		// Consultar en la base de datos si el usuario ya existe
 			$sql = mysqli_query($link, "SELECT *

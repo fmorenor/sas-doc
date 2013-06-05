@@ -2,12 +2,10 @@
     header("Content-type: application/json");
     include_once "../conexion.php";
     
-    $id = $_REQUEST['id_documento'];
-    
     $sql = mysqli_query($link, "SELECT *,
                                 CONCAT(SUBSTRING_INDEX(path,'.',1),'.JPG') as thumb
                                 FROM documento_adjuntos
-                                WHERE id_documento > ".$id." and id_documento < ".($id+20));
+                                WHERE id_documento = ".$_REQUEST['id_documento']);
     
     $jsonData = array();
     while($row = mysqli_fetch_array($sql)){

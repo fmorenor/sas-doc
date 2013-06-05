@@ -251,6 +251,40 @@ header {
 	/*cursor:default;*/
 }
 
+#newDocumentScroll{
+	width: 100%;
+	overflow-y: auto;	
+}
+
+#newDocument .fullsize-textarea {
+	width: 97%;
+	resize: vertical;
+}
+
+#newDocument .input-fullwidth{
+	width: 100%;
+}
+
+#newDocument .input-append, #newDocument .input-prepend{
+	width: 100%;
+}
+
+#newDocument .row-fluid [class*="span"]{
+	margin-left: 0;
+}
+
+.form-horizontal .control-group{
+	margin-bottom: 10px;
+}
+
+#newDocument .ui-spinner{
+	border: 1px solid #CCCCCC;
+	height: 24px;
+    width: 60px;
+	color: #555555;
+	font-size: 14px;
+}
+
 /* GENERIC */
 
 .modal-back{
@@ -314,6 +348,20 @@ header {
 #contador-atendido:hover,
 #contador-enviado:hover{
 	font-weight: bold;
+}
+
+/*** Fix para plugin Select2 + bootstrap ***/
+.select2-offscreen, .select2-offscreen:focus {
+    clip: rect(0 0 0 0);
+    width: 1px !important;
+    height: 1px !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    position: absolute !important;
+    outline: 0;
+    left: 0px;
 }
 
 

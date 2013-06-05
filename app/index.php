@@ -17,7 +17,7 @@
 	<!-- main stylesheet -->			           
 		<link rel="stylesheet" href="assets/css/main.css">  
 		<link rel="stylesheet" href="assets/css/ui/jquery-ui.css">						
-		<link rel="stylesheet" href="assets/css/ui/jquery.ui.selectmenu.css"  />
+		<!--<link rel="stylesheet" href="assets/css/ui/jquery.ui.selectmenu.css"  />-->
 		<link rel="stylesheet" href="assets/css/plugins/jquery.throbber.css" />
 	
 	<!-- Slick Grid-->

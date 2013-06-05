@@ -214,13 +214,13 @@ function newDocument() {
 		$('#newDocument').css('left', newDocumentMargin);
 		
 		$('#newDocument').slideDown({
-			duration: 1000,
+			duration: 850,
 			specialEasing: {
-				width: 'linear',
-				height: 'easeOutBounce'
+			   width: 'linear',
+			   height: 'easeOutBounce'
 			},
-			start: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
-					$('#newDocument').load("view/level1/newDocument.php");
+			complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
+			   $('#newDocument').load("view/level1/newDocument.php");
 			}
 		});	
 	}

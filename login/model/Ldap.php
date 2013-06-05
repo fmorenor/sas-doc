@@ -1227,6 +1227,48 @@ class Ldap
 		$username = substr( $username , (strpos( $username ,"\\" )+1) ,strlen($username) );
 		return $username;
 	}
+	
+	// PRAGMA - Buscar un usuario
+	function user_search($username,$fields=NULL)
+	{
+		if($username == NULL)
+        {
+            return FALSE;
+        }
+		if(!$this->_bind)
+        {
+            return FALSE;
+        }
+		
+		$username = $this->_removePrefix($username);
+		
+		$filter = "(&(&(objectClass=user)(samaccounttype=". ADLDAP_NORMAL_ACCOUNT .")(objectCategory=person)(cn=*))(|(samaccountname=*$username*)(displayname=*$username*)))";
+		if($fields == NULL)
+		{
+			$fields=array("samaccountname","mail","memberof","title","department","displayname"
+				,"telephonenumber","primarygroupid","userAccountControl",'givenName','sn');
+		}
+		$sr=ldap_search($this->_conn,$this->_base_dn,$filter,$fields);
+		$entries = ldap_get_entries($this->_conn, $sr);
+		
+		//Found Results
+		if( array_key_exists('memberof',$entries) )
+		{
+			// AD does not return the primary group in the ldap query, we may need to fudge it
+			if($this->_real_primarygroup)
+			{
+				
+					$entries[0]["memberof"][]= $this->group_cn($entries[0]["primarygroupid"][0]);
+			}
+			else
+			{
+				$entries[0]["memberof"][]="CN=Domain Users,CN=Users,".$this->_base_dn;
+			}
+		}
+		
+		//$entries[0]["memberof"]["count"]++;
+		return ($entries);
+	}
 }
 
 // END Ldap class

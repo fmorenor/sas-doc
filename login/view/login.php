@@ -2,7 +2,10 @@
 
 <html>
 <head>
-    <script src="login/controller/login.js"></script>
+	<script src="app/controller/plugins/jquery.cookie.js"></script>
+	<script src="app/controller/plugins/ecmascrypt.js"></script>
+	<script src="app/controller/plugins/ecmascrypt.functions.js"></script>
+    <script src="login/controller/login.js"></script>	
 </head>
 
 <body>
@@ -14,19 +17,29 @@
             <div class="control-group">
                 <label class="control-label" for="username">Usuario</label>
                 <div class="controls">
-                    <input type="text" id="username" name="username" placeholder="Usuario">
+					<div class="input-prepend">
+						<span class="add-on">
+							<i class="icon-user"></i>
+						</span>
+						<input type="text" id="username" name="username" placeholder="Usuario">
+					</div>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="password">Password</label>
                 <div class="controls">
-                    <input type="password" id="password" name="password" placeholder="Password">
+					<div class="input-prepend">
+						<span class="add-on">
+							<i class="icon-lock"></i>
+						</span>
+						<input type="password" id="password" name="password" placeholder="Password">
+					</div>
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
                     <label class="checkbox" style="float:left; padding-right:20px">
-                        <input type="checkbox"> Recordar
+                        <input type="checkbox" id="autologin" name="autologin"> Recordar
                     </label>
                     <button type="submit" class="btn"><i class="icon-ok-circle"></i> Ingresar</button>
                 </div>

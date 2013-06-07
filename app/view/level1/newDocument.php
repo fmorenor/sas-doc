@@ -1,12 +1,9 @@
 <?php include_once("../../model/functions.php"); ?>
 
-<link href="controller/plugins/select2/select2.css" rel="stylesheet"/>
-<script src="controller/plugins/select2/select2.js"></script>
-<script src="controller/plugins/select2/select2_locale_es.js"></script>
 <script src="controller/level1/newDocument.js"></script>
     
     <div id="closeNewDocumentButton" class="closer"></div>
-    <div class="form-horizontal">
+    <form class="form-horizontal">
         <fieldset>
             <legend>Agregar un nuevo documento</legend>
             <!--Primer fila-->
@@ -35,7 +32,7 @@
                         <div class="control-group">
                             <label class="control-label" for="asunto">Asunto</label>
                             <div class="controls">
-                                <textarea rows="1" id="asunto" placeholder="Asunto" class="fullsize-textarea" required />
+                                <textarea rows="2" id="asunto" placeholder="Asunto" class="fullsize-textarea" required />
                             </div>
                         </div>
                     </div>
@@ -46,7 +43,7 @@
                         <div class="control-group">
                             <label class="control-label" for="nota">Nota</label>
                             <div class="controls">
-                                <textarea rows="1" id="nota" placeholder="Nota" class="fullsize-textarea" />
+                                <textarea rows="2" id="nota" placeholder="Nota" class="fullsize-textarea" />
                             </div>
                         </div>
                     </div>
@@ -129,11 +126,22 @@
                         </div>      
                     </div>
                 </div>
+                <!-- Quinta fila -->
+                <div class="row-fluid">
+                    <div class="span12">
+                        <br />
+                        <div><strong>Adjunta los archivos escaneados del documento</strong></div>
+                        <div>Los archivos escaneados deben estar en formato PDF, cada archivo puede tener varias páginas y puedes subir varios archivos si lo necesitas.</div>                        
+                        <div id="uploader"></div>
+                    </div>
+                </div>
+                <!-- Sexta fila -->
                 <div class="row-fluid">
                     <div class="span11">
+                        <br /><br />
                         <button type="submit" class="btn btn-inverse pull-right"><i class="icon-ok icon-white"></i> Guardar</button>
                     </div>
                 </div>
             </div>
         </fieldset>
-    </div>
+    </form>

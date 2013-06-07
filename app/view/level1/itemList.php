@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <link rel="stylesheet" href="assets/css/itemList.css">
-    </head>
-    
+    <head>        
+    </head>    
     <body>
         <div id="myGridL1" style="width:100%;"></div>
            

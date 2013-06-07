@@ -1,14 +1,21 @@
 var userData;
 
  $(document).ready(function() {
+    
+    // Force cache Javascript files
+    $.ajaxSetup({
+        cache: true
+    });	
+    
 	$.throbber.show({overlay: true});
 	userData = JSON.parse(localStorage['userData']);
 	userData.level = 1;
 	userData.searchType = 'general';
 	 
+    // BOF Encabezado 
 	$('#encabezado').load('view/encabezado.php', function(){
 		var nombre_completo = (userData.nombre_completo == null) ? userData.usuario : userData.nombre_completo;
-		$('.welcome-message').html("Bienvenid@<br />"+nombre_completo+"<br /><a href='../login/view/logout.php'>Salir</a>");
+		$('.welcome-message').html("Bienvenid@<br />"+nombre_completo+"<br /><a href='../login/view/logout.php?rnd="+Math.random()+"'>Salir</a>");
 		
 		$('.btn-new-document').click(function(){
 			// Si existe el div itemDetail se procede a ocultarlo y a destruirlo. Despues se crea la ventana "newDocument"	 
@@ -28,6 +35,7 @@ var userData;
 			}
 		});
 	});
+    // EOF Encabezado
 	
 	// BOF Nav Container
 	$('#nav-container').load('view/nav-container.php', function(){
@@ -90,7 +98,6 @@ var userData;
 	$('#content1').load("view/level1.php", function(){          
 	   $.throbber.hide();	   
 	});
-	
  });
 
 // Funciones de búsqueda 
@@ -196,8 +203,8 @@ function loadDocument(id) {
 			height: 'easeOutBounce'
 		},
 		complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
-				userData.selectedDocumentId = id;
-				$('#itemDetail').load("view/level1/itemDetail.php", {itemDetailHeight: $('#itemDetail').height()} );
+            userData.selectedDocumentId = id;
+            $('#itemDetail').load("view/level1/itemDetail.php?itemDetailHeight="+$('#itemDetail').height());
 		}
 	});
 }

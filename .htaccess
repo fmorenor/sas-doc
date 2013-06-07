@@ -1,0 +1,150 @@
+<IfModule mod_mime.c>
+	AddType text/css .css
+	AddType text/x-component .htc
+	AddType application/x-javascript .js
+	AddType application/javascript .js2
+	AddType text/javascript .js3
+	AddType text/x-js .js4
+	AddType text/html .html .htm
+	AddType text/richtext .rtf .rtx
+	AddType image/svg+xml .svg .svgz
+	AddType text/plain .txt
+	AddType text/xsd .xsd
+	AddType text/xsl .xsl
+	AddType text/xml .xml
+	AddType video/asf .asf .asx .wax .wmv .wmx
+	AddType video/avi .avi
+	AddType image/bmp .bmp
+	AddType application/java .class
+	AddType video/divx .divx
+	AddType application/msword .doc .docx
+	AddType application/vnd.ms-fontobject .eot
+	AddType application/x-msdownload .exe
+	AddType image/gif .gif
+	AddType application/x-gzip .gz .gzip
+	AddType image/x-icon .ico
+	AddType image/jpeg .jpg .jpeg .jpe
+	AddType application/json .json
+	AddType application/vnd.ms-access .mdb
+	AddType audio/midi .mid .midi
+	AddType video/quicktime .mov .qt
+	AddType audio/mpeg .mp3 .m4a
+	AddType video/mp4 .mp4 .m4v
+	AddType video/mpeg .mpeg .mpg .mpe
+	AddType application/vnd.ms-project .mpp
+	AddType application/x-font-otf .otf
+	AddType application/vnd.oasis.opendocument.database .odb
+	AddType application/vnd.oasis.opendocument.chart .odc
+	AddType application/vnd.oasis.opendocument.formula .odf
+	AddType application/vnd.oasis.opendocument.graphics .odg
+	AddType application/vnd.oasis.opendocument.presentation .odp
+	AddType application/vnd.oasis.opendocument.spreadsheet .ods
+	AddType application/vnd.oasis.opendocument.text .odt
+	AddType audio/ogg .ogg
+	AddType application/pdf .pdf
+	AddType image/png .png
+	AddType application/vnd.ms-powerpoint .pot .pps .ppt .pptx
+	AddType audio/x-realaudio .ra .ram
+	AddType application/x-shockwave-flash .swf
+	AddType application/x-tar .tar
+	AddType image/tiff .tif .tiff
+	AddType application/x-font-ttf .ttf .ttc
+	AddType audio/wav .wav
+	AddType audio/wma .wma
+	AddType application/vnd.ms-write .wri
+	AddType application/vnd.ms-excel .xla .xls .xlsx .xlt .xlw
+	AddType application/zip .zip
+</IfModule>
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault "access plus 1 second"
+	ExpiresByType text/css "access plus 1 month"
+	ExpiresByType text/x-component "access plus 1 month"
+	ExpiresByType application/x-javascript "access plus 1 month"
+	ExpiresByType application/javascript "access plus 1 month"
+	ExpiresByType text/javascript "access plus 1 month"
+	ExpiresByType text/x-js "access plus 1 month"
+	ExpiresByType text/html A3600
+	ExpiresByType text/php A3600	
+	ExpiresByType text/richtext A3600
+	ExpiresByType image/svg+xml A3600
+	ExpiresByType text/plain A3600
+	ExpiresByType text/xsd A3600
+	ExpiresByType text/xsl A3600
+	ExpiresByType text/xml A3600
+	ExpiresByType video/asf "access plus 1 month"
+	ExpiresByType video/avi "access plus 1 month"
+	ExpiresByType image/bmp "access plus 1 month"
+	ExpiresByType application/java "access plus 1 month"
+	ExpiresByType video/divx "access plus 1 month"
+	ExpiresByType application/msword "access plus 1 month"
+	ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+	ExpiresByType application/x-msdownload "access plus 1 month"
+	ExpiresByType image/gif "access plus 1 month"
+	ExpiresByType application/x-gzip "access plus 1 month"
+	ExpiresByType image/x-icon "access plus 1 month"
+	ExpiresByType image/jpeg "access plus 1 month"
+	ExpiresByType application/json "access plus 30 seconds"
+	ExpiresByType application/vnd.ms-access "access plus 1 month"
+	ExpiresByType audio/midi "access plus 1 month"
+	ExpiresByType video/quicktime "access plus 1 month"
+	ExpiresByType audio/mpeg "access plus 1 month"
+	ExpiresByType video/mp4 "access plus 1 month"
+	ExpiresByType video/mpeg "access plus 1 month"
+	ExpiresByType application/vnd.ms-project "access plus 1 month"
+	ExpiresByType application/x-font-otf "access plus 1 month"
+	ExpiresByType application/vnd.oasis.opendocument.database "access plus 1 month"
+	ExpiresByType application/vnd.oasis.opendocument.chart "access plus 1 month"
+	ExpiresByType application/vnd.oasis.opendocument.formula "access plus 1 month"
+	ExpiresByType application/vnd.oasis.opendocument.graphics "access plus 1 month"
+	ExpiresByType application/vnd.oasis.opendocument.presentation "access plus 1 month"
+	ExpiresByType application/vnd.oasis.opendocument.spreadsheet "access plus 1 month"
+	ExpiresByType application/vnd.oasis.opendocument.text "access plus 1 month"
+	ExpiresByType audio/ogg "access plus 1 month"
+	ExpiresByType application/pdf "access plus 1 month"
+	ExpiresByType image/png "access plus 1 month"
+	ExpiresByType application/vnd.ms-powerpoint "access plus 1 month"
+	ExpiresByType audio/x-realaudio "access plus 1 month"
+	ExpiresByType image/svg+xml "access plus 1 month"
+	ExpiresByType application/x-shockwave-flash "access plus 1 month"
+	ExpiresByType application/x-tar "access plus 1 month"
+	ExpiresByType image/tiff "access plus 1 month"
+	ExpiresByType application/x-font-ttf "access plus 1 month"
+	ExpiresByType audio/wav "access plus 1 month"
+	ExpiresByType audio/wma "access plus 1 month"
+	ExpiresByType application/vnd.ms-write "access plus 1 month"
+	ExpiresByType application/vnd.ms-excel "access plus 1 month"
+	ExpiresByType application/zip "access plus 1 month"
+</IfModule>
+<IfModule mod_deflate.c>
+	<IfModule mod_headers.c>
+		Header append Vary User-Agent env=!dont-vary
+	</IfModule>
+		AddOutputFilterByType DEFLATE text/css text/x-component application/x-javascript application/javascript text/javascript text/x-js text/html text/richtext image/svg+xml text/plain text/xsd text/xsl text/xml image/x-icon application/json
+	<IfModule mod_mime.c>
+		# DEFLATE by extension
+		AddOutputFilter DEFLATE js css htm html xml
+	</IfModule>
+</IfModule>
+<FilesMatch "\.(css|htc|js|js2|js3|js4|CSS|HTC|JS|JS2|JS3|JS4)$">
+	FileETag MTime Size
+	<IfModule mod_headers.c>
+		Header set Pragma "public"
+		Header append Cache-Control "public, must-revalidate, proxy-revalidate"
+	</IfModule>
+</FilesMatch>
+<FilesMatch "\.(html|htm|rtf|rtx|svg|svgz|txt|xsd|xsl|xml|HTML|HTM|RTF|RTX|SVG|SVGZ|TXT|XSD|XSL|XML)$">
+	FileETag MTime Size
+	<IfModule mod_headers.c>
+		Header set Pragma "public"
+		Header append Cache-Control "public, must-revalidate, proxy-revalidate"
+	</IfModule>
+</FilesMatch>
+<FilesMatch "\.(asf|asx|wax|wmv|wmx|avi|bmp|class|divx|doc|docx|eot|exe|gif|gz|gzip|ico|jpg|jpeg|jpe|json|mdb|mid|midi|mov|qt|mp3|m4a|mp4|m4v|mpeg|mpg|mpe|mpp|otf|odb|odc|odf|odg|odp|ods|odt|ogg|pdf|png|pot|pps|ppt|pptx|ra|ram|svg|svgz|swf|tar|tif|tiff|ttf|ttc|wav|wma|wri|xla|xls|xlsx|xlt|xlw|zip|ASF|ASX|WAX|WMV|WMX|AVI|BMP|CLASS|DIVX|DOC|DOCX|EOT|EXE|GIF|GZ|GZIP|ICO|JPG|JPEG|JPE|JSON|MDB|MID|MIDI|MOV|QT|MP3|M4A|MP4|M4V|MPEG|MPG|MPE|MPP|OTF|ODB|ODC|ODF|ODG|ODP|ODS|ODT|OGG|PDF|PNG|POT|PPS|PPT|PPTX|RA|RAM|SVG|SVGZ|SWF|TAR|TIF|TIFF|TTF|TTC|WAV|WMA|WRI|XLA|XLS|XLSX|XLT|XLW|ZIP)$">
+	FileETag MTime Size
+	<IfModule mod_headers.c>
+		Header set Pragma "public"
+		Header append Cache-Control "public, must-revalidate, proxy-revalidate"
+	</IfModule>
+</FilesMatch>
+

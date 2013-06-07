@@ -12,13 +12,14 @@
 		<link rel="stylesheet" href="assets/css/bootstrap-responsive.min.css">
 			
 	<!-- google web fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+		<!--<link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>-->
 	
 	<!-- main stylesheet -->			           
 		<link rel="stylesheet" href="assets/css/main.css">  
 		<link rel="stylesheet" href="assets/css/ui/jquery-ui.css">						
 		<!--<link rel="stylesheet" href="assets/css/ui/jquery.ui.selectmenu.css"  />-->
 		<link rel="stylesheet" href="assets/css/plugins/jquery.throbber.css" />
+		<link rel="stylesheet" href="assets/css/itemList.css">
 	
 	<!-- Slick Grid-->
 		<link rel="stylesheet" href="controller/plugins/slickgrid/slick.grid.css" type="text/css"/>
@@ -27,6 +28,12 @@
 		
 	<!-- Carrousel -->
 		<link rel="stylesheet" href="assets/css/detail-carrousel.css" >
+			
+	<!-- Select 2 -->
+		<link href="controller/plugins/select2/select2.css" rel="stylesheet"/>
+	
+	<!-- PLUPLOAD -->
+		<link rel="stylesheet" href="controller/plugins/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
     
 	 <!--[if gte IE 9]>
         <style type="text/css">
@@ -40,54 +47,65 @@
     <!--[if IE 9]><link rel="stylesheet" href="app/assets/css/ie/ie9.css"><![endif]-->
             
     <!--[if lt IE 9]>
-        <script src="app/controller/ie/html5shiv.min.js"></script>
-        <script src="app/controller/ie/respond.min.js"></script>
+        <script src="app/controller/ie/html5shiv.min.js" async="true"></script>
+        <script src="app/controller/ie/respond.min.js" async="true"></script>
     <![endif]-->
     
 	<!-- main scripts -->
         <script src="controller/jquery-1.9.1.min.js"></script>
 		<script src="controller/ui/minified/jquery-ui.min.js"></script>
-		<script src="controller/ui/jquery.ui.selectmenu.js" async="true"></script>
-		<script src="controller/plugins/jquery.throbber.js" ></script>
+		<script src="controller/plugins/jquery.throbber.js"></script>
 		<script src="controller/ui/minified/i18n/jquery.ui.datepicker-es.min.js" async="true"></script>
 		
 	<!-- highcharts -->	
-		<script src="controller/plugins/highcharts/highcharts.js" ></script>
-		<script src="controller/plugins/highcharts/highcharts-more.js" ></script>
-		<script src="controller/plugins/highcharts/exporting.js" ></script>
-		<script src="controller/plugins/jquery.json-2.3.min.js" ></script>
-		<script src="controller/css3-mediaqueries.js"></script>
+		<script src="controller/plugins/highcharts/highcharts.js"  async="true"></script>
+		<script src="controller/plugins/highcharts/highcharts-more.js"  async="true"></script>
+		<script src="controller/plugins/highcharts/exporting.js"  async="true"></script>
+		<script src="controller/plugins/jquery.json-2.3.min.js"  async="true"></script>
+		<!--<script src="controller/css3-mediaqueries.js" async="true"></script>-->
 	
 	<!-- bootstrap Framework plugins -->
         <script src="controller/bootstrap.min.js"></script>   
 	
 	<!-- diTimeout: para executar solo una vez al redimensionar la ventana -->
-		<script src="controller/plugins/jquery.ba-dotimeout.min.js" ></script>
-		
-	<!-- Resaltar texto de busqueda en el listado -->
-		<script src="controller/plugins/jquery.highlight.js" async="true" ></script>
+		<script src="controller/plugins/jquery.ba-dotimeout.min.js"  async="true"></script>
 		
 	<!-- Plugin para agregar ellispis a textos multilineas muy largos -->
-		<script src="controller/plugins/jquery.dotdotdot-1.5.7-packed.js" ></script>
-		
-	<!-- Plugin carrusel -->
-		<script src="controller/plugins/jquery.carouFredSel-6.2.1-packed.js" async="true" ></script>		
-		<script src="controller/plugins/helper-plugins/jquery.mousewheel.min.js" async="true"></script>
-		<script src="controller/plugins/helper-plugins/jquery.touchSwipe.min.js" async="true"></script>
-
+		<script src="controller/plugins/jquery.dotdotdot-1.5.7-packed.js"  async="true"></script>
 	
 	<!-- Slickgrid -->
-		<script src="controller/plugins/slickgrid/lib/firebugx.js"></script>
-		<script src="controller/plugins/slickgrid/lib/jquery.event.drag-2.2.js"></script>  
-		<script src="controller/plugins/slickgrid/slick.core.js"></script>
-		<script src="controller/plugins/slickgrid/slick.formatters.js"></script>		
-		<script src="controller/plugins/slickgrid/slick.grid.js"></script>
+		<script src="controller/plugins/slickgrid/lib/firebugx.js" async="true"></script>
+		<script src="controller/plugins/slickgrid/lib/jquery.event.drag-2.2.js" async="true"></script>  
+		<script src="controller/plugins/slickgrid/slick.core.js" async="true"></script>
+		<script src="controller/plugins/slickgrid/slick.formatters.js" async="true"></script>		
+		<script src="controller/plugins/slickgrid/slick.grid.js" async="true"></script>
 		<!--<script src="controller/plugins/slickgrid/slick.groupitemmetadataprovider.js"></script>-->
 		<!--<script src="controller/plugins/slickgrid/slick.dataview.js"></script>-->
 		<!--<script src="controller/plugins/slickgrid/controls/slick.columnpicker.js"></script>-->
 		<!--<script src="controller/plugins/slickgrid/slickgrid.functions.js" ></script>-->
 		<!--<script src="controller/plugins/slickgrid/plugins/slick.autotooltips.js"></script>-->
 		<!--<script src="controller/plugins/slickgrid/plugins/slick.rowselectionmodel.js"></script>	-->
+		
+		
+		<!-- Plugin carrusel -->
+		<script src="controller/plugins/jquery.carouFredSel-6.2.1-packed.js" async="true"></script>	
+		<script src="controller/plugins/helper-plugins/jquery.mousewheel.min.js" async="true"></script>
+		<script src="controller/plugins/helper-plugins/jquery.touchSwipe.min.js" async="true"></script>
+		
+		<!-- Resaltar texto de busqueda en el listado -->
+		<script src="controller/plugins/jquery.highlight.js" async="true"></script>
+		
+		<!-- Select2 -->
+		<script src="controller/plugins/select2/select2.js" async="true"></script>
+		<script src="controller/plugins/select2/select2_locale_es.js" async="true"></script>
+		
+		<!-- PLUPLOAD -->
+		<script src="controller/plugins/plupload/plupload.js" async="true"></script>
+		<script src="controller/plugins/plupload/plupload.html5.js" async="true"></script>
+		<script src="controller/plugins/plupload/plupload.flash.js" async="true"></script>
+		<script src="controller/plugins/plupload/jquery.plupload.queue/jquery.plupload.queue.js" async="true"></script>
+		<script src="controller/plugins/plupload/i18n/es.js" async="true"></script>
+
 	
 	<?php
         @session_start();

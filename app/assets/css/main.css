@@ -364,5 +364,14 @@ header {
     left: 0px;
 }
 
+/*** Fix para PLUPLOAD ***/
+.plupload_header {
+	display: none;
+}
+
+.plupload_container{
+	padding: 5px !important;
+}
+
 
 

@@ -29,16 +29,16 @@
         <!-- jQuery framework -->
             <script src="app/controller/jquery-1.9.1.min.js"></script>
         <!-- jQuery UI -->
-            <script src="app/controller/ui/minified/jquery-ui.min.js"></script>
+            <script src="app/controller/ui/minified/jquery-ui.min.js" async="true"></script>
         <!-- bootstrap Framework plugins -->
-            <!--<script src="app/controller/bootstrap.min.js"></script>             -->
+            <script src="app/controller/bootstrap.min.js" async="true"></script>
         <!-- common functions -->
             <script src="login/controller/index.js"></script>
 </head>
 
 <body>
     <?php
-        @session_start(); 
+        @session_start();        
         if(isset($_SESSION['appSessionSASDOC'])){
              echo "<script>window.location = 'app/'; </script>";
         }
@@ -49,6 +49,25 @@
 
     <!-- Contenido -->
     <div class="container" id="login"></div>
+    
+    <!-- Navegador viejo -->
+    <div id="browserMessage" style="display: none; padding-top: 40px;">
+        <div class="row-fluid">    
+            <div class="span6 offset3 alert alert-block">                
+                <h4>Espera</h4>
+                <br />
+                <p>Estas usando un navegador inseguro y que no cumple con los estandares internacionales de la W3C. Por favor utiliza por lo menos Internet Explorer 10 o un navegador m&aacute;s moderno y seguro como:</p>
+                <br />
+                <div class="btn-toolbar offset2">
+                    <div class="btn-group">
+                        <button class="btn" onclick='window.open("http://www.mozilla.org/es-MX/firefox/fx/")'><i class="icon-download"></i> Mozilla Firefox</button>
+                        <button class="btn" onclick='window.open("https://www.google.com/intl/es/chrome/")'><i class="icon-download"></i> Google Chrome</button>
+                        <button class="btn" onclick='window.open("http://www.opera.com/download")'><i class="icon-download"></i> Opera</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>

@@ -1,4 +1,4 @@
-  <style>
+<style>
     .slick-cell {
       background: white !important;
       border-color: transparent !important;

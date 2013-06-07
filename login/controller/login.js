@@ -52,16 +52,19 @@ function getAutologin(){
 	
 	//IF CHECKBOX IS SET, COOKIE WILL BE SET
 	if(c.is(":checked")){
-		var u = $("#username").val(); //VALUE OF USERNAME
+		var u = runEncrypt($("#username").val()); //VALUE OF USERNAME
+		var ulen = $("#username").val().length;
 		var p = runEncrypt($("#password").val()); //VALUE OF PASSWORD
 		var plen = $("#password").val().length;
 		$.cookie("ucnf", u, { expires: 365 }); //SETS IN DAYS (1 YEARS)
 		$.cookie("pcnf", p, { expires: 365 }); //SETS IN DAYS (1 YEARS)
+		$.cookie("ulencnf", ulen, { expires: 365 });
 		$.cookie("plencnf", plen, { expires: 365 });
 		$.cookie("autocnf", true, { expires: 365 }); 
 	} else {
 		$.removeCookie("ucnf");
 		$.removeCookie("pcnf");
+		$.removeCookie("ulencnf");
 		$.removeCookie("plencnf");
 		$.removeCookie("autocnf");
 	}
@@ -69,11 +72,11 @@ function getAutologin(){
 //NEXT PAGE LOAD, THE USERNAME & PASSWORD WILL BE SHOWN IN THEIR FIELDS
 function setAutologin(){
 	if ($.cookie("autocnf") != null) {
-		if ($.cookie("ucnf").length > 0 && $.cookie("autocnf") == 'true') {
+		if ($.cookie("ucnf").length >= 32 && $.cookie("autocnf") == 'true') {
 			
 			$("#autologin").attr("checked", $.cookie("autocnf"));
 			
-			var e = $.cookie("ucnf"); //"USERNAME" COOKIE
+			var e = runDecrypt($.cookie("ucnf"), $.cookie("ulencnf")); //"USERNAME" COOKIE
 			var p = runDecrypt($.cookie("pcnf"), $.cookie("plencnf")); //"PASSWORD" COOKIE
 			
 			$("#username").val(e); //FILLS WITH "USERNAME" COOKIE

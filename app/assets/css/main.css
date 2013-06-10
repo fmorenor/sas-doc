@@ -6,6 +6,15 @@
   src: local('Raleway'), url(fonts/Raleway.eot) format('embedded-opentype'), url(fonts/Raleway.woff) format('woff');
 }
 
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  src: url(fonts/Raleway-Bold.eot);
+  src: local('Raleway'), url(fonts/Raleway-Bold.eot) format('embedded-opentype'), url(fonts/Raleway-Bold.woff) format('woff');
+}
+
+
 body{
 	background-image: url("../img/bg/wavegrid.png");
 	font-family:Raleway;

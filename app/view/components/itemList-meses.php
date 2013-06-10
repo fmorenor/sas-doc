@@ -135,7 +135,7 @@
   }
 
   $(function () {    
-    $.post("model/level1/itemList.php", {id_usuario: userData.id_usuario}, function(data){
+    $.post("model/components/itemList.php", {id_usuario: userData.id_usuario}, function(data){
       grid = new Slick.Grid("#myGridL1", data, columns, options);      
     });
   })

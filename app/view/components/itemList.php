@@ -109,7 +109,7 @@
                 $('#myGridL1').height(($(document).height() - $('#encabezado').height() - 65)+'px');    
                 $.throbber.show();
                 $('.ui-throbber').css('left', ($('#myGridL1').width() / 2)-20+'px');
-                $.post("model/level1/itemList.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
+                $.post("model/components/itemList.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
                     
                     $.throbber.hide();
                     

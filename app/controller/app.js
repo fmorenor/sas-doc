@@ -44,7 +44,7 @@ var userData;
 			userData.estatus = $(this).attr("rel");
 			
 			$("#itemListL1").unhighlight();
-			$('#itemListL1').load("view/level1/itemList.php");
+			$('#itemListL1').load("view/components/itemList.php");
 			
 		});
 		
@@ -94,8 +94,8 @@ var userData;
 	});
 	// EOF Nav Container
 	 
-	// Cargar los contenidos del level1 
-	$('#content1').load("view/level1.php", function(){          
+	// Cargar los contenidos del components 
+	$('#content1').load("view/main-container.php", function(){          
 	   $.throbber.hide();	   
 	});
  });
@@ -108,8 +108,8 @@ function search() {
 	// Limpiar la función de resaltar palabras buscadas en el documento
 	$("#itemListL1").unhighlight();
 	userData.searchInput = $('#searchInput').val();
-	$('#itemListL1').load("view/level1/itemList.php");
-	$('#itemContentL1').load("view/level1/itemContent.php");
+	$('#itemListL1').load("view/components/itemList.php");
+	$('#itemContentL1').load("view/components/itemContent.php");
 }
 
 function searchDateRange() {
@@ -123,8 +123,8 @@ function searchDateRange() {
 	}
 	// Limpiar la función de resaltar palabras buscadas en el documento
 	$("#itemListL1").unhighlight();
-	$('#itemListL1').load("view/level1/itemList.php");
-	$('#itemContentL1').load("view/level1/itemContent.php");
+	$('#itemListL1').load("view/components/itemList.php");
+	$('#itemContentL1').load("view/components/itemContent.php");
 }
 
 function setSearchGroup(type) {
@@ -204,7 +204,7 @@ function loadDocument(id) {
 		},
 		complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
             userData.selectedDocumentId = id;
-            $('#itemDetail').load("view/level1/itemDetail.php?itemDetailHeight="+$('#itemDetail').height());
+            $('#itemDetail').load("view/components/itemDetail.php?itemDetailHeight="+$('#itemDetail').height());
 		}
 	});
 }
@@ -227,7 +227,7 @@ function newDocument() {
 			   height: 'easeOutBounce'
 			},
 			complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
-			   $('#newDocument').load("view/level1/newDocument.php");
+			   $('#newDocument').load("view/components/newDocument.php");
 			}
 		});	
 	}

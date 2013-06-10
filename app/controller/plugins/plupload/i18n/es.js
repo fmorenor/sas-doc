@@ -22,6 +22,6 @@ plupload.addI18n({
 	'Add Files': 'Agregar Archivos',
 	'Start upload': 'Comenzar Subida',
 	'%d files queued': '%d archivos en cola.',
-	'Error: Invalid file extension: ': 'Error: Extensi√≥n de archivo inv√°lida: ',
+	'Error: Invalid file extension: ': 'Error: ExtensiÛn de archivo inv·lida: ',
 	'Using runtime: html5': 'Usando motor: HTML5'
 });

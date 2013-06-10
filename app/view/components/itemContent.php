@@ -1,6 +1,6 @@
 <script>    
     $(document).ready(function(){
-        $.post("model/level1/itemContent.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
+        $.post("model/components/itemContent.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
             
             //Cargar los valores con los datos provenientes del POST
                 var conteo_pendientes = data['semaforo'][1]+data['semaforo'][2];
@@ -21,7 +21,7 @@
             //Cargar el gráfico con los datos provenientes del POST
                 userDataL1['chart'] =  data['chart'];
                 userDataL1['colors'] =  data['colors'];
-                $('#itemContentL1 #chart').load("view/level1/chart.php");
+                $('#itemContentL1 #chart').load("view/components/chart.php");
         });
         
         // NavBar
@@ -31,19 +31,19 @@
         
          $('#contador-pendiente').bind("click",function(event){
             userData.estatus = '1,2';
-            $('#itemListL1').load("view/level1/itemList.php");
+            $('#itemListL1').load("view/components/itemList.php");
             $('#myNav li:eq(0) a').tab('show'); 
         });
         
         $('#contador-atendido').bind("click",function(event){
             userData.estatus = '3';
-            $('#itemListL1').load("view/level1/itemList.php");            
+            $('#itemListL1').load("view/components/itemList.php");            
             $('#myNav li:eq(1) a').tab('show');             
         });   
          
         $('#contador-enviado').bind("click",function(event){
             userData.estatus = '4,5';
-            $('#itemListL1').load("view/level1/itemList.php");
+            $('#itemListL1').load("view/components/itemList.php");
             $('#myNav li:eq(2) a').tab('show'); 
         });
     });

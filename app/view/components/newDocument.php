@@ -1,6 +1,6 @@
 <?php include_once("../../model/functions.php"); ?>
 
-<script src="controller/level1/newDocument.js"></script>
+<script src="controller/components/newDocument.js"></script>
     
     <div id="closeNewDocumentButton" class="closer"></div>
     <form class="form-horizontal">

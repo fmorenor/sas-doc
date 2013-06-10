@@ -1,7 +1,7 @@
 <script>
     $(document).ready(function() {
         
-        $.post("model/level1/itemDetail.php", {id_documento: userData.selectedDocumentId}, function(data){
+        $.post("model/components/itemDetail.php", {id_documento: userData.selectedDocumentId}, function(data){
             
             // BOF LLenar de datos la ficha            
                 // Titulo
@@ -88,7 +88,7 @@
             
             
             // Carga de thumbs de adjuntos hasta que se haya cargado itemDeatil.php            
-            $.post("model/level1/itemDetail-adjuntos.php", {id_documento: userData.selectedDocumentId}, function(data){                
+            $.post("model/components/itemDetail-adjuntos.php", {id_documento: userData.selectedDocumentId}, function(data){                
                 $('.detail-scroll').unbind("scroll");
                 
                 // Si existen registros de documentos anjuntos
@@ -164,11 +164,11 @@
                     
                 } // EOF Si hay documentos adjuntos
                 
-            }); // EOF  $.post("model/level1/itemDetail-adjuntos.php...
+            }); // EOF  $.post("model/components/itemDetail-adjuntos.php...
             
             
             // Cargar los registros de "turnado a"
-            $.post("model/level1/itemDetail-turnado-a.php", {id_documento: userData.selectedDocumentId}, function(data){                
+            $.post("model/components/itemDetail-turnado-a.php", {id_documento: userData.selectedDocumentId}, function(data){                
                 if(data.length > 0){
                     var turnado_a = "<tr>";
                     turnado_a += "<th rowspan='"+data.length+"'>Turnado a</th>";
@@ -181,10 +181,10 @@
                     turnado_a +="</tr>";                    
                     $('#detail-table').append(turnado_a);                    
                 }   
-            }); // EOF  $.post("model/level1/itemDetail-turnado-a.php...
+            }); // EOF  $.post("model/components/itemDetail-turnado-a.php...
             
             // Cargar las "notas"
-            $.post("model/level1/itemDetail-notas.php", {id_documento: userData.selectedDocumentId}, function(data){                
+            $.post("model/components/itemDetail-notas.php", {id_documento: userData.selectedDocumentId}, function(data){                
                 if(data.length > 0){
                     var table_notas = "<h5>Notas</h5>";
                     table_notas += "<div class='detail-table-container'>"
@@ -204,10 +204,10 @@
                     table_notas +="</table></div>";                    
                     $('.detail-more-data').append(table_notas);                    
                 }   
-            }); // EOF  $.post("model/level1/itemDetail-notas.php...
+            }); // EOF  $.post("model/components/itemDetail-notas.php...
             
             // Cargar el listado de "documentos padre"
-            $.post("model/level1/itemDetail-documentos-padre.php", {id_documento: userData.selectedDocumentId}, function(data){                
+            $.post("model/components/itemDetail-documentos-padre.php", {id_documento: userData.selectedDocumentId}, function(data){                
                 if(data.length > 0){
                     var table_padre = "<h5>Documentos a los que da seguimiento este documento</h5>";
                     table_padre += "<div class='detail-table-container'>"
@@ -227,10 +227,10 @@
                     table_padre +="</table></div>";                    
                     $('.detail-more-data').append(table_padre);                    
                 }   
-            }); // EOF  $.post("model/level1/itemDetail-documentos-padre.php...
+            }); // EOF  $.post("model/components/itemDetail-documentos-padre.php...
             
             // Cargar el listado de "documentos hijos"
-            $.post("model/level1/itemDetail-documentos-hijos.php", {id_documento: userData.selectedDocumentId}, function(data){                
+            $.post("model/components/itemDetail-documentos-hijos.php", {id_documento: userData.selectedDocumentId}, function(data){                
                 if(data.length > 0){
                     var table_hijos = "<h5>Documentos derivados de este documento</h5>";
                     table_hijos += "<div class='detail-table-container'>"
@@ -250,9 +250,9 @@
                     table_hijos +="</table></div>";                    
                     $('.detail-more-data').append(table_hijos);                    
                 }   
-            }); // EOF  $.post("model/level1/itemDetail-documentos-hijos.php...
+            }); // EOF  $.post("model/components/itemDetail-documentos-hijos.php...
             
-        }); // EOF $.post("model/level1/itemDetail.php... 
+        }); // EOF $.post("model/components/itemDetail.php... 
         
         
         $('#closeDocumentButton').bind("click", function(){

@@ -11,7 +11,7 @@
 		
 		// ComboBox Tipo de documento
 		$('#tipo_documento_container').load("model/catalogos/catalogo_tipo_documento.php", function(){
-		    $("#tipo_documento_combobox").select2({width: '100%'});
+		    $("#tipo_documento").select2({width: '100%'});
 		});
 		 
 		// BOF Campos de fecha 
@@ -47,11 +47,23 @@
 			onClose: function( selectedDate ) {
 				//$( "#fecha_emision" ).datepicker( "option", "maxDate", selectedDate );
 			}
+		});		
+		
+		$( "#fecha_emision" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+		$( "#fecha_recepcion" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+		$( "#fecha_recepcion2" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+		
+		$('#hora_recepcion').timepicker({
+			minuteStep: 1,
+			showMeridian: false,
+			showSeconds: true
 		});
 		
-		$( "#fecha_recepcion" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-		$( "#fecha_emision" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-		$( "#fecha_recepcion2" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+		$('#hora_recepcion2').timepicker({
+			minuteStep: 1,
+			showMeridian: false,
+			showSeconds: true
+		});
 		
 		// EOF Campos de fecha 
 	
@@ -59,7 +71,7 @@
 		$('#vigencia').spinner();
 		
 		// BOF ComboBox remitente
-			$('#remitente_combobox').select2({
+			$('#remitente').select2({
 				placeholder: 'Buscar un remitente',
 				minimumInputLength: 5,
 				allowClear: true,
@@ -87,14 +99,13 @@
 						return this.text.localeCompare(term)===0;
 						}).length===0) {
 							return {id:term, text:term};
-						}
-						
+						}						
 					} 
 			});
 		// BOF ComboBox remitente
 		
 		// BOF ComboBox destinatario
-			$('#destinatario_combobox').select2({
+			$('#destinatario').select2({
 				placeholder: 'Buscar un destinatario',
 				minimumInputLength: 5,
 				allowClear: true,
@@ -121,7 +132,7 @@
 		// BOF ComboBox destinatario
 		
 		// BOF ComboBox turnado
-			$('#turnado_a_combobox').select2({
+			$('#turnado_a').select2({
 				placeholder: 'Elegir usuarios turnados / cc',
 				minimumInputLength: 5,
 				allowClear: true,
@@ -148,16 +159,16 @@
 				}				
 			});
 			
-			$("#turnado_a_combobox").select2("container").find("ul.select2-choices").sortable({
+			$("#turnado_a").select2("container").find("ul.select2-choices").sortable({
 				containment: 'parent',
-				start: function() { $("#turnado_a_combobox").select2("onSortStart"); },
-				update: function() { $("#turnado_a_combobox").select2("onSortEnd"); }
+				start: function() { $("#turnado_a").select2("onSortStart"); },
+				update: function() { $("#turnado_a").select2("onSortEnd"); }
 			});
 		// BOF ComboBox turnado
 		
 		
 		// BOF ComboBox asignado
-			$('#asignado_a_combobox').select2({
+			$('#asignado_a').select2({
 				placeholder: 'Usuario responsable del seguimiento',
 				minimumInputLength: 5,
 				allowClear: true,
@@ -208,7 +219,7 @@
 		});
 		
 		// Client side form validation
-		$('form').submit(function(e) {
+		$('#form-nuevo-documento').submit(function(e) {
 			
 			var uploader = $('#uploader').pluploadQueue();
 	
@@ -218,18 +229,59 @@
 				uploader.bind('StateChanged', function() {
 					if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
 						//$('form')[0].submit();
-						console.log("Enviar formulario");
+						//$.doTimeout( 'click', 250, postData());
+						postData();
 					}
-				});
-					
+				});					
 				uploader.start();
 			} else {
-				alert('You must queue at least one file.');
+				//alert('You must queue at least one file.');
+				postData();
 			}
-	
+			
 			return false;
 		});
 		// EOF UPLOADER
+		
+		function postData() {
+			var url = $('#form-nuevo-documento').attr( 'action' );
+						
+			var formData = {};			
+			$("#form-nuevo-documento :input").each(function(){
+				if ($(this)[0].id && $(this)[0].value) {
+					var id = $(this)[0].id;
+					var value = $(this)[0].value;
+					formData[id] = value; 
+				} else if ($(this)[0].name && $(this)[0].value){
+					var id = $(this)[0].name;
+					var value = $(this)[0].value;
+					formData[id] = value; 
+				}
+			});
+			
+			// Datos fuera del formulario
+			formData['estatus'] = 1; // PRAGMA - Revisar si se usará checkbox
+			formData['id_usuario'] = userData.id_usuario;			
+			formData['remitente_nombre'] = $('s2id_remitente a.select2-choice span').text();
+			
+			// Enviar los datos del formulario por POST
+			var posting = $.post( url, formData);
+			posting.done(function( data ) {				
+				// Cerrar la ventana
+				closeNewDocument();
+				// Refrescar la pantalla
+				$.throbber.show({overlay: true});
+				$("#itemListL1").unhighlight();
+				$('#itemListL1').load("view/components/itemList.php?method=POST");
+				$('#content1').load("view/main-container.php", function(){          
+					$.throbber.hide();	   
+				});
+				// console.log(data.msg);
+			});
+		}
+		
+		
+		$('#newDocumentScroll').scrollTop(1);
 
 	});
 	

@@ -3,7 +3,7 @@
 <script src="controller/components/newDocument.js"></script>
     
     <div id="closeNewDocumentButton" class="closer"></div>
-    <form class="form-horizontal">
+    <form class="form-horizontal" id="form-nuevo-documento" action="model/components/newDocument-save.php">
         <fieldset>
             <legend>Agregar un nuevo documento</legend>
             <!--Primer fila-->
@@ -11,7 +11,7 @@
                 <div class="row-fluid" >
                     <div class="span6">
                         <div class="control-group">
-                            <label class="control-label" for="numero_documento">No. de documento</label>
+                            <label class="control-label" for="numero_documento"><strong>No. de documento *</strong></label>
                             <div class="controls">
                                 <input type="text" id="numero_documento" class="input-fullwidth" placeholder="No. de documento" required>
                             </div>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="span6">
                         <div class="control-group">
-                            <label class="control-label" for="tipo_documento">Tipo de documento</label>
+                            <label class="control-label" for="tipo_documento"><strong>Tipo de documento *</strong></label>
                             <div class="controls">
                                  <div class="ui-widget input-append" id="tipo_documento_container"></div>                                
                             </div>
@@ -30,7 +30,7 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="control-group">
-                            <label class="control-label" for="asunto">Asunto</label>
+                            <label class="control-label" for="asunto"><strong>Asunto *</strong></label>
                             <div class="controls">
                                 <textarea rows="2" id="asunto" placeholder="Asunto" class="fullsize-textarea" required />
                             </div>
@@ -52,37 +52,58 @@
                 <div class="row-fluid">
                     <div class="span6">
                         <div class="control-group">
-                            <label class="control-label" for="remitente">Remitente</label>
+                            <label class="control-label" for="remitente"><strong>Remitente *</strong></label>
                             <div class="controls">
                                 <div class="ui-widget input-append">
-                                    <input type="hidden" id="remitente_combobox" class="input-fullwidth" />
+                                    <input type="text" id="remitente" class="input-fullwidth select2-required-input" required >
                                 </div>
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="detinatario">Destinatario</label>
+                            <label class="control-label" for="detinatario"><strong>Destinatario *</strong></label>
                             <div class="controls">
                                 <div class="ui-widget input-append">
-                                    <input type='hidden' id="destinatario_combobox" class="input-fullwidth" />
+                                    <input type='text' id="destinatario" class="input-fullwidth select2-required-input" required >
                                 </div>                                      
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="fecha_emision">Fecha emisión</label>
+                            <label class="control-label" for="fecha_emision"><strong>Fecha emisión *</strong></label>
                             <div class="controls">
-                                <input type="text" id="fecha_emision" class="input-fullwidth" placeholder="<?php echo getToday(); ?>" required>
+                                <div class="input-prepend">
+                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                    <input type="text" id="fecha_emision" class="input-large" placeholder="<?php echo getToday(); ?>" required>
+                                </div>
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="fecha_recepcion">Fecha recepción</label>
+                            <label class="control-label" for="fecha_recepcion"><strong>Fecha recepción *</strong></label>
                             <div class="controls">
-                                <input type="text" id="fecha_recepcion" class="input-fullwidth" placeholder="<?php echo getToday(); ?>" required>
+                                
+                                 <div class="input-prepend" style="float: left; width:50%">
+                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                    <input type="text" id="fecha_recepcion" class="input-small" placeholder="<?php echo getToday(); ?>" required>                                    
+                                </div>                                
+                                <div class="input-prepend bootstrap-timepicker" style="width:50%">                                    
+                                    <span class="add-on"><i class="icon-time"></i></span>
+                                    <input id="hora_recepcion" type="text" class="input-small">
+                                </div>
+                                
                             </div>
                         </div>
                          <div class="control-group">
                             <label class="control-label" for="fecha_recepcion2">Recep. oficialia partes</label>
                             <div class="controls">
-                                <input type="text" id="fecha_recepcion2" class="input-fullwidth" placeholder="<?php echo getToday(); ?>">
+                                
+                                <div class="input-prepend" style="float: left; width:50%">
+                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                    <input type="text" id="fecha_recepcion2" class="input-small" placeholder="<?php echo getToday(); ?>">                                    
+                                </div>                                
+                                <div class="input-prepend bootstrap-timepicker" style="width:50%">                                    
+                                    <span class="add-on"><i class="icon-time"></i></span>
+                                    <input id="hora_recepcion2" type="text" class="input-small">
+                                </div>
+                                
                             </div>
                         </div>                        
                     </div>
@@ -105,16 +126,15 @@
                             <div class="controls">
                                 <!--<input type="text" id="turnado" class="input-fullwidth" placeholder="Turnado">-->
                                 <div class="ui-widget input-append">
-                                    <input type='hidden' id="turnado_a_combobox" class="input-fullwidth" />
+                                    <input type='hidden' id="turnado_a" class="input-fullwidth" />
                                 </div> 
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="asignado_a">Asignado a</label>
-                            <div class="controls">
-                                <!--<input type="text" id="asignado_a" class="input-fullwidth" placeholder="Asignado">-->
+                            <div class="controls">                                
                                 <div class="ui-widget input-append">
-                                    <input type='hidden' id="asignado_a_combobox" class="input-fullwidth" />
+                                    <input type='text' id="asignado_a" class="input-fullwidth">
                                 </div> 
                             </div>
                         </div>

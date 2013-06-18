@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php
 	header("Content-type: application/json");
 	include("../../app/model/conexion.php");
@@ -47,7 +48,6 @@
 			$grupo = $g[$keys];
 			
 		// Inicia la las variables de sesión	
-			@session_start();
 			$_SESSION['nombre_completo'] = $nombre_completo;
 			$_SESSION['grupo'] = $grupo;
 			$_SESSION['appSessionSASDOC'] = "true";
@@ -147,5 +147,6 @@
 		'id_usuario_anterior' => $_SESSION['id_usuario_anterior']);
 	}
 	
+	mysqli_close($link);
 	echo json_encode($jsonData);	
 ?>

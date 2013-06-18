@@ -1,7 +1,18 @@
 <script>    
     $(document).ready(function(){
-        $.post("model/components/itemContent.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
-            
+        
+        //$.post("model/components/itemContent.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
+        $.ajax({
+                type: '<?php echo $_GET['method']; ?>',
+                url: "model/components/itemContent.php",
+                data: {
+                        id_usuario: userData.id_usuario,
+                        id_privilegios: userData.id_privilegios,
+                        estatus: userData.estatus,
+                        searchType: userData.searchType,
+                        searchInput: userData.searchInput
+                        }
+        }).done(function(data){              
             //Cargar los valores con los datos provenientes del POST
                 var conteo_pendientes = data['semaforo'][1]+data['semaforo'][2];
                 conteo_pendientes = (conteo_pendientes > 0) ? conteo_pendientes : 0;
@@ -31,19 +42,19 @@
         
          $('#contador-pendiente').bind("click",function(event){
             userData.estatus = '1,2';
-            $('#itemListL1').load("view/components/itemList.php");
+            $('#itemListL1').load("view/components/itemList.php?method=GET");
             $('#myNav li:eq(0) a').tab('show'); 
         });
         
         $('#contador-atendido').bind("click",function(event){
             userData.estatus = '3';
-            $('#itemListL1').load("view/components/itemList.php");            
+            $('#itemListL1').load("view/components/itemList.php?method=GET");            
             $('#myNav li:eq(1) a').tab('show');             
         });   
          
         $('#contador-enviado').bind("click",function(event){
             userData.estatus = '4,5';
-            $('#itemListL1').load("view/components/itemList.php");
+            $('#itemListL1').load("view/components/itemList.php?method=GET");
             $('#myNav li:eq(2) a').tab('show'); 
         });
     });

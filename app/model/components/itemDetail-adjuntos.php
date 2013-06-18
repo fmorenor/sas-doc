@@ -15,5 +15,6 @@
                                 'thumb' => $thumb);
         //}
     }
+	
 	echo json_encode($jsonData);
 ?>

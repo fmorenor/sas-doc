@@ -1,4 +1,4 @@
-<?php if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start(); ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 
 <html>
@@ -16,9 +16,9 @@
 	
 	<!-- main stylesheet -->			           
 		<link rel="stylesheet" href="assets/css/main.css">  
-		<link rel="stylesheet" href="assets/css/ui/jquery-ui.css">						
-		<!--<link rel="stylesheet" href="assets/css/ui/jquery.ui.selectmenu.css"  />-->
+		<link rel="stylesheet" href="assets/css/ui/jquery-ui.css">
 		<link rel="stylesheet" href="assets/css/plugins/jquery.throbber.css" />
+		<link rel="stylesheet" href="assets/css/plugins/bootstrap-timepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/itemList.css">
 	
 	<!-- Slick Grid-->
@@ -56,6 +56,9 @@
 		<script src="controller/ui/minified/jquery-ui.min.js"></script>
 		<script src="controller/plugins/jquery.throbber.js"></script>
 		<script src="controller/ui/minified/i18n/jquery.ui.datepicker-es.min.js" async="true"></script>
+		<!--<script src="controller/plugins/jquery.timepicker.js"></script>-->
+		<script src="controller/plugins/bootstrap-timepicker.min.js"></script>
+		
 		
 	<!-- highcharts -->	
 		<script src="controller/plugins/highcharts/highcharts.js"  async="true"></script>
@@ -100,7 +103,7 @@
 		<script src="controller/plugins/select2/select2_locale_es.js" async="true"></script>
 		
 		<!-- PLUPLOAD -->
-		<script src="controller/plugins/plupload/plupload.js" async="true"></script>
+		<script src="controller/plugins/plupload/plupload.js"></script>
 		<script src="controller/plugins/plupload/plupload.html5.js" async="true"></script>
 		<script src="controller/plugins/plupload/plupload.flash.js" async="true"></script>
 		<script src="controller/plugins/plupload/jquery.plupload.queue/jquery.plupload.queue.js" async="true"></script>
@@ -108,7 +111,6 @@
 
 	
 	<?php
-        @session_start();
         if(isset($_SESSION['appSessionSASDOC'])){
             ?>
 			<script type="text/javascript" src="controller/app.js"></script>

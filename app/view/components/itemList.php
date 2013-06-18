@@ -109,33 +109,45 @@
                 $('#myGridL1').height(($(document).height() - $('#encabezado').height() - 65)+'px');    
                 $.throbber.show();
                 $('.ui-throbber').css('left', ($('#myGridL1').width() / 2)-20+'px');
-                $.post("model/components/itemList.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
-                    
-                    $.throbber.hide();
-                    
-                    if (data.length > 0) {
-                        grid = new Slick.Grid("#myGridL1", data, columns, options);
-                        
-                        $(".cell-main-subtitle").dotdotdot();
-                        grid.onViewportChanged.subscribe(function(e,args){
-                            $(".cell-main-subtitle").dotdotdot();
-                        });
-                        
-                        // Resaltar las palabras buscadas en la lista de documentos
-                        if (userData.searchInput) {
-                            var searchInputText = userData.searchInput;                
-                            $("#itemListL1").highlight(searchInputText);
-                            grid.onViewportChanged.subscribe(function(e,args){
-                                $("#itemListL1").highlight(searchInputText);
-                            });
-                        }
-                        
-                    } else {
-                        $('#myGridL1').css('background-color', '#FFFFFF');
-                        $('#myGridL1').html("<div class='itemListMessage'>No hay documentos disponibles que coincidan con el criterio de búsqueda...</div>");
-                    }
-                });
-            });
+                
+                //$.post("model/components/itemList.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){                
+                $.ajax({
+                    type: '<?php echo $_GET['method']; ?>',
+                    url: "model/components/itemList.php",
+                    data: {
+                        id_usuario: userData.id_usuario,
+                        id_privilegios: userData.id_privilegios,
+                        estatus: userData.estatus,
+                        searchType: userData.searchType,
+                        searchInput: userData.searchInput
+                       }
+                })
+                .done(function(data){                    
+                     $.throbber.hide();
+                 
+                     if (data.length > 0) {
+                         grid = new Slick.Grid("#myGridL1", data, columns, options);
+                         
+                         $(".cell-main-subtitle").dotdotdot();
+                         grid.onViewportChanged.subscribe(function(e,args){
+                             $(".cell-main-subtitle").dotdotdot();
+                         });
+                         
+                         // Resaltar las palabras buscadas en la lista de documentos
+                         if (userData.searchInput) {
+                             var searchInputText = userData.searchInput;                
+                             $("#itemListL1").highlight(searchInputText);
+                             grid.onViewportChanged.subscribe(function(e,args){
+                                 $("#itemListL1").highlight(searchInputText);
+                             });
+                         }
+                         
+                     } else {
+                         $('#myGridL1').css('background-color', '#FFFFFF');
+                         $('#myGridL1').html("<div class='itemListMessage'>No hay documentos disponibles que coincidan con el criterio de búsqueda...</div>");
+                     }
+                 });
+            });         
             
             function getListWidth() {
                 return $('#itemListL1').width() - 20;

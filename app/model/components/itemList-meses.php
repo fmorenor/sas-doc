@@ -67,5 +67,6 @@
 	}
 	
 	$jsonData = array_reverse($jsonData);
+	
 	echo json_encode($jsonData);	
 ?>

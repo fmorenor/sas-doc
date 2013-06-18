@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php
     header("Content-type: application/json");
     include_once "../conexion.php";
@@ -9,10 +10,9 @@
     
     ///// BOF Ldap	
 	include('../../../login/model/Ldap.php');
-	
-    @session_start();
-        $login = $_SESSION['usuario'];
-        $password = decrypt($_SESSION['cryptkey'],$key,$iv,$bit_check);        
+    
+	$login = $_SESSION['usuario'];
+	$password = decrypt($_SESSION['cryptkey'],$key,$iv,$bit_check);        
 	
 	$AUT = new ldap();	
 	$ldap_config = array();

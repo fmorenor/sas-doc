@@ -262,7 +262,8 @@ header {
 
 #newDocumentScroll{
 	width: 100%;
-	overflow-y: auto;	
+	overflow-y: auto;
+	padding-top: 1px;
 }
 
 #newDocument .fullsize-textarea {
@@ -359,7 +360,7 @@ header {
 	font-weight: bold;
 }
 
-/*** Fix para plugin Select2 + bootstrap ***/
+/*** BOF Fix para plugin Select2 + bootstrap ***/
 .select2-offscreen, .select2-offscreen:focus {
     clip: rect(0 0 0 0);
     width: 1px !important;
@@ -368,10 +369,19 @@ header {
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden;
-    position: absolute !important;
+    position: absolute;
     outline: 0;
     left: 0px;
 }
+
+.select2-focusser{
+  position: absolute !important;
+}
+
+#tipo_documento, #remitente, #destinatario, #asignado_a{
+  position: relative;
+}
+/*** EOF Fix para plugin Select2 + bootstrap ***/
 
 /*** Fix para PLUPLOAD ***/
 .plupload_header {

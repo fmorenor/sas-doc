@@ -16,5 +16,6 @@
 							'user' => $row['user'],
 							'nombre' => $row['nombre']);        
     }
+	
 	echo json_encode($jsonData);
 ?>

@@ -44,7 +44,7 @@ var userData;
 			userData.estatus = $(this).attr("rel");
 			
 			$("#itemListL1").unhighlight();
-			$('#itemListL1').load("view/components/itemList.php");
+			$('#itemListL1').load("view/components/itemList.php?method=GET");
 			
 		});
 		
@@ -108,8 +108,8 @@ function search() {
 	// Limpiar la función de resaltar palabras buscadas en el documento
 	$("#itemListL1").unhighlight();
 	userData.searchInput = $('#searchInput').val();
-	$('#itemListL1').load("view/components/itemList.php");
-	$('#itemContentL1').load("view/components/itemContent.php");
+	$('#itemListL1').load("view/components/itemList.php?method=POST");
+	$('#itemContentL1').load("view/components/itemContent.php?method=POST");
 }
 
 function searchDateRange() {
@@ -123,8 +123,8 @@ function searchDateRange() {
 	}
 	// Limpiar la función de resaltar palabras buscadas en el documento
 	$("#itemListL1").unhighlight();
-	$('#itemListL1').load("view/components/itemList.php");
-	$('#itemContentL1').load("view/components/itemContent.php");
+	$('#itemListL1').load("view/components/itemList.php?method=POST");
+	$('#itemContentL1').load("view/components/itemContent.php?method=POST");
 }
 
 function setSearchGroup(type) {

@@ -30,5 +30,6 @@
 							'estatus' => $row['estatus'],
 							'label_estatus' => $label_estatus);        
     }
+	
 	echo json_encode($jsonData);
 ?>

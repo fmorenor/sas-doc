@@ -109,6 +109,5 @@
 	$jsonData['chart']['name'] = "Documentos disponibles";
 	
 	$jsonData['id_usuario_involucrado'] = $id_usuario_involucrado;
-
 	echo json_encode($jsonData);	
 ?>

@@ -8,9 +8,9 @@ $(document).ready(function(){
     
     // Cargar la vista de la lista de meses
     userData.estatus = '1,2';
-    $('#itemListL1').load("view/components/itemList.php?id_usuario="+userData.id_usuario+"&estatus="+userData.estatus);
+    $('#itemListL1').load("view/components/itemList.php?method=GET&id_usuario="+userData.id_usuario+"&estatus="+userData.estatus);
     
     // Cargar la vista del contenido del components
-    $('#itemContentL1').load("view/components/itemContent.php?id_usuario="+userData.id_usuario);
+    $('#itemContentL1').load("view/components/itemContent.php?method=GET&id_usuario="+userData.id_usuario);
     
 });

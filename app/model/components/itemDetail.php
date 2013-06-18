@@ -82,7 +82,8 @@
                     'fecha_actualizacion' => $row['fecha_actualizacion'],
 					);
 		
-	}	
+	}
+	
 	echo json_encode($jsonData);
 ?>
     

@@ -10,7 +10,7 @@
                 $('.label_estatus_detail_class').text(data.estatus);
                 if (data.id_estatus == '1' || data.id_estatus == '2') {            
                     if(data.dias_restantes){
-                        $('.label_estatus_detail_class').after('<span class="label label-important label_vigencia_detail">Vigencia: '+data.vigencia+' días - Días restantes: '+data.dias_restantes+'</span>');
+                        $('.label_estatus_detail_class').after('<span class="label label-important label_vigencia_detail">Vigencia: '+data.vigencia+' días / Días restantes: '+data.dias_restantes+'</span>');
                     } 
                 }   
                 

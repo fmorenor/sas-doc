@@ -17,4 +17,9 @@
     - El usuario por defecto se debe quitar para dejar que sea el del usuario logueado
     
         app/controller/main-container.js
+        
+    - Se debe cambiar la ruta de ImageMagik de "ImageMagick-6.7.6-Q16" a "ImageMagick-6.8.1-Q16" para que funcione en el server
+    
+        app/model/components/newDocument-save.php
+        app/model/components/generateThumb.php
     

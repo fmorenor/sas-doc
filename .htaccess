@@ -147,4 +147,5 @@
 		Header append Cache-Control "public, must-revalidate, proxy-revalidate"
 	</IfModule>
 </FilesMatch>
-
+# Como este servidor no enviaba "Content-Encoding: gzip" aun cuando mod_deflate esta activado, lo forzamos.
+SetEnv force-gzip "yes"

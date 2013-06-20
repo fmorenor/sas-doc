@@ -133,7 +133,7 @@
 		
 		// BOF ComboBox turnado
 			$('#turnado_a').select2({
-				placeholder: 'Elegir usuarios turnados / cc',
+				//placeholder: 'Elegir usuarios turnados / cc',
 				minimumInputLength: 5,
 				allowClear: true,
 				multiple: true,
@@ -200,7 +200,7 @@
 			// General settings
 			runtimes : 'html5,flash',
 			url : 'model/upload.php',
-			max_file_size : '10mb',
+			max_file_size : '2mb',
 			chunk_size : '1mb',
 			unique_names : true,
 	
@@ -244,6 +244,8 @@
 		// EOF UPLOADER
 		
 		function postData() {
+			$('.modal-back').css('z-index', '3');
+			$.throbber.show({overlay: true});
 			var url = $('#form-nuevo-documento').attr( 'action' );
 						
 			var formData = {};			
@@ -265,16 +267,21 @@
 			formData['remitente_nombre'] = $('s2id_remitente a.select2-choice span').text();
 			
 			// Enviar los datos del formulario por POST
-			var posting = $.post( url, formData);
+			var posting = $.post( url, formData);			
 			posting.done(function( data ) {				
 				// Cerrar la ventana
 				closeNewDocument();
-				// Refrescar la pantalla
-				$.throbber.show({overlay: true});
+				// Refrescar la pantalla				
 				$("#itemListL1").unhighlight();
 				$('#itemListL1').load("view/components/itemList.php?method=POST");
 				$('#content1').load("view/main-container.php", function(){          
-					$.throbber.hide();	   
+					$.throbber.hide();
+					$('.modal-back').css('z-index', '1');
+					// Generar los thumbs para los archivos que se subieron
+					$.each(data.files, function(){
+						$.post("model/components/generateThumb.php", {file: this});
+					});
+					
 				});
 				// console.log(data.msg);
 			});

@@ -39,7 +39,7 @@
 								//$searchQuery .= "OR asig_por.nombre LIKE '%".$_REQUEST['searchInput']."%' ";
 								$searchQuery .= ")";
 								
-								$orderBy = "ORDER BY d.fecha_recepcion ASC";
+								$orderBy = "ORDER BY d.fecha_recepcion DESC";
 								
 								break;
 			case 'recepcion':	$dateFromTo = split(",",$_REQUEST['searchInput']);
@@ -47,7 +47,7 @@
 								$searchQuery .= "d.fecha_recepcion BETWEEN '".$dateFromTo[0]." 00:00:00' AND '".$dateFromTo[1]."' ";
 								$searchQuery .= ")";
 								
-								$orderBy = "ORDER BY d.fecha_recepcion ASC";
+								$orderBy = "ORDER BY d.fecha_recepcion DESC";
 								
 								break;
 			case 'emision':		$dateFromTo = split(",",$_REQUEST['searchInput']);
@@ -55,7 +55,7 @@
 								$searchQuery .= "d.fecha_emision BETWEEN '".$dateFromTo[0]." 00:00:00' AND '".$dateFromTo[1]."' ";
 								$searchQuery .= ")";
 								
-								$orderBy = "ORDER BY d.fecha_emision ASC";
+								$orderBy = "ORDER BY d.fecha_emision DESC";
 								
 								break;
 		}
@@ -83,7 +83,7 @@
 								d.vigencia,
 								d.id_estatus,
 								e.estatus,
-								CONCAT(SUBSTRING_INDEX(da.path,'.',1),'.JPG') as thumb
+								CONCAT(SUBSTRING_INDEX(da.path,'.',1),'.jpg') as thumb
 								
 								FROM documentos d
 
@@ -137,6 +137,8 @@
 		}
 		// EOF Vigencia	- Días restantes
 		
+		$system_path = str_replace("app\model\components", "", dirname(__FILE__)).'documents/';		
+		$thumb = (file_exists($system_path.$row['thumb'])) ? "../documents/".$row['thumb'] : "assets/img/thumb_null.png";
 		$jsonData[] = array(
 					'id_documento' => $row['id'],
 					'numero_documento' => $row['numero_documento'],
@@ -158,7 +160,7 @@
 					'id_estatus' => $row['id_estatus'],
 					'estatus' => $row['estatus'],
 					'label_estatus' => $label_estatus,
-					'thumb' => '../documents/'.$row['thumb']
+					'thumb' => $thumb
 					);
 		
 	}	

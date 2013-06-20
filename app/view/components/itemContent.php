@@ -3,7 +3,7 @@
         
         //$.post("model/components/itemContent.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){
         $.ajax({
-                type: '<?php echo $_GET['method']; ?>',
+                type: '<?php echo (($_GET['method']) ? $_GET['method'] : "POST"); ?>',
                 url: "model/components/itemContent.php",
                 data: {
                         id_usuario: userData.id_usuario,

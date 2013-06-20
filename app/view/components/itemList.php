@@ -42,7 +42,7 @@
                 <span class="badge badge_adjuntos" title="Documentos adjuntos: <%=conteo_adjuntos%>"><%=conteo_adjuntos%></span>
                 <span class="label label-<%=label_estatus%> label_estatus_class"><%=estatus%></span>   
                 
-                <!--<img src="<%=thumb%>"/>-->
+                <img src="<%=thumb%>"/>
                
             </div>
           </div>
@@ -112,7 +112,7 @@
                 
                 //$.post("model/components/itemList.php", {id_usuario: userData.id_usuario, id_privilegios: userData.id_privilegios, estatus: userData.estatus, searchType: userData.searchType, searchInput: userData.searchInput}, function(data){                
                 $.ajax({
-                    type: '<?php echo $_GET['method']; ?>',
+                    type: '<?php echo (($_GET['method']) ? $_GET['method'] : "POST"); ?>',
                     url: "model/components/itemList.php",
                     data: {
                         id_usuario: userData.id_usuario,

@@ -1,12 +1,7 @@
 var userData;
 
  $(document).ready(function() {
-    
-    // Force cache Javascript files
-    $.ajaxSetup({
-        cache: true
-    });	
-    
+   
 	$.throbber.show({overlay: true});
 	userData = JSON.parse(localStorage['userData']);
 	userData.level = 1;

@@ -100,10 +100,19 @@
 					$_SESSION['alerta_pendientes'] = $userDataTemp['alerta_pendientes'][0];
 					$_SESSION['id_usuario_anterior'] = $id_usuario_anterior;
 					
+					// Si el nombre registrado es diferente al de ActiveDirectory se actualiza
 					if($userDataTemp['nombre'][0] != $nombre_completo){
 						$update = mysqli_query($link, "UPDATE catalogo_usuarios
 														SET nombre = '".$nombre_completo."'
 														WHERE user = '".$login."'; ");
+					}
+					
+					// Si el id_grupo registrado es igual a "0" se actualiza por el recien consultado de Active Directory
+					if($userDataTemp['id_grupo'][0] == '0'){
+						$update = mysqli_query($link, "UPDATE catalogo_usuarios
+														SET id_grupo = '".$id_grupo."'
+														WHERE user = '".$login."'; ");
+						$_SESSION['id_grupo'] = $id_grupo;
 					}
 					
 			} else {

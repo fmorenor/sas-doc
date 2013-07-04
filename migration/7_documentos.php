@@ -11,8 +11,10 @@
     
     $sql = mysqli_query($link, "ALTER TABLE `documentos`
     CHANGE `id_documento_atendido` `id_documento_padre` INT( 11 ) NULL DEFAULT NULL,
-    CHANGE `fecha_respuesta` `fecha_actualizacion` TIMESTAMP NULL DEFAULT NULL,
-    CHANGE `asignado_fecha` `fecha_asignado` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'");
+    CHANGE `fecha_respuesta` `fecha_actualizacion` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+    CHANGE `asignado_fecha` `fecha_asignado` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+    CHANGE `fecha_recepcion` `fecha_recepcion` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+    CHANGE `fecha_emision` `fecha_emision` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'");
 
     $sql = mysqli_query($link, "ALTER TABLE `documentos` ADD `fecha_turnado` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `turnado_fecha`");
     
@@ -23,7 +25,7 @@
     WHERE id_turnado_a = 0;");
     
     $sql = mysqli_query($link, "ALTER TABLE `documentos` ADD `id_usuario_insertar` INT NOT NULL AFTER `id_estatus` ");
-    $sql = mysqli_query($link, "UPDATE `documentos` SET `id_usuario_insertar` = `id_asignado_por`);
+    $sql = mysqli_query($link, "UPDATE `documentos` SET `id_usuario_insertar` = `id_asignado_por`)");
     
     
     // Eliminar campos    

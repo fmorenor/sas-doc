@@ -3,7 +3,7 @@
     include_once "../conexion.php";
     
     $sql = mysqli_query($link, "SELECT *,
-                                CONCAT(SUBSTRING_INDEX(path,'.',1),'.jpg') as thumb
+                                CONCAT(SUBSTRING_INDEX(path,'.',1),'_thumb.jpg') as thumb
                                 FROM documento_adjuntos
                                 WHERE id_documento = ".$_REQUEST['id_documento']);
     

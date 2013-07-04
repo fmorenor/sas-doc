@@ -37,7 +37,7 @@
 			case 1: $label_estatus = "important"; break;
 			case 2: $label_estatus = "warning"; break;
 			case 3: $label_estatus = "success"; break;
-			case 4: 
+			case 4: $label_estatus = "inverse"; break;
 			case 5: $label_estatus = "info"; break;
 		}
 		

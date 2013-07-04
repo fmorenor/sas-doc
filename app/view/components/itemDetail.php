@@ -7,6 +7,10 @@
                 // Titulo
                 $('#numero_documento').text(data.numero_documento);
                 $('.label_estatus_detail_class').addClass('label-'+data.label_estatus);
+                
+                $('.label_estatus_detail_class').on('click', function(){switchList(data.id_estatus)});
+                $('.label_estatus_detail_class').css('cursor', 'pointer');
+                
                 $('.label_estatus_detail_class').text(data.estatus);
                 if (data.id_estatus == '1' || data.id_estatus == '2') {            
                     if(data.dias_restantes){
@@ -24,11 +28,24 @@
                 
                 // Tabla
                 $('#detail-table').before("<h5>Detalles del documento</h5>");
+               
                 if(data.tipo_documento){
-                    $('#detail-table').append("<tr>"
-                    +"    <th>Tipo de documento</th><td>"+data.tipo_documento+"</td>"
-                    +"    <th>Expediente</th><td>"+data.expediente+"</td>"
-                    +"</tr>");
+                    if (data.expediente) {
+                         $('#detail-table').append("<tr>"
+                        +"    <th>Tipo de documento</th><td>"+data.tipo_documento+"</td>"
+                        +"    <th>Expediente</th><td>"+data.expediente+"</td>"
+                        +"</tr>");
+                    } else {
+                         $('#detail-table').append("<tr>"
+                        +"    <th>Tipo de documento</th><td colspan='3'>"+data.tipo_documento+"</td>"
+                        +"</tr>");
+                    }                   
+                } else {
+                    if (data.expediente) {
+                         $('#detail-table').append("<tr>"
+                        +"    <th>Expediente</th><td colspan='3'>"+data.expediente+"</td>"
+                        +"</tr>");
+                    } 
                 }
                 
                 if(data.anexos){
@@ -37,11 +54,26 @@
                     +"</tr>");
                 }
                 
-                if(data.fecha_emision){
-                    $('#detail-table').append("<tr>"
-                    +"  <th>Fecha emisión</th><td>"+data.fecha_emision+"</td>"
-                    +"  <th>Fecha recepción</th><td>"+data.fecha_recepcion+"</td>"
-                    +"</tr>");
+                if(data.fecha_emision != '0000-00-00 00:00:00'){  
+                    switch(data.id_estatus){
+                        case '4': // Generado
+                            $('#detail-table').append("<tr>"
+                            +"  <th>Fecha emisión</th><td colspan='3'>"+data.fecha_emision+"</td>"
+                            +"</tr>");
+                            break;
+                        case '5': // Respuesta
+                            $('#detail-table').append("<tr>"                            
+                            +"  <th>Fecha docto. origen</th><td>"+data.fecha_recepcion+"</td>"
+                            +"  <th>Fecha de seguimiento</th><td>"+data.fecha_emision+"</td>"
+                            +"</tr>");
+                            break;                       
+                        default: // Recibido, Turnado, Atendido
+                            $('#detail-table').append("<tr>"
+                            +"  <th>Fecha emisión</th><td>"+data.fecha_emision+"</td>"
+                            +"  <th>Fecha recepción</th><td>"+data.fecha_recepcion+"</td>"
+                            +"</tr>");
+                            break;
+                    }    
                 }
                 
                  if(data.fecha_recepcion2 != '0000-00-00 00:00:00'){
@@ -219,7 +251,7 @@
                         + "</tr>";
                     $.each(data, function(i, obj) {
                         table_padre += "<tr>";
-                        table_padre += "    <td><button class='btn' onclick='selectDocument("+obj.id+")'>"+obj.numero_documento+"</button></td>";
+                        table_padre += "    <td><button class='btn' onclick='selectDocument("+obj.id+")'><i class='icon-arrow-left'></i> "+obj.numero_documento+"</button></td>";
                         table_padre += "    <td>"+obj.asunto+"</td>";
                         table_padre += "    <td><div class='label label-"+obj.label_estatus+"'>"+obj.estatus+"</div></td>";                        
                         table_padre += "</tr>";
@@ -242,7 +274,7 @@
                         + "</tr>";
                     $.each(data, function(i, obj) {
                         table_hijos += "<tr>";
-                        table_hijos += "    <td><button class='btn' onclick='selectDocument("+obj.id+")'>"+obj.numero_documento+"</button></td>";
+                        table_hijos += "    <td><button class='btn' onclick='selectDocument("+obj.id+")'><i class='icon-arrow-right'></i> "+obj.numero_documento+"</button></td>";
                         table_hijos += "    <td>"+obj.asunto+"</td>";
                         table_hijos += "    <td><div class='label label-"+obj.label_estatus+"'>"+obj.estatus+"</div></td>";                        
                         table_hijos += "</tr>";
@@ -258,8 +290,26 @@
         $('#closeDocumentButton').bind("click", function(){
             closeSelectedDocument();
         });
-        
     });
+    
+    function switchList(id_estatus){
+            switch (id_estatus) {
+                case "1":
+                case "2":   userData.estatus = "1,2";
+                            $('#myNav li:eq(0) a').tab('show');
+                            break;
+                case "3":   userData.estatus = "3";
+                            $('#myNav li:eq(1) a').tab('show');
+                            break;
+                case "4":
+                case "5":   userData.estatus = "4,5";
+                            $('#myNav li:eq(2) a').tab('show');
+                            break;
+            }
+            
+			$("#itemListL1").unhighlight();
+			$('#itemListL1').load("view/components/itemList.php?method=GET");            
+        }
 </script>
 <div id="closeDocumentButton" class="closer"></div>
 <div id="detail-content">

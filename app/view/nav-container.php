@@ -54,9 +54,9 @@
                 <div id="itemDetailTools" class="input-append pull-right">
                     <label class="span4 label-search-style">Herramientas del documento seleccionado</label>                    
                     <div class="btn-group">
-                        <button class="btn"><i class="icon-edit"></i> Editar</button>
-                        <button class="btn"><i class="icon-share"></i> Seguimiento</button>
-                        <button class="btn"><i class="icon-trash"></i> Eliminar</button>
+                        <button class="btn" id="btn-edit-document"><i class="icon-edit"></i> Editar</button>
+                        <button class="btn" id="btn-follow-document"><i class="icon-share"></i> Seguimiento</button>
+                        <button class="btn" id="btn-delete-document"><i class="icon-trash"></i> Eliminar</button>
                     </div>
                 </div>
         </div>

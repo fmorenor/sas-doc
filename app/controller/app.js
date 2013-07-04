@@ -6,28 +6,15 @@ var userData;
 	userData = JSON.parse(localStorage['userData']);
 	userData.level = 1;
 	userData.searchType = 'general';
+    userData.estatus = '1,2';
 	 
     // BOF Encabezado 
 	$('#encabezado').load('view/encabezado.php', function(){
 		var nombre_completo = (userData.nombre_completo == null) ? userData.usuario : userData.nombre_completo;
 		$('.welcome-message').html("Bienvenid@<br />"+nombre_completo+"<br /><a href='../login/view/logout.php?rnd="+Math.random()+"'>Salir</a>");
 		
-		$('.btn-new-document').click(function(){
-			// Si existe el div itemDetail se procede a ocultarlo y a destruirlo. Despues se crea la ventana "newDocument"	 
-			if ($('#itemDetail').length > 0) {
-				
-				$('#itemDetailTools').fadeOut(function(){
-					setSearchGroup(userData.searchType);	
-				});	
-				
-				$('#itemDetail').slideUp(function(){
-						$('#itemDetail').remove();
-						newDocument();
-				});
-				
-			} else { //Si no existe se crea y luego se muestra	
-				newDocument();		
-			}
+		$('#btn-new-document').click(function(){
+			createNewDocumentWindow('Recibido');
 		});
 	});
     // EOF Encabezado
@@ -84,7 +71,20 @@ var userData;
 		$( "#searchDateFrom" ).datepicker( "option", "dateFormat", "yy-mm-dd");
 		$( "#searchDateTo" ).datepicker( "option", "dateFormat", "yy-mm-dd");
 		$('#searchClear2').css('display', 'none');
-		// EOF Datepicker	
+		// EOF Datepicker
+        
+        // Botones de edición del documento selecionado
+        $('#btn-edit-document').click(function(){
+			createNewDocumentWindow('Editar');
+		});
+        
+         $('#btn-follow-document').click(function(){
+			createNewDocumentWindow('Seguimiento');
+		});
+         
+         $('#btn-delete-document').click(function(){
+			createNewDocumentWindow('Eliminar');
+		});
 		
 	});
 	// EOF Nav Container
@@ -94,6 +94,24 @@ var userData;
 	   $.throbber.hide();	   
 	});
  });
+ 
+ function createNewDocumentWindow(type) {
+   // Si existe el div itemDetail se procede a ocultarlo y a destruirlo. Despues se crea la ventana "newDocument"	 
+   if ($('#itemDetail').length > 0) {
+       
+       $('#itemDetailTools').fadeOut(function(){
+           setSearchGroup(userData.searchType);	
+       });	
+       
+       $('#itemDetail').slideUp(function(){
+               $('#itemDetail').remove();
+               newDocument(type);               
+       });
+       
+   } else { //Si no existe se crea y luego se muestra	
+       newDocument(type);
+   }
+}
 
 // Funciones de búsqueda 
 function search() {
@@ -204,7 +222,7 @@ function loadDocument(id) {
 	});
 }
 
-function newDocument() {
+function newDocument(type) {
 	// Crear ventana newDocument si no existe
 	if ($('#newDocument').length == 0) {		
 		toggleModal();
@@ -222,7 +240,7 @@ function newDocument() {
 			   height: 'easeOutBounce'
 			},
 			complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
-			   $('#newDocument').load("view/components/newDocument.php");
+			   $('#newDocument').load("view/components/newDocument"+type+".php");
 			}
 		});	
 	}
@@ -234,11 +252,14 @@ function closeNewDocument() {
 	//	setSearchGroup(userData.searchType);	
 	//});
 	
-	
-	$('#newDocument').slideUp(function(){
-			toggleModal();
-			$('#newDocument').remove();			
-	});
+   if (documentData) {
+      documentData = null;
+   }
+   
+   $('#newDocument').slideUp(function(){
+           toggleModal();
+           $('#newDocument').remove();			
+   });
 }
 
 function toggleModal() {

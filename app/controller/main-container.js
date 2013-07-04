@@ -6,8 +6,7 @@ $(document).ready(function(){
     userData.id_usuario = 2; 
     userData.id_privilegios = 1;
     
-    // Cargar la vista de la lista de meses
-    userData.estatus = '1,2';
+    // Cargar la vista de la lista de meses    
     $('#itemListL1').load("view/components/itemList.php?method=POST&id_usuario="+userData.id_usuario+"&estatus="+userData.estatus);
     
     // Cargar la vista del contenido del components

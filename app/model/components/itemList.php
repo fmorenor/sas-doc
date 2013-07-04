@@ -24,8 +24,15 @@
 					break;
 	}
 	
-	// Si hay algún valor en los campos de buqueda se realiza, si no solo se ignora...	
-	$orderBy = "ORDER BY d.fecha_recepcion ASC"; // Por defecto esta es la ordenación
+	// Si hay algún valor en los campos de buqueda se realiza, si no solo se ignora...
+	// El ordenamiento se hace inverso DESC -> ASC porque se meten al arreglo del ultimo al primero
+	switch($_REQUEST['estatus']){
+		case '1,2': $orderBy = "ORDER BY d.fecha_recepcion ASC, d.fecha_actualizacion ASC"; break;
+		case '3':	$orderBy = "ORDER BY d.fecha_actualizacion ASC, d.fecha_recepcion ASC"; break;
+		case '4,5': $orderBy = "ORDER BY d.fecha_emision ASC, d.fecha_actualizacion ASC"; break;
+		default: $orderBy = "ORDER BY d.fecha_recepcion ASC, d.fecha_actualizacion ASC"; break;
+	}
+	
 	if($_REQUEST['searchInput'] != ''){		
 		switch($_REQUEST['searchType']){
 			case 'general': 	$searchQuery = "AND (";
@@ -39,7 +46,7 @@
 								//$searchQuery .= "OR asig_por.nombre LIKE '%".$_REQUEST['searchInput']."%' ";
 								$searchQuery .= ")";
 								
-								$orderBy = "ORDER BY d.fecha_recepcion DESC";
+								//$orderBy = "ORDER BY d.fecha_recepcion ASC, d.fecha_actualizacion ASC"; // Por defecto esta es la ordenación
 								
 								break;
 			case 'recepcion':	$dateFromTo = split(",",$_REQUEST['searchInput']);
@@ -47,7 +54,7 @@
 								$searchQuery .= "d.fecha_recepcion BETWEEN '".$dateFromTo[0]." 00:00:00' AND '".$dateFromTo[1]."' ";
 								$searchQuery .= ")";
 								
-								$orderBy = "ORDER BY d.fecha_recepcion DESC";
+								$orderBy = "ORDER BY d.fecha_recepcion ASC, d.fecha_actualizacion ASC";
 								
 								break;
 			case 'emision':		$dateFromTo = split(",",$_REQUEST['searchInput']);
@@ -55,7 +62,7 @@
 								$searchQuery .= "d.fecha_emision BETWEEN '".$dateFromTo[0]." 00:00:00' AND '".$dateFromTo[1]."' ";
 								$searchQuery .= ")";
 								
-								$orderBy = "ORDER BY d.fecha_emision DESC";
+								$orderBy = "ORDER BY d.fecha_emision ASC, d.fecha_actualizacion ASC";
 								
 								break;
 		}
@@ -72,6 +79,7 @@
 								d.fecha_recepcion,
 								d.id_remitente,
 								d.remitente as nombre_remitente,
+								rem.nombre as nombre_remitente_cat,
 								d.id_destinatario,
 								dest.nombre as nombre_destinatario,
 								d.destinatario_documento_enviado,
@@ -83,7 +91,7 @@
 								d.vigencia,
 								d.id_estatus,
 								e.estatus,
-								CONCAT(SUBSTRING_INDEX(da.path,'.',1),'.jpg') as thumb
+								CONCAT(SUBSTRING_INDEX(da.path,'.',1),'_thumb.jpg') as thumb
 								
 								FROM documentos d
 
@@ -98,6 +106,9 @@
 				
 								LEFT JOIN catalogo_usuarios asig_por
 								  ON d.id_asignado_por = asig_por.id
+								  
+								LEFT JOIN catalogo_usuarios rem
+								  ON d.id_remitente = rem.id  
 								  
 								LEFT JOIN catalogo_estatus e
 								  ON d.id_estatus = e.id
@@ -122,7 +133,7 @@
 			case 1: $label_estatus = "important"; break;
 			case 2: $label_estatus = "warning"; break;
 			case 3: $label_estatus = "success"; break;
-			case 4: 
+			case 4: $label_estatus = "inverse"; break;
 			case 5: $label_estatus = "info"; break;
 		}
 		
@@ -146,7 +157,7 @@
 					'fecha_emision' => $row['fecha_emision'],
 					'fecha_recepcion' => $row['fecha_recepcion'],
 					'id_remitente' => $row['id_remitente'],
-					'nombre_remitente' => $row['nombre_remitente'],
+					'nombre_remitente' => ($row['id_remitente'] > 0) ? $row['nombre_remitente_cat'] : $row['nombre_remitente'],
 					'id_destinatario' => $row['id_destinatario'],
 					'nombre_destinatario' => $row['nombre_destinatario'],
 					'destinatario_documento_enviado' => $row['destinatario_documento_enviado'],
@@ -160,7 +171,8 @@
 					'id_estatus' => $row['id_estatus'],
 					'estatus' => $row['estatus'],
 					'label_estatus' => $label_estatus,
-					'thumb' => $thumb
+					'thumb' => $thumb,
+					'order' => $orderBy
 					);
 		
 	}	

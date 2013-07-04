@@ -16,8 +16,17 @@
                 </div>        
                 <div class="cell-main-content">
                     <ul>
-                        <li>Emisión: <%=fecha_emision%></li>
-                        <li>Recepción: <%=fecha_recepcion%></li>
+                    
+                        <% if(id_estatus == '1' || id_estatus == '2' || id_estatus == '3'){ %>  
+                            <li>Emisión: <%=fecha_emision%></li>
+                            <li>Recepción: <%=fecha_recepcion%></li>
+                        <% } else if(id_estatus == '5'){ %>                            
+                            <li>Recep. docto. origen: <%=fecha_recepcion%></li>
+                            <li>Seguimiento: <%=fecha_emision%></li>
+                        <% } else { %>
+                            <li>Emisión: <%=fecha_emision%></li>
+                        <% } %>
+                        
                         <li class="textBreak listWrap" title="<%=nombre_remitente%>">Remitente: <%=nombre_remitente%></li>
                         
                         <% if(id_estatus == '1' || id_estatus == '2' || id_estatus == '3'){ %>                

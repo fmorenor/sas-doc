@@ -36,7 +36,7 @@
 			$enviados = 0;			
 		}
 		
-		// Se suman los valores para pendientes (recibidos-turnados) y enviados (generados-respuestas)
+		// Se suman los valores para pendientes (recibidos-turnados) y enviados (generados-seguimientos)
 		switch($row['id_estatus']){
 			case 1:
 			case 2:	$pendientes = $pendientes + (int)$row['conteo_documentos']; break;

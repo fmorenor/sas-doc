@@ -139,7 +139,7 @@
         }
         
         // Estatus del documento padre
-        // Si el estatus del documento padre es 4 o 5 (generado o respuesta) se deja en 5,
+        // Si el estatus del documento padre es 4 o 5 (generado o seguimiento) se deja en 5,
         // si tiene otro estatus se cambia a 3 (atendido)
         $estatus = ($_POST['estatus_padre'] == "4" || $_POST['estatus_padre'] == "5") ? $_POST['estatus_padre'] : 3;
         $sql = mysqli_query($link, "UPDATE documentos

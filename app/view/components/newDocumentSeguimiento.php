@@ -67,15 +67,6 @@
                                 </div>                                      
                             </div>
                         </div>
-                        <!--<div class="control-group">-->
-                        <!--    <label class="control-label" for="fecha_emision"><strong>Fecha emisión *</strong></label>-->
-                        <!--    <div class="controls">-->
-                        <!--        <div class="input-prepend">-->
-                        <!--            <span class="add-on"><i class="icon-calendar"></i></span>-->
-                        <!--            <input type="text" id="fecha_emision" class="input-large" placeholder="<?php echo getToday(); ?>" required>-->
-                        <!--        </div>-->
-                        <!--    </div>-->
-                        <!--</div>-->
                         
                          <div class="control-group">
                             <label class="control-label" for="fecha_emision"><strong>Fecha de seguimiento *</strong></label>

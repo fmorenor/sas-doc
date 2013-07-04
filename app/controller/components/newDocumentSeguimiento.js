@@ -224,7 +224,7 @@
 			formData['id_usuario'] = userData.id_usuario;			
 			formData['remitente_nombre'] = $('#s2id_remitente a.select2-choice span').text();
 			formData['destinatario_nombre'] = $('#s2id_destinatario a.select2-choice span').text();
-			// Si el estatus del doccumento padre es 4 o 5 (generado o respuesta) la fecha a guardar será fecha emisión
+			// Si el estatus del doccumento padre es 4 o 5 (generado o seguimiento) la fecha a guardar será fecha emisión
 			// si tiene otro estatus será fecha_recepcion
 			formData['fecha_padre'] = (documentData.id_estatus == "4" || documentData.id_estatus == "5") ? documentData.fecha_emision : documentData.fecha_recepcion;
 			

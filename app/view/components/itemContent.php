@@ -24,9 +24,9 @@
                 
                 var conteo_enviados = data['semaforo'][4]+data['semaforo'][5];
                 conteo_enviados = (conteo_enviados > 0) ? conteo_enviados : 0;
-                $('#resume .estatus-enviado').text(conteo_enviados); // Se suman los generados y las respuestas
+                $('#resume .estatus-enviado').text(conteo_enviados); // Se suman los generados y las seguimientos
                 $('#resume .estatus-generado').text(data['semaforo'][4]);
-                $('#resume .estatus-respuesta').text(data['semaforo'][5]);
+                $('#resume .estatus-seguimiento').text(data['semaforo'][5]);
               
                 
             //Cargar el gráfico con los datos provenientes del POST
@@ -40,7 +40,7 @@
         $('#contador-atendido').css('cursor', 'pointer');       
         $('#contador-enviado').css('cursor', 'pointer');
         
-         $('#contador-pendiente').bind("click",function(event){
+        $('#contador-pendiente').bind("click",function(event){
             userData.estatus = '1,2';
             $('#itemListL1').load("view/components/itemList.php?method=GET");
             $('#myNav li:eq(0) a').tab('show'); 
@@ -72,7 +72,7 @@
     </div>
     <div class="span3 right-separator">
         <div class="row">
-            <div class="span9">Recibidos</div>
+            <div class="span9">News</div>
             <div class="span3 resume-subvalue estatus-recibido">0</div>
         </div>
         <div class="row">
@@ -96,8 +96,8 @@
             <div class="span3 resume-subvalue estatus-generado">0</div>
         </div>
         <div class="row">
-            <div class="span9">Respuestas</div>
-            <div class="span3 resume-subvalue estatus-respuesta">0</div>
+            <div class="span9">Seguimientos</div>
+            <div class="span3 resume-subvalue estatus-seguimiento">0</div>
         </div>
     </div>
 </div>

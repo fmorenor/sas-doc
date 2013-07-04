@@ -169,7 +169,7 @@
 					'vigencia' => $row['vigencia'],
 					'dias_restantes' => $dias_restantes,
 					'id_estatus' => $row['id_estatus'],
-					'estatus' => $row['estatus'],
+					'estatus' => ($row['estatus'] == 'Seguimiento') ? 'Seguim.' : $row['estatus'],
 					'label_estatus' => $label_estatus,
 					'thumb' => $thumb,
 					'order' => $orderBy

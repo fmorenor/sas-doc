@@ -61,7 +61,7 @@
                             +"  <th>Fecha emisión</th><td colspan='3'>"+data.fecha_emision+"</td>"
                             +"</tr>");
                             break;
-                        case '5': // Respuesta
+                        case '5': // Seguimiento
                             $('#detail-table').append("<tr>"                            
                             +"  <th>Fecha docto. origen</th><td>"+data.fecha_recepcion+"</td>"
                             +"  <th>Fecha de seguimiento</th><td>"+data.fecha_emision+"</td>"

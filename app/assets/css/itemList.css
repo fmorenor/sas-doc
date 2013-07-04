@@ -79,6 +79,7 @@
 .label_estatus_class{
     position:absolute;
     top:115px;
+    margin-left: 4px;
 }
 
 .badge{

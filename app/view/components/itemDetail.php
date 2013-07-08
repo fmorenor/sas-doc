@@ -243,7 +243,7 @@
                 if(data.length > 0){
                     var table_padre = "<h5>Documentos a los que da seguimiento este documento</h5>";
                     table_padre += "<div class='detail-table-container'>"
-                        + "<table class='table table-bordered table-striped'>"
+                        + "<table class='table table-bordered table-striped' id='table_padre'>"
                         + "<tr>"
                         + " <th>Documento</th>"
                         + " <th>Asunto</th>"
@@ -266,7 +266,7 @@
                 if(data.length > 0){
                     var table_hijos = "<h5>Documentos derivados de este documento</h5>";
                     table_hijos += "<div class='detail-table-container'>"
-                        + "<table class='table table-bordered table-striped'>"
+                        + "<table class='table table-bordered table-striped' id='table_hijos'>"
                         + "<tr>"
                         + " <th>Documento</th>"
                         + " <th>Asunto</th>"

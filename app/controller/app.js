@@ -289,7 +289,9 @@ function toggleModal() {
 function confirmationDialog(eventType){
    switch (eventType) {
       case 'Eliminar':  title = "&iquest;Est&aacute;s segur@ de esto?";
-                        text = "Este documento se eliminar&aacute; definitivamente, as&iacute; como todos los datos y archivos asociados a el.<br /><br /> Si estas segur@ por favor conf&iacute;rmalo.";
+                        text = "Este documento se eliminar&aacute; definitivamente, as&iacute; como todos los datos y archivos asociados a el.";
+                        if($('#table_hijos').length > 0) text += "<br /><br />Adem&aacute;s, los documentos derivados de este documento quedar&aacute;n sin referencia de segumiento.";
+                        text += "<br /><br />Si estas segur@ por favor conf&iacute;rmalo.";
                         break;
    }
    

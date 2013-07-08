@@ -29,10 +29,10 @@
         <!-- Common JS -->
         <!-- jQuery framework -->
             <script src="app/controller/jquery-1.9.1.min.js"></script>
+         <!-- bootstrap Framework plugins -->
+            <script src="app/controller/bootstrap.min.js" async="true"></script>    
         <!-- jQuery UI -->
-            <script src="app/controller/ui/minified/jquery-ui.min.js" async="true"></script>
-        <!-- bootstrap Framework plugins -->
-            <script src="app/controller/bootstrap.min.js" async="true"></script>
+            <script src="app/controller/ui/minified/jquery-ui.min.js" async="true"></script>       
         <!-- Select2 -->
             <script src="app/controller/plugins/select2/select2.js" async="true"></script>    
         <!-- common functions -->

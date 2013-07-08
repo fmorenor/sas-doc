@@ -51,8 +51,13 @@
         <script src="app/controller/ie/respond.min.js" async="true"></script>
     <![endif]-->
     
-	<!-- main scripts -->
+	<!-- jQuery -->
         <script src="controller/jquery-1.9.1.min.js"></script>
+		
+	<!-- bootstrap Framework plugins -->
+        <script src="controller/bootstrap.min.js"></script>
+		
+	<!-- main scripts -->	
 		<script src="controller/ui/minified/jquery-ui.min.js"></script>
 		<script src="controller/plugins/jquery.throbber.js"></script>
 		<script src="controller/ui/minified/i18n/jquery.ui.datepicker-es.min.js" async="true"></script>
@@ -66,9 +71,6 @@
 		<script src="controller/plugins/highcharts/exporting.js"  async="true"></script>
 		<script src="controller/plugins/jquery.json-2.3.min.js"  async="true"></script>
 		<!--<script src="controller/css3-mediaqueries.js" async="true"></script>-->
-	
-	<!-- bootstrap Framework plugins -->
-        <script src="controller/bootstrap.min.js"></script>   
 	
 	<!-- diTimeout: para executar solo una vez al redimensionar la ventana -->
 		<script src="controller/plugins/jquery.ba-dotimeout.min.js"  async="true"></script>

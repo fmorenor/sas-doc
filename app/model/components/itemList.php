@@ -149,7 +149,7 @@
 		// EOF Vigencia	- Días restantes
 		
 		$system_path = str_replace("app\model\components", "", dirname(__FILE__)).'documents/';		
-		$thumb = (file_exists($system_path.$row['thumb'])) ? "../documents/".$row['thumb'] : "assets/img/thumb_null.png";
+		$thumb = (file_exists($system_path.$row['thumb']) && !is_dir($system_path.$row['thumb'])) ? "../documents/".$row['thumb'] : "assets/img/thumb_null.png";
 		$jsonData[] = array(
 					'id_documento' => $row['id'],
 					'numero_documento' => $row['numero_documento'],

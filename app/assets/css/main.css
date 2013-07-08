@@ -392,5 +392,7 @@ header {
 	padding: 5px !important;
 }
 
-
+#dialog-confirmation-modal{
+  text-align: center;
+}
 

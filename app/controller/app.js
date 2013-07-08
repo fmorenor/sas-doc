@@ -83,7 +83,7 @@ var userData;
 		});
          
          $('#btn-delete-document').click(function(){
-			createNewDocumentWindow('Eliminar');
+            confirmationDialog('Eliminar');
 		});
 		
 	});
@@ -246,6 +246,20 @@ function newDocument(type) {
 	}
 }
 
+function deleteDocument() {
+   $('#itemDetailTools').fadeOut(function(){
+      setSearchGroup(userData.searchType);	
+   });	
+   
+   $('#itemDetail').slideUp(function(){
+       $('#itemDetail').remove();
+       // Borrar documento y refrescar el listado y los contadores
+       $.post("model/components/deleteDocument.php", {'id_documento': userData.selectedDocumentId}, function(){
+          $('#content1').load("view/main-container.php");
+       });
+   });       
+}
+
 function closeNewDocument() {
 	// Ocultar herramientas del item
 	//$('#itemDetailTools').fadeOut(function(){
@@ -268,6 +282,71 @@ function toggleModal() {
 	} else {
 		$('.modal-back').fadeOut();
 	}
+}
+
+// Función para confirmar antr de ejeutar una acción.
+// Se le envia como parámetro el tipo de evento deseado y ya dentro con un SWITCH se decide la acción.
+function confirmationDialog(eventType){
+   switch (eventType) {
+      case 'Eliminar':  title = "&iquest;Est&aacute;s segur@ de esto?";
+                        text = "Este documento se eliminar&aacute; definitivamente, as&iacute; como todos los datos y archivos asociados a el.<br /><br /> Si estas segur@ por favor conf&iacute;rmalo.";
+                        break;
+   }
+   
+   var dcm = '<div id="dialog-confirmation-modal" title="'+title+'" style="display: none">'     
+      +'<p>'+text+'</p>'
+      +'<input type="password" name="confirmationPassword" id="confirmationPassword" placeholder="Escribe tu Contrase&ntilde;a" value="" />'
+      +'<div id="confirmationMessage"></div>'
+      +'</div>';      
+   $('body').append(dcm);
+   
+  
+   $('#dialog-confirmation-modal').dialog({
+      autoOpen: false,
+      //height: 170,
+      modal: true,
+      close: function(event, ui) {
+         $('#dialog-confirmation-modal').remove();
+      },
+      buttons:
+         {
+            'Confirmar': function() {
+               confirmationCheck();                   
+            },
+            'Cancelar': function() {
+               $( this ).dialog( "close" );
+               $('#dialog-confirmation-modal').remove();
+            }
+         }
+   });
+   
+   $( "#dialog-confirmation-modal" ).dialog("open");
+   
+   // Asociarle el evento de confirmationCheck al input Password, cuando se presione la tecla ENTER
+   $('#confirmationPassword').keypress(function (e) {
+      if (e.which == 13) {
+        confirmationCheck();
+      }
+   });
+   
+   function confirmationCheck() {
+      $.post('../login/model/verify-user.php',{
+            username: userData.usuario,
+            password: $('#confirmationPassword').val()
+         },
+         function(data) {			
+            if(data.usuario == userData.usuario){
+               $('#dialog-confirmation-modal').dialog( "close" );
+               $('#dialog-confirmation-modal').remove();
+               switch (eventType) {
+                  case 'Eliminar':  deleteDocument();
+                                    break;
+               }
+            }
+         }).fail(function() {
+             $('#confirmationMessage').html('<div class="alert alert-error">Datos incorrectos, int&eacute;ntalo nuevamente.</div>');
+         });  
+   }
 }
 
  

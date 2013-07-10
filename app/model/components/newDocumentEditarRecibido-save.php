@@ -135,31 +135,10 @@
             }
         }
         
-        // TURNADO_A	3,4,hcantor        
-        // Primero se detecta cuales usuarios no están dados de alta todavía
-        //$select = mysqli_query($link, "SELECT * FROM documento_turnado_a
-        //                                        WHERE id_documento = '".$id_documento."';   ");
-        //while($row = mysqli_fetch_array($select)){
-        //    $turnado_a_array[] = $row['id_turnado_a'];
-        //}
-        //
-        //$turnado_a = explode(",", $_POST['turnado_a']);
-        //foreach ($turnado_a as &$valor) {
-        //    if(is_numeric($valor)){
-        //        $id_turnado_a = $valor;            
-        //    } else {
-        //        $id_turnado_a = insertNewUser($valor);
-        //    }
-        //    if($id_turnado_a > 0  && !in_array($id_turnado_a, $turnado_a_array)){
-        //        $sql = mysqli_query($link, "INSERT INTO documento_turnado_a
-        //                                        SET id_documento = '".$id_documento."',
-        //                                        id_turnado_a = '".$id_turnado_a."';   ");
-        //        $jsonData['error_turnado_a'] = mysqli_error($link);
-        //    }
-        //}
-        
+        // TURNADO_A	3,4,hcantor   
+        // Se eliminan los usuarios en la tabla turnados para agregar nuevamente solo los presentes en la lista.
         $delete = mysqli_query($link, "DELETE FROM documento_turnado_a
-                                                WHERE id_documento = '".$id_documento."';   ");
+                                        WHERE id_documento = '".$id_documento."';   ");
         
         $turnado_a = explode(",", $_POST['turnado_a']);
         foreach ($turnado_a as &$valor) {

@@ -62,7 +62,7 @@
 		<script src="controller/plugins/jquery.throbber.js"></script>
 		<script src="controller/ui/minified/i18n/jquery.ui.datepicker-es.min.js" async="true"></script>
 		<!--<script src="controller/plugins/jquery.timepicker.js"></script>-->
-		<script src="controller/plugins/bootstrap-timepicker.min.js"></script>
+		<script src="controller/plugins/bootstrap-timepicker.min.js" async="true"></script>
 		
 		
 	<!-- highcharts -->	

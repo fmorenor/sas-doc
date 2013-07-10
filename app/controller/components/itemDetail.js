@@ -161,7 +161,8 @@ $(document).ready(function() {
                 
                 // Detectar la posición de ".detail-adjuntos", de eso depende la posición de las flechas
                 // ya que deben tener posición absoluta y se debe calcular al comienzo.
-                var adjuntosTop = $('.detail-adjuntos').offset().top;
+                
+                var adjuntosTop = ($('.detail-adjuntos').offset()) ? $('.detail-adjuntos').offset().top : 0;
                 var itemDetailHeight = ($('#itemDetail').height()+30);
                 
                 if (adjuntosTop < itemDetailHeight) { // Si hay espacio se muestran
@@ -313,7 +314,7 @@ function loadNotes() {
             table_notas +="</table></div>";                    
             $('.detail-notas').html(table_notas);   
         }  else {
-            var table_notas = "<a href='javascript:void(0)' id='agregar_notas' class='btn popover-link'><i class='icon-plus-sign'></i> Agregar notas a este documento</a>";
+            var table_notas = "<a href='javascript:void(0)' id='agregar_notas' class='btn btn-small popover-link'><i class='icon-plus-sign'></i> Agregar notas a este documento</a>";
             $('.detail-notas').html(table_notas);
         }
         // PopOver para agregar notas   
@@ -324,6 +325,7 @@ function loadNotes() {
             content: function() {
                var message = '<textarea rows="2" id="nueva_nota" placeholder="Nueva nota" class="fullsize-textarea" />';
                message += '<br /><a href="javascript:void(0)" class="btn btn-small" onClick="saveNewNote()">Guardar</a>';
+               message += ' <a href="javascript:void(0)" class="btn btn-small" onClick="$(\'#agregar_notas\').popover(\'hide\');">Cancelar</a>'
                return message;
             }
         });

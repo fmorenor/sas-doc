@@ -253,7 +253,7 @@
 		
 		// Cerrar ventana		
 		$('#closeNewDocumentButton').bind("click", function(){			
-            closeNewDocument();
+            closeNewDocument(documentData.id_documento);
         });
 		
 		// BOF UPLOADER
@@ -354,11 +354,9 @@
 				});
 				// console.log(data.msg);
 			});
-		}
-		
+		}		
 		
 		$('#newDocumentScroll').scrollTop(1);
-
 	});
 	
 	// BOF Notas

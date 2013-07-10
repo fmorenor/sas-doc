@@ -148,7 +148,7 @@
 		
 		// Cerrar ventana		
 		$('#closeNewDocumentButton').bind("click", function(){			
-            closeNewDocument();
+            closeNewDocument(documentData.id_documento);
         });
 		
 		// BOF UPLOADER

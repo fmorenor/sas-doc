@@ -269,12 +269,7 @@ function deleteDocument() {
    });       
 }
 
-function closeNewDocument() {
-	// Ocultar herramientas del item
-	//$('#itemDetailTools').fadeOut(function(){
-	//	setSearchGroup(userData.searchType);	
-	//});
-	
+function closeNewDocument(id_documento) {	
    if (documentData) {
       documentData = null;
    }
@@ -283,6 +278,11 @@ function closeNewDocument() {
            toggleModal();
            $('#newDocument').remove();			
    });
+   
+   // Abrir el documento anterior
+   // Parametros opcionales
+   if(typeof(id_documento)==='undefined') id_documento = null;
+   else selectDocument(id_documento);   
 }
 
 function toggleModal() {
@@ -349,23 +349,23 @@ function confirmationDialog(eventType, id){
    
    function confirmationCheck(id) {
       $.post('../login/model/verify-user.php',{
-            username: userData.usuario,
-            password: $('#confirmationPassword').val()
-         },
-         function(data) {
-            $('#dialog-confirmation-modal').dialog( "close" );
-            $('#dialog-confirmation-modal').remove();
-            if(data.usuario == userData.usuario){               
-               switch (eventType) {
-                  case 'Eliminar':  deleteDocument();
-                                    break;
-                  case 'EliminarNota':  deleteNote(id);
-                                    break;
-               }
+         username: userData.usuario,
+         password: $('#confirmationPassword').val()
+      },
+      function(data) {
+         $('#dialog-confirmation-modal').dialog( "close" );
+         $('#dialog-confirmation-modal').remove();
+         if(data.usuario == userData.usuario){               
+            switch (eventType) {
+               case 'Eliminar':  deleteDocument();
+                                 break;
+               case 'EliminarNota':  deleteNote(id);
+                                 break;
             }
-         }).fail(function() {
-             $('#confirmationMessage').html('<div class="alert alert-error">Datos incorrectos, int&eacute;ntalo nuevamente.</div>');
-         });  
+         }
+      }).fail(function() {
+          $('#confirmationMessage').html('<div class="alert alert-error">Datos incorrectos, int&eacute;ntalo nuevamente.</div>');
+      });  
    }
 }
 

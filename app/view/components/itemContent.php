@@ -72,7 +72,7 @@
     </div>
     <div class="span3 right-separator">
         <div class="row">
-            <div class="span9">News</div>
+            <div class="span9">Recibidos</div>
             <div class="span3 resume-subvalue estatus-recibido">0</div>
         </div>
         <div class="row">

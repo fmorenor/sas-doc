@@ -1,7 +1,7 @@
 <?php
     header("Content-type: application/json");
     include_once "../conexion.php";
-    $sql = mysqli_query($link, "SELECT * FROM documento_notas dn
+    $sql = mysqli_query($link, "SELECT dn.*, cu.user, cu.nombre FROM documento_notas dn
 								LEFT JOIN catalogo_usuarios cu
 									ON dn.id_usuario = cu.id
 								WHERE id_documento = ".$_REQUEST['id_documento'].";");

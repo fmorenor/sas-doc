@@ -2,12 +2,12 @@
 	$(document).ready(function() {
 		
 		// Obtener los datos del documento padre
-		$.get("model/components/itemDetail.php", {id_documento: userData.selectedDocumentId}, function(data){
-			documentData = data;
+		//$.get("model/components/itemDetail.php", {id_documento: userData.selectedDocumentId}, function(data){
+			//documentData = data;
 			$('#selectedDocument').text(documentData.numero_documento);			
 			
 			// ComboBox Tipo de documento
-			$('#tipo_documento_container').load("model/catalogos/catalogo_tipo_documento.php", function(){
+			$('#tipo_documento_container').load("model/catalogos/catalogo_tipo_documento.php", {id_tipo_documento: documentData.id_tipo_documento},  function(){
 				$("#tipo_documento").select2({width: '100%'});
 			});
 			 
@@ -139,7 +139,7 @@
 					update: function() { $("#turnado_a").select2("onSortEnd"); }
 				});
 			// BOF ComboBox turnado
-		});
+		//});
 		
 		
 		

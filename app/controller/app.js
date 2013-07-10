@@ -1,4 +1,5 @@
 var userData;
+var documentData;
 
  $(document).ready(function() {
    
@@ -75,7 +76,14 @@ var userData;
         
         // Botones de edición del documento selecionado
         $('#btn-edit-document').click(function(){
-			createNewDocumentWindow('Editar');
+            switch (documentData.id_estatus) {
+               case '1':
+               case '2': 
+               case '3': t = "Recibido"; break;
+               case '4': t = "Generado"; break;
+               case '5': t = "Seguimento"; break;
+            }
+			createNewDocumentWindow('Editar'+t);
 		});
         
          $('#btn-follow-document').click(function(){
@@ -217,7 +225,8 @@ function loadDocument(id) {
 		},
 		complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
             userData.selectedDocumentId = id;
-            $('#itemDetail').load("view/components/itemDetail.php?itemDetailHeight="+$('#itemDetail').height());
+            userData.itemDetailHeight = $('#itemDetail').height();
+            $('#itemDetail').load("view/components/itemDetail.php");
 		}
 	});
 }
@@ -286,11 +295,18 @@ function toggleModal() {
 
 // Función para confirmar antr de ejeutar una acción.
 // Se le envia como parámetro el tipo de evento deseado y ya dentro con un SWITCH se decide la acción.
-function confirmationDialog(eventType){
+function confirmationDialog(eventType, id){
+   // Parametros opcionales
+   if(typeof(id)==='undefined') id = null;
+   
    switch (eventType) {
       case 'Eliminar':  title = "&iquest;Est&aacute;s segur@ de esto?";
                         text = "Este documento se eliminar&aacute; definitivamente, as&iacute; como todos los datos y archivos asociados a el.";
                         if($('#table_hijos').length > 0) text += "<br /><br />Adem&aacute;s, los documentos derivados de este documento quedar&aacute;n sin referencia de segumiento.";
+                        text += "<br /><br />Si estas segur@ por favor conf&iacute;rmalo.";
+                        break;
+      case 'EliminarNota':  title = "&iquest;Est&aacute;s segur@ de esto?";
+                        text = "Esta nota se eliminar&aacute; definitivamente.";                        
                         text += "<br /><br />Si estas segur@ por favor conf&iacute;rmalo.";
                         break;
    }
@@ -312,8 +328,8 @@ function confirmationDialog(eventType){
       },
       buttons:
          {
-            'Confirmar': function() {
-               confirmationCheck();                   
+            'Confirmar': function() {                
+               confirmationCheck(id);                   
             },
             'Cancelar': function() {
                $( this ).dialog( "close" );
@@ -327,21 +343,23 @@ function confirmationDialog(eventType){
    // Asociarle el evento de confirmationCheck al input Password, cuando se presione la tecla ENTER
    $('#confirmationPassword').keypress(function (e) {
       if (e.which == 13) {
-        confirmationCheck();
+        confirmationCheck(id);
       }
    });
    
-   function confirmationCheck() {
+   function confirmationCheck(id) {
       $.post('../login/model/verify-user.php',{
             username: userData.usuario,
             password: $('#confirmationPassword').val()
          },
-         function(data) {			
-            if(data.usuario == userData.usuario){
-               $('#dialog-confirmation-modal').dialog( "close" );
-               $('#dialog-confirmation-modal').remove();
+         function(data) {
+            $('#dialog-confirmation-modal').dialog( "close" );
+            $('#dialog-confirmation-modal').remove();
+            if(data.usuario == userData.usuario){               
                switch (eventType) {
                   case 'Eliminar':  deleteDocument();
+                                    break;
+                  case 'EliminarNota':  deleteNote(id);
                                     break;
                }
             }

@@ -55,14 +55,7 @@
 							// notice we return the value of more so Select2 knows if more results can be loaded
 							return {results: data.results, more: more};
 						}
-					},				
-					createSearchChoice: function(term, data) {
-						if ($(data).filter(function() {
-							return this.text.localeCompare(term)===0;
-							}).length===0) {
-								return {id:term, text:term};
-							}						
-						},
+					},	
 					initSelection: function(element, callback) {						
 						var d = {id: documentData.id_destinatario, text: (documentData.nombre_destinatario) ? documentData.nombre_destinatario : documentData.destinatario_documento_enviado};
 						element.val(documentData.id_destinatario);
@@ -96,6 +89,13 @@
 							return {results: data.results, more: more};
 						}
 					},
+					createSearchChoice: function(term, data) {
+						if ($(data).filter(function() {
+							return this.text.localeCompare(term)===0;
+							}).length===0) {
+								return {id:term, text:term};
+							}						
+						},
 					initSelection: function(element, callback) {						
 						var d = {id: documentData.id_remitente, text: documentData.nombre_remitente};
 						element.val(documentData.id_remitente);

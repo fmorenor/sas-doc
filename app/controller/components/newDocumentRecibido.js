@@ -265,6 +265,7 @@
 			formData['estatus'] = ($('#turnado_a').val()) ? 2 : 1; // Si hay usuarios en "turnado" se cambia el estatus a 2
 			formData['id_usuario'] = userData.id_usuario;			
 			formData['remitente_nombre'] = $('#s2id_remitente a.select2-choice span').text();
+			formData['destinatario_nombre'] = $('#s2id_destinatario a.select2-choice span').text();
 			
 			// Enviar los datos del formulario por POST
 			var posting = $.post( url, formData);			

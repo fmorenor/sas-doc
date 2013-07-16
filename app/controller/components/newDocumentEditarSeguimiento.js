@@ -16,19 +16,7 @@
 			$('#expediente').val(documentData.expediente);
 			$('#anexos').val(documentData.anexos);
 			$('#vigencia').val(documentData.vigencia);
-			loadPreviousNotes();			
-						
-			// BOF Campos de fecha 
-			$( "#fecha_recepcion" ).datepicker({
-				defaultDate: 0,
-				minDate: new Date(2008, 1 - 1, 1),
-				maxDate: 0,
-				changeMonth: true,
-				changeYear: true,
-				onClose: function( selectedDate ) {
-					$( "#fecha_emision" ).datepicker( "option", "maxDate", selectedDate );
-				}
-			});
+			loadPreviousNotes();
 			
 			$( "#fecha_emision" ).datepicker({
 				defaultDate: 0,
@@ -41,46 +29,19 @@
 					$( "#fecha_recepcion2" ).datepicker( "option", "minDate", selectedDate );
 				}
 			});
-			
-			$( "#fecha_recepcion2" ).datepicker({
-				defaultDate: 0,
-				minDate: new Date(2008, 1 - 1, 1),
-				maxDate: 0,
-				changeMonth: true,
-				changeYear: true,
-				onClose: function( selectedDate ) {
-					//$( "#fecha_emision" ).datepicker( "option", "maxDate", selectedDate );
-				}
-			});		
-			
+						
 			$( "#fecha_emision" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-			$( "#fecha_recepcion" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-			$( "#fecha_recepcion2" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-			
-			// Horas
-			$('#hora_recepcion').timepicker({
+            
+            $('#hora_emision').timepicker({
 				minuteStep: 1,
 				showMeridian: false,
 				showSeconds: true
-			});			
-			
-			$('#hora_recepcion2').timepicker({
-				minuteStep: 1,
-				showMeridian: false,
-				showSeconds: true
-			});
+			});	
 			
 			// Set Dates
 			if (documentData.fecha_emision != '0000-00-00 00:00:00') {
 				$( "#fecha_emision" ).datepicker('setDate', documentData.fecha_emision.substring(0,10));
-			}
-			if (documentData.fecha_recepcion != '0000-00-00 00:00:00') {
-				$( "#fecha_recepcion" ).datepicker('setDate', documentData.fecha_recepcion.substring(0,10));
-				$('#hora_recepcion').timepicker('setTime',  documentData.fecha_recepcion.substring(12,20));
-			}
-			if (documentData.fecha_recepcion2 != '0000-00-00 00:00:00') {
-				$( "#fecha_recepcion2" ).datepicker('setDate', documentData.fecha_recepcion2.substring(0,10));
-				$('#hora_recepcion2').timepicker('setTime',  documentData.fecha_recepcion2.substring(12,20));
+                $('#hora_emision').timepicker('setTime',  documentData.fecha_emision.substring(12,20));
 			}
 			
 			// EOF Campos de fecha 
@@ -108,14 +69,7 @@
 							// notice we return the value of more so Select2 knows if more results can be loaded
 							return {results: data.results, more: more};
 						}
-					},				
-					createSearchChoice: function(term, data) {
-						if ($(data).filter(function() {
-							return this.text.localeCompare(term)===0;
-							}).length===0) {
-								return {id:term, text:term};
-							}						
-						},
+					},	
 					initSelection: function(element, callback) {						
 						var d = {id: documentData.id_remitente, text: documentData.nombre_remitente};
 						if(d.text){
@@ -150,6 +104,13 @@
 							return {results: data.results, more: more};
 						}
 					},
+                    createSearchChoice: function(term, data) {
+						if ($(data).filter(function() {
+							return this.text.localeCompare(term)===0;
+							}).length===0) {
+								return {id:term, text:term};
+							}						
+                        },
 					initSelection: function(element, callback) {						
 						var d = {id: documentData.id_destinatario, text: (documentData.nombre_destinatario) ? documentData.nombre_destinatario : documentData.destinatario_documento_enviado};
 						if(d.text){
@@ -213,37 +174,37 @@
 			// BOF ComboBox turnado
 			
 			// BOF ComboBox asignado
-			$('#asignado_a').select2({
-				placeholder: 'Usuario responsable del seguimiento',
-				minimumInputLength: 5,
-				allowClear: true,
-				ajax: {
-					url: "model/catalogos/catalogo_usuarios.php",
-					dataType: 'json',
-					quietMillis: 100,
-					data: function (term, page) {
-						return {
-							term: term, //search term
-							page_limit: 10, // page size
-							page: page // page number
-						};
-					},
-					results: function (data, page) {
-						//return { results: data.results};
-						var more = (page * 100) < data.total; // whether or not there are more results available
- 
-						// notice we return the value of more so Select2 knows if more results can be loaded
-						return {results: data.results, more: more};
-					}
-				},
-				initSelection: function(element, callback) {
-					var d = {id: documentData.id_asignado_a, text: documentData.nombre_asignado_a};
-					if(d.text){
-						element.val(documentData.id_asignado_a);
-						callback(d);
-					}			
-				},
-			});
+			//$('#asignado_a').select2({
+			//	placeholder: 'Usuario responsable del seguimiento',
+			//	minimumInputLength: 5,
+			//	allowClear: true,
+			//	ajax: {
+			//		url: "model/catalogos/catalogo_usuarios.php",
+			//		dataType: 'json',
+			//		quietMillis: 100,
+			//		data: function (term, page) {
+			//			return {
+			//				term: term, //search term
+			//				page_limit: 10, // page size
+			//				page: page // page number
+			//			};
+			//		},
+			//		results: function (data, page) {
+			//			//return { results: data.results};
+			//			var more = (page * 100) < data.total; // whether or not there are more results available
+			//
+			//			// notice we return the value of more so Select2 knows if more results can be loaded
+			//			return {results: data.results, more: more};
+			//		}
+			//	},
+			//	initSelection: function(element, callback) {
+			//		var d = {id: documentData.id_asignado_a, text: documentData.nombre_asignado_a};
+			//		if(d.text){
+			//			element.val(documentData.id_asignado_a);
+			//			callback(d);
+			//		}			
+			//	},
+			//});
 			// BOF ComboBox asignado
 			
 			// Campo vigencia es de tipo spinner

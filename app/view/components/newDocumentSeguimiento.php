@@ -3,7 +3,7 @@
 <script src="controller/components/newDocumentSeguimiento.js"></script>
     
     <div id="closeNewDocumentButton" class="closer"></div>
-    <form class="form-horizontal" id="form-nuevo-documento" action="model/components/newDocumentSeguimiento-save.php">
+    <form class="form-horizontal" id="form-nuevo-documento" action="model/components/newDocument-save.php">
         <fieldset>
             <legend>Darle seguimiento al documento <strong><span id="selectedDocument"></span></strong></legend>
             <!--Primer fila-->
@@ -72,7 +72,7 @@
                             <label class="control-label" for="fecha_emision"><strong>Fecha de seguimiento *</strong></label>
                             <div class="controls">
                                 
-                                 <div class="input-prepend" style="float: left; width:50%">
+                                <div class="input-prepend" style="float: left; width:50%">
                                     <span class="add-on"><i class="icon-calendar"></i></span>
                                     <input type="text" id="fecha_emision" class="input-small" placeholder="<?php echo getToday(); ?>" required>                                    
                                 </div>                                

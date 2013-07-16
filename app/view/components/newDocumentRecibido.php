@@ -3,7 +3,7 @@
 <script src="controller/components/newDocumentRecibido.js"></script>
     
     <div id="closeNewDocumentButton" class="closer"></div>
-    <form class="form-horizontal" id="form-nuevo-documento" action="model/components/newDocumentRecibido-save.php">
+    <form class="form-horizontal" id="form-nuevo-documento" action="model/components/newDocument-save.php">
         <fieldset>
             <legend>Agregar un nuevo documento</legend>
             <!--Primer fila-->

@@ -1,6 +1,6 @@
 <?php include_once("../../model/functions.php"); ?>
 
-<script src="controller/components/newDocumentEditarRecibido.js"></script>
+<script src="controller/components/newDocumentEditarSeguimiento.js"></script>
     
     <div id="closeNewDocumentButton" class="closer"></div>
     <form class="form-horizontal" id="form-nuevo-documento" action="model/components/newDocument-edit.php">
@@ -73,42 +73,16 @@
                         <div class="control-group">
                             <label class="control-label" for="fecha_emision"><strong>Fecha emisión *</strong></label>
                             <div class="controls">
-                                <div class="input-prepend">
-                                    <span class="add-on"><i class="icon-calendar"></i></span>
-                                    <input type="text" id="fecha_emision" class="input-large" placeholder="<?php echo getToday(); ?>" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="fecha_recepcion"><strong>Fecha recepción *</strong></label>
-                            <div class="controls">
-                                
-                                 <div class="input-prepend" style="float: left; width:50%">
-                                    <span class="add-on"><i class="icon-calendar"></i></span>
-                                    <input type="text" id="fecha_recepcion" class="input-small" placeholder="<?php echo getToday(); ?>" required>                                    
-                                </div>                                
-                                <div class="input-prepend bootstrap-timepicker" style="width:50%">                                    
-                                    <span class="add-on"><i class="icon-time"></i></span>
-                                    <input id="hora_recepcion" type="text" class="input-small">
-                                </div>
-                                
-                            </div>
-                        </div>
-                         <div class="control-group">
-                            <label class="control-label" for="fecha_recepcion2">Recep. oficialia partes</label>
-                            <div class="controls">
-                                
                                 <div class="input-prepend" style="float: left; width:50%">
                                     <span class="add-on"><i class="icon-calendar"></i></span>
-                                    <input type="text" id="fecha_recepcion2" class="input-small" placeholder="<?php echo getToday(); ?>">                                    
+                                    <input type="text" id="fecha_emision" class="input-small" placeholder="<?php echo getToday(); ?>" required>                                    
                                 </div>                                
                                 <div class="input-prepend bootstrap-timepicker" style="width:50%">                                    
                                     <span class="add-on"><i class="icon-time"></i></span>
-                                    <input id="hora_recepcion2" type="text" class="input-small">
+                                    <input id="hora_emision" type="text" class="input-small">
                                 </div>
-                                
                             </div>
-                        </div>                        
+                        </div>                               
                     </div>
                 
                     <div class="span6">
@@ -132,21 +106,7 @@
                                     <input value=" " type='hidden' id="turnado_a" class="input-fullwidth" />
                                 </div> 
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="asignado_a">Asignado a</label>
-                            <div class="controls">                                
-                                <div class="ui-widget input-append">
-                                    <input value=" " type='text' id="asignado_a" class="input-fullwidth">
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="vigencia">Días de vigencia</label>
-                            <div class="controls">
-                                <input id="vigencia" name="vigencia" min="0" max="365" value="0">
-                            </div>
-                        </div>      
+                        </div>                          
                     </div>
                 </div>
                 <!-- Quinta fila -->

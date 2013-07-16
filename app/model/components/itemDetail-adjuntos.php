@@ -11,7 +11,8 @@
     while($row = mysqli_fetch_array($sql)){
 		$system_path = str_replace("app\model\components", "", dirname(__FILE__)).'documents/';		
 		$thumb = (file_exists($system_path.$row['thumb'])) ? "../documents/".$row['thumb'] : "assets/img/thumb_null.png";
-		$jsonData[] = array('path' => '../documents/'.$row['path'],
+		$jsonData[] = array('id' => $row['id'],
+							'path' => '../documents/'.$row['path'],
 							'thumb' => $thumb);
     }
 	

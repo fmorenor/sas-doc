@@ -19,16 +19,36 @@
     $ldap_config['account_preffix'] = 'CONAFOR';
     
     $AUT->initialize( $ldap_config );
-    // EOF LDAP    
+    // EOF LDAP
     
-    // destinatario
+    // Remitente
+    $remitente = $_POST['remitente_nombre'];
+    if($_POST['remitente']){
+        if(is_numeric($_POST['remitente'])){
+            $id_remitente = $_POST['remitente'];            
+        } else {
+            $id_remitente = insertNewUser($_POST['remitente']);
+        }
+    } 
+    
+    // Destinatario
+    $destinatario = $_POST['destinatario_nombre'];
     if($_POST['destinatario']){
         if(is_numeric($_POST['destinatario'])){
             $id_destinatario = $_POST['destinatario'];
         } else {
             $id_destinatario = insertNewUser($_POST['destinatario']);
         }
-    } 
+    } else {
+        $id_destinatario = 0;
+    }
+    
+    // Turnado a
+    if($_POST['turnado_a']){
+        $fecha_turnado = "fecha_turnado = '".date('Y-m-d H:i:s')."',";
+    } else {
+        $fecha_turnado = "";
+    }
     
     // asignado_a
     if($_POST['asignado_a']){
@@ -42,26 +62,13 @@
         $fecha_asignado = "";
     }
     
-    if($_POST['turnado_a']){
-        $fecha_turnado = "fecha_turnado = '".date('Y-m-d H:i:s')."',";
-    } else {
-        $fecha_turnado = "";
-    }
-    
-    // remitente
-    if($_POST['remitente'] || $_POST['remitente_nombre']){
-        if(is_numeric($_POST['remitente'])){
-            $id_remitente = $_POST['remitente'];
-            $remitente = $_POST['remitente_nombre'];
-        } else {
-            $id_remitente = 0;
-            $remitente = $_POST['remitente'];
-        }
+    if($_POST['vigencia']){
+        $vigencia = "vigencia = '".$_POST['vigencia']."',";
     }
     
     // Fechas
     if($_POST['fecha_emision']){
-        $fecha_emision = "fecha_emision = '".$_POST['fecha_emision']."',";
+        $fecha_emision = ($_POST['hora_emision']) ? "fecha_emision = '".$_POST['fecha_emision']." ".$_POST['hora_emision']."'," : "fecha_emision = '".$_POST['fecha_emision']."',";
     }
     if($_POST['fecha_recepcion']){
         $fecha_recepcion = "fecha_recepcion = '".$_POST['fecha_recepcion']." ".$_POST['hora_recepcion']."',";
@@ -79,11 +86,12 @@
                                 ".$fecha_recepcion."
                                 ".$fecha_recepcion2."
                                 id_tipo_documento = '".$_POST['tipo_documento']."',
-                                vigencia = '".$_POST['vigencia']."',
+                                 ".$vigencia."
                                 id_usuario_insertar = '".$_POST['id_usuario']."',
                                 id_estatus = '".$_POST['estatus']."',
                                 
                                 id_destinatario = '".$id_destinatario."',
+                                destinatario_documento_enviado = '".$destinatario."',
                                 ".$id_asignado_a."
                                 ".$fecha_asignado."
                                 ".$fecha_turnado."
@@ -181,6 +189,8 @@
                 } else {
                     $id_usuario = $id_new_user;
                 }
+            } else {
+                $id_usuario = 0;
             }
             return $id_usuario;
         } else {

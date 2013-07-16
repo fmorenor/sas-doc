@@ -19,16 +19,31 @@
     $ldap_config['account_preffix'] = 'CONAFOR';
     
     $AUT->initialize( $ldap_config );
-    // EOF LDAP    
+    // EOF LDAP
     
-    // destinatario
+    // Remitente
+    $remitente = $_POST['remitente_nombre'];
+    if($_POST['remitente']){
+        if(is_numeric($_POST['remitente'])){
+            $id_remitente = $_POST['remitente'];            
+        } else {
+            $id_remitente = insertNewUser($_POST['remitente']);
+        }
+    } else {
+        $id_remitente = 0;
+    }
+    
+    // Destinatario
+    $destinatario = $_POST['destinatario_nombre'];
     if($_POST['destinatario']){
         if(is_numeric($_POST['destinatario'])){
             $id_destinatario = $_POST['destinatario'];
         } else {
             $id_destinatario = insertNewUser($_POST['destinatario']);
         }
-    } 
+    } else {
+        $id_destinatario = 0;
+    }
     
     // asignado_a
     if($_POST['asignado_a']){
@@ -42,32 +57,33 @@
         $fecha_asignado = "";
     }
     
-    if($_POST['turnado_a']){
-        $fecha_turnado = "fecha_turnado = '".date('Y-m-d H:i:s')."',";
-    } else {
-        $fecha_turnado = "";
-    }
-    
-    // remitente
-    if($_POST['remitente']){
-        if(is_numeric($_POST['remitente'])){
-            $id_remitente = $_POST['remitente'];
-            $remitente = $_POST['remitente_nombre'];
-        } else {
-            $id_remitente = 0;
-            $remitente = $_POST['remitente'];
-        }
+    if($_POST['vigencia']){
+        $vigencia = "vigencia = '".$_POST['vigencia']."',";
     }
     
     // Fechas
     if($_POST['fecha_emision']){
-        $fecha_emision = "fecha_emision = '".$_POST['fecha_emision']."',";
+        $fecha_emision = ($_POST['hora_emision']) ? "fecha_emision = '".$_POST['fecha_emision']." ".$_POST['hora_emision']."'," : "fecha_emision = '".$_POST['fecha_emision']."',";
     }
     if($_POST['fecha_recepcion']){
         $fecha_recepcion = "fecha_recepcion = '".$_POST['fecha_recepcion']." ".$_POST['hora_recepcion']."',";
     }
     if($_POST['fecha_recepcion2']){
         $fecha_recepcion2 = "fecha_recepcion2 = '".$_POST['fecha_recepcion2']." ".$_POST['hora_recepcion2']."',";
+    }
+    // Fecha turnado
+    if($_POST['turnado_a']){
+        $fecha_turnado = "fecha_turnado = '".date('Y-m-d H:i:s')."',";
+    } else {
+        $fecha_turnado = "";
+    }
+    
+    // Seguimiento
+    if($_POST['id_documento_padre']){
+        $id_documento_padre = "id_documento_padre = '".$_POST['id_documento_padre']."',";
+        if($_POST['fecha_padre']){
+            $fecha_recepcion = "fecha_recepcion = '".$_POST['fecha_padre']."',";
+        }  
     }
     
     $sql = mysqli_query($link, "INSERT INTO documentos
@@ -79,17 +95,19 @@
                                 ".$fecha_recepcion."
                                 ".$fecha_recepcion2."
                                 id_tipo_documento = '".$_POST['tipo_documento']."',
-                                vigencia = '".$_POST['vigencia']."',
+                                ".$vigencia."
                                 id_usuario_insertar = '".$_POST['id_usuario']."',
                                 id_estatus = '".$_POST['estatus']."',
                                 
-                                id_destinatario = '".$id_destinatario."',
-                                ".$id_asignado_a."
-                                ".$fecha_asignado."
-                                ".$fecha_turnado."
                                 id_remitente = '".$id_remitente."',
                                 remitente = '".$remitente."',
+                                id_destinatario = '".$id_destinatario."',
+                                destinatario_documento_enviado = '".$destinatario."',
+                                ".$id_asignado_a."
+                                ".$fecha_asignado."
+                                ".$fecha_turnado."                                
                                 id_asignado_por = '".$_POST['id_usuario']."',
+                                ".$id_documento_padre."
                                 fecha_actualizacion = '".date('Y-m-d H:i:s')."';   ");
     
     $jsonData['error_documentos'] = mysqli_error($link);
@@ -148,6 +166,18 @@
                 $jsonData['error_turnado_a'] = mysqli_error($link);
             }
         }
+        
+        // Estatus del documento padre
+        // Si el estatus del documento padre es 4 o 5 (generado o seguimiento) se deja en 5,
+        // si tiene otro estatus se cambia a 3 (atendido)
+        if($_POST['estatus_padre']){
+            $estatus = ($_POST['estatus_padre'] == "4" || $_POST['estatus_padre'] == "5") ? $_POST['estatus_padre'] : 3;
+            $sql = mysqli_query($link, "UPDATE documentos
+                                        SET id_estatus = ".$estatus.",                                    
+                                        fecha_actualizacion = '".date('Y-m-d H:i:s')."'
+                                        WHERE id = '".$_POST['id_documento_padre']."';   ");
+            $jsonData['error_estatus_padre'] = mysqli_error($link);
+        }
     }
         
     function insertNewUser($user){
@@ -175,6 +205,8 @@
                 } else {
                     $id_usuario = $id_new_user;
                 }
+            } else {
+                $id_usuario = 0;
             }
             return $id_usuario;
         } else {

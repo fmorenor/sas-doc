@@ -203,11 +203,12 @@ header {
 }
 
 .label_estatus_detail_class{
-    margin-left: 20px;
+    /*margin-left: 20px;*/
+	margin-top: 3px;
 }
 
 .label_vigencia_detail{
-    margin-left: 20px;
+    margin-left: 5px;
 }
 
 .detail-title{
@@ -359,6 +360,12 @@ header {
 #contador-atendido:hover,
 #contador-enviado:hover{
 	font-weight: bold;
+}
+
+@-moz-document url-prefix() {
+    textarea {
+        height: 3em;
+    }
 }
 
 /*** BOF Fix para plugin Select2 + bootstrap ***/

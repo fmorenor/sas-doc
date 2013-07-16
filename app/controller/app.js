@@ -81,7 +81,7 @@ var documentData;
                case '2': 
                case '3': t = "Recibido"; break;
                case '4': t = "Generado"; break;
-               case '5': t = "Seguimento"; break;
+               case '5': t = "Seguimiento"; break;
             }
 			createNewDocumentWindow('Editar'+t);
 		});
@@ -309,6 +309,10 @@ function confirmationDialog(eventType, id){
                         text = "Esta nota se eliminar&aacute; definitivamente.";                        
                         text += "<br /><br />Si estas segur@ por favor conf&iacute;rmalo.";
                         break;
+      case 'EliminarAdjunto':  title = "&iquest;Est&aacute;s segur@ de esto?";
+                        text = "Este archivo adjunto se eliminar&aacute; definitivamente, a&uacute;n cuando no guardes los cambios del documento.";                        
+                        text += "<br /><br />Si estas segur@ por favor conf&iacute;rmalo.";
+                        break;
    }
    
    var dcm = '<div id="dialog-confirmation-modal" title="'+title+'" style="display: none">'     
@@ -360,6 +364,8 @@ function confirmationDialog(eventType, id){
                case 'Eliminar':  deleteDocument();
                                  break;
                case 'EliminarNota':  deleteNote(id);
+                                 break;
+               case 'EliminarAdjunto':  deleteAdjunto(id);
                                  break;
             }
          }

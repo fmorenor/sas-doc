@@ -46,6 +46,10 @@ a.next {
 	opacity : 0.8;
 }
 
+#newDocument a.next {
+	right: 60px;
+}
+
 a.prev:hover {
     background-position: center bottom;
 }
@@ -97,4 +101,5 @@ a.prev span, a.next span {
 	width: 77px;
 	height: 96px;
 }
+
 

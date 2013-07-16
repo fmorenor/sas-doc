@@ -1,4 +1,4 @@
-    - Se deben activar los módulos siguientes en Apache para activar la compresión y el cache:
+﻿    - Se deben activar los módulos siguientes en Apache para activar la compresión y el cache:
     
         mod_expires.c    
         mod_deflate.c    
@@ -22,4 +22,10 @@
     
         app/model/components/newDocument-save.php
         app/model/components/generateThumb.php
+
+
+    - Temas pendientes
+	Documentos pendientes
+	Bitácora
+	Notificados
     

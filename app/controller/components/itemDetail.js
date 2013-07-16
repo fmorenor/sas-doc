@@ -165,11 +165,11 @@ $(document).ready(function() {
                 var adjuntosTop = ($('.detail-adjuntos').offset()) ? $('.detail-adjuntos').offset().top : 0;
                 var itemDetailHeight = ($('#itemDetail').height()+30);
                 
-                if (adjuntosTop < itemDetailHeight) { // Si hay espacio se muestran
+                if ((adjuntosTop + 40) < itemDetailHeight) { // Si hay espacio se muestran
                     $('a.prev').css('display', 'block');
                     $('a.next').css('display', 'block');
-                    $('a.prev').css('top', adjuntosTop - 40);
-                    $('a.next').css('top', adjuntosTop - 40);
+                    $('a.prev').css('top', adjuntosTop);
+                    $('a.next').css('top', adjuntosTop);
                 } else {  // Si no hay espacio se ocultan           
                     $('a.prev').css('display', 'none');
                     $('a.next').css('display', 'none');

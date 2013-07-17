@@ -25,7 +25,6 @@
 
 
     - Temas pendientes
-	Documentos pendientes
-	Bitácora
-	Notificados
+        Documentos pendientes
+        Notificados
     

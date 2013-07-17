@@ -41,11 +41,16 @@ $(document).ready(function() {
 });
 
 function loginErrorDialog(){
-   $( "#dialog-modal" ).dialog("open");
+	$( "#dialog-modal" ).dialog("open");
+   
+	// Eliminar los datos guardados
+	$("#autologin").attr("checked", false);
+	$.removeCookie("ucnf");
+	$.removeCookie("pcnf");
+	$.removeCookie("ulencnf");
+	$.removeCookie("plencnf");
+	$.removeCookie("autocnf");
 }
-
-	//console.log(runEncrypt('protocroda'));
-    //console.log(runDecrypt('d81e412babf21fa9fcfcc11df18c4f04'));
 
 function getAutologin(){
 	var c = $("#autologin"); //INPUT CHECKBOX

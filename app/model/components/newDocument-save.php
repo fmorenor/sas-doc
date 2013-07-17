@@ -117,7 +117,9 @@
     
     // Si se guardó correctemente el documento se procede a hacer todo lo demás...
     if($id_documento > 0){
-    
+         $jsonData['id_documento'] = $id_documento;
+         $jsonData['numero_documento'] = $_POST['numero_documento'];
+         
         // Notas
         if($_POST['nota']){
             $sql = mysqli_query($link, "INSERT INTO documento_notas

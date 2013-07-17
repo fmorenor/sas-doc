@@ -188,6 +188,8 @@
 					}					
 				});
 				// console.log(data.msg);
+                // Bitácora
+                setBitacora(userData.id_usuario, userData.usuario, data.id_documento, data.numero_documento, 'insertar_generado');
 			});
 		}		
 		

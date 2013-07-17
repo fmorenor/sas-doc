@@ -319,6 +319,8 @@
 					}					
 				});
 				// console.log(data.msg);
+                // Bitácora
+                setBitacora(userData.id_usuario, userData.usuario, data.id_documento, data.numero_documento, 'actualizar_seguimiento');
 			});
 		}		
 		
@@ -329,6 +331,7 @@
 	function loadPreviousNotes(show) {
 		$.post("model/components/itemDetail-notas.php", {id_documento: userData.selectedDocumentId}, function(data){                
 			if(data.length > 0){
+                documentData.notas = data;
 				var table_notas = "<table class='table table-bordered table-striped'>"
 					+ "<tr>"
 					+ " <th width='42%'>Nota</th>"
@@ -372,6 +375,12 @@
 			$('#notas_anteriores').popover('hide');
 			$('#notas_anteriores').popover('destroy');
 			loadPreviousNotes(true);
+            // Bitácora
+			var objeto;
+			$.map( documentData.notas, function( value, index ) {
+				objeto = documentData.notas[index].id+" / "+documentData.notas[index].nota+" / "+documentData.notas[index].user+" / "+documentData.notas[index].fecha;
+			}); 
+			setBitacora(userData.id_usuario, userData.usuario, documentData.id_documento, documentData.numero_documento, 'eliminar_nota', objeto);
 		 });
 	}
 	// EOF  Notas
@@ -394,6 +403,7 @@
             
             // Si existen registros de documentos anjuntos
             if(data.length > 0){
+                documentData.adjuntos = data;
 				
 				// Agregar titulo del módulo "adjuntos"	
 				$('.detail-adjuntos').before('<h5 id="adjuntos-title">Archivos adjuntos de este documento</h5>');					
@@ -475,6 +485,12 @@
 	function deleteAdjunto(id) {
 		$.post("model/components/deleteAdjunto.php", {id_adjunto: id}, function(data){
 		   loadAdjuntos(true);
+           // Bitácora
+			var objeto;
+			$.map( documentData.adjuntos, function( value, index ) {
+				objeto = documentData.adjuntos[index].id+" -> "+documentData.adjuntos[index].path;
+			}); 
+			setBitacora(userData.id_usuario, userData.usuario, documentData.id_documento, documentData.numero_documento, 'eliminar_adjunto', objeto);
 		});
 	}
 	// EOF  Adjuntos

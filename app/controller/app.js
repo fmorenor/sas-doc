@@ -11,12 +11,26 @@ var documentData;
 	 
     // BOF Encabezado 
 	$('#encabezado').load('view/encabezado.php', function(){
-		var nombre_completo = (userData.nombre_completo == null) ? userData.usuario : userData.nombre_completo;
-		$('.welcome-message').html("Bienvenid@<br />"+nombre_completo+"<br /><a href='../login/view/logout.php?rnd="+Math.random()+"'>Salir</a>");
-		
-		$('#btn-new-document').click(function(){
-			createNewDocumentWindow('Recibido');
-		});
+         var nombre_completo = (userData.nombre_completo == null) ? userData.usuario : userData.nombre_completo;
+         
+         // Botón de Herramientas
+         var toolsButton = '<div class="btn-group">'
+         + '<a class="btn btn-mini btn-inverse dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" title="Herramientas">'
+         + '<i class="icon-wrench icon-white"></i> '
+         + '<span class="caret"></span>'
+         + '</a>'
+         + '<ul class="dropdown-menu pull-right">'
+         + '<li><a href="javascript:void(0)" onclick="confirmationDialog(\'VerBitacora\')">Ver bit&aacute;cora</a></li>'
+         + '</ul>'
+         + '</div> ';
+         toolsButton = (userData.id_privilegios == '1') ? toolsButton : '';
+         
+         // Mensaje de bienvenida
+         $('.welcome-message').html("Bienvenid@<br /><div class='nombre'>"+nombre_completo+"</div>"+toolsButton+"<a href='../login/view/logout.php?rnd="+Math.random()+"' class='btn btn-mini btn-inverse'><i class='icon-user icon-white'></i> Salir</a>");
+         
+         $('#btn-new-document').click(function(){
+             createNewDocumentWindow('Recibido');
+         });
 	});
     // EOF Encabezado
 	
@@ -265,6 +279,7 @@ function deleteDocument() {
        // Borrar documento y refrescar el listado y los contadores
        $.post("model/components/deleteDocument.php", {'id_documento': userData.selectedDocumentId}, function(){
           $('#content1').load("view/main-container.php");
+          setBitacora(userData.id_usuario, userData.usuario, documentData.id_documento, documentData.numero_documento, 'eliminar_documento');
        });
    });       
 }
@@ -312,6 +327,10 @@ function confirmationDialog(eventType, id){
       case 'EliminarAdjunto':  title = "&iquest;Est&aacute;s segur@ de esto?";
                         text = "Este archivo adjunto se eliminar&aacute; definitivamente, a&uacute;n cuando no guardes los cambios del documento.";                        
                         text += "<br /><br />Si estas segur@ por favor conf&iacute;rmalo.";
+                        break;
+      case 'VerBitacora':  title = "Bit&aacute;cora del SAS-DOC";
+                        text = "En la bit&aacute;cora del sistema podr&aacute;s ver las actividades de los usuarios que pertenecen a tu &aacute;rea de trabajo.";                        
+                        text += "<br /><br />Por favor conf&iacute;rma tus datos.";
                         break;
    }
    
@@ -367,11 +386,50 @@ function confirmationDialog(eventType, id){
                                  break;
                case 'EliminarAdjunto':  deleteAdjunto(id);
                                  break;
+               case 'VerBitacora':  getBitacora(userData.id_usuario);
+                                 break;               
             }
          }
       }).fail(function() {
           $('#confirmationMessage').html('<div class="alert alert-error">Datos incorrectos, int&eacute;ntalo nuevamente.</div>');
       });  
+   }
+}
+
+function setBitacora(id_usuario, usuario, id_documento, numero_documento, evento, objeto) {
+   //Parámetros opcionales
+   if(typeof(objeto)==='undefined') objeto = '';
+   $.post('model/components/setBitacora.php',
+         {'id_usuario': id_usuario,
+         'usuario': usuario,
+         'id_documento': id_documento,
+         'numero_documento':numero_documento,
+         'evento':evento,
+         'objeto': objeto}
+   );
+}
+
+function getBitacora(id_usuario) {
+   // Crear ventana newDocument si no existe
+   if ($('#bitacoraWindow').length == 0) {		
+       toggleModal();
+       $('#content1').append('<div id="bitacoraWindow"></div>');
+       
+       var bitacoraWindowMargin = 20;
+       $('#bitacoraWindow').width($(window).width() - (bitacoraWindowMargin * 4)); // 80px para dejar un espacio a ambos lados
+       $('#bitacoraWindow').height($(window).height() - 140); // 160px por el top y el padding en el CSS
+       $('#bitacoraWindow').css('left', bitacoraWindowMargin);
+       
+       $('#bitacoraWindow').slideDown({
+           duration: 850,
+           specialEasing: {
+              width: 'linear',
+              height: 'easeOutBounce'
+           },
+           complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
+              $('#bitacoraWindow').load("view/components/bitacoraWindow.php");
+           }
+       });	
    }
 }
 

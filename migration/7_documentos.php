@@ -27,6 +27,17 @@
     $sql = mysqli_query($link, "ALTER TABLE `documentos` ADD `id_usuario_insertar` INT NOT NULL AFTER `id_estatus` ");
     $sql = mysqli_query($link, "UPDATE `documentos` SET `id_usuario_insertar` = `id_asignado_por`)");
     
+    // Tabla Bitácora
+    $sql = mysqli_query($link, "ALTER TABLE `bitacora` ADD `objeto` text NOT NULL AFTER `evento` ");
+    
+    $sql = mysqli_query($link, "UPDATE bitacora SET
+    objeto = concat(id_usuario_modificado, ' / ',usuario_modificado)
+    where id_usuario_modificado > 0");
+    
+    $sql = mysqli_query($link, "ALTER TABLE `bitacora`
+    DROP `id_usuario_modificado`,
+    DROP `usuario_modificado`;");
+    
     
     // Eliminar campos    
     $sql = mysqli_query($link, "ALTER TABLE `documentos`

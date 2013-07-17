@@ -61,7 +61,7 @@ header {
 }
 
 .btn-new-document{
-	height: 40px;
+	height: 43px;
 }
 	
 .anlt_content {
@@ -120,6 +120,21 @@ header {
     font-size: 0.75em;
 	line-height: 12px;
     text-align: right;
+	margin-top: -5px;
+}
+
+.welcome-message .btn{
+  margin: 3px 0 0 0;
+}
+
+.welcome-message a{
+  text-align: left;
+}
+
+.welcome-message .nombre{ 
+  white-space:nowrap; 
+  overflow:hidden;
+   text-overflow:ellipsis;
 }
 
 .hidden-desktop .welcome-message {
@@ -237,7 +252,7 @@ header {
 }
 
 /* NEW DOCUMENT */
-#newDocument{
+#newDocument, #bitacoraWindow{
 	display: none;
 	position: absolute;
 	top:103px;

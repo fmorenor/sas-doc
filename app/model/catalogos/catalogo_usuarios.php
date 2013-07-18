@@ -44,7 +44,7 @@
     // BOF Datos de usuarios registrados
     $sql = mysqli_query($link, "SELECT * FROM catalogo_usuarios
                                 WHERE activo = 1
-                                    AND (user like '%".$_REQUEST['term']."%'
+									AND (user = '".$_REQUEST['term']."'
                                     OR nombre like '%".$_REQUEST['term']."%')
                                 ORDER BY nombre; ");
     

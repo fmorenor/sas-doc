@@ -1242,7 +1242,7 @@ class Ldap
 		
 		$username = $this->_removePrefix($username);
 		
-		$filter = "(&(&(objectClass=user)(samaccounttype=". ADLDAP_NORMAL_ACCOUNT .")(objectCategory=person)(cn=*))(|(samaccountname=*$username*)(displayname=*$username*)))";
+		$filter = "(&(&(objectClass=user)(samaccounttype=". ADLDAP_NORMAL_ACCOUNT .")(objectCategory=person)(cn=*))(|(samaccountname=$username)(displayname=*$username*)))";
 		if($fields == NULL)
 		{
 			$fields=array("samaccountname","mail","memberof","title","department","displayname"

@@ -84,7 +84,7 @@
 	ExpiresByType application/x-gzip "access plus 1 month"
 	ExpiresByType image/x-icon "access plus 1 month"
 	ExpiresByType image/jpeg "access plus 1 month"
-	ExpiresByType application/json "access plus 1 minute"
+	ExpiresByType application/json A20
 	ExpiresByType application/vnd.ms-access "access plus 1 month"
 	ExpiresByType audio/midi "access plus 1 month"
 	ExpiresByType video/quicktime "access plus 1 month"

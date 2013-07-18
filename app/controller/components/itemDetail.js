@@ -5,17 +5,43 @@ $(document).ready(function() {
         // BOF LLenar de datos la ficha            
             // Titulo
             $('#numero_documento').text(data.numero_documento);
-            $('.label_estatus_detail_class').addClass('label-'+data.label_estatus);
-            
-            $('.label_estatus_detail_class').on('click', function(){switchList(data.id_estatus)});
-            $('.label_estatus_detail_class').css('cursor', 'pointer');
-            
+            $('.label_estatus_detail_class').addClass('label-'+data.label_estatus);            
             $('.label_estatus_detail_class').text(data.estatus);
+            // $('.label_estatus_detail_class').on('click', function(){switchList(data.id_estatus)});
+            if (documentData.id_estatus <= 3) {
+                $('.label_estatus_detail_class').prepend('<i class="icon-refresh icon-white"></i> ');
+                $('.label_estatus_detail_class').css('cursor', 'pointer');
+                //$('.label_estatus_detail_class').on('click', function(){changeStatus(documentData.id_documento)});
+                // PopOver para cambiar el estatus   
+                $('.label_estatus_detail_class').popover({
+                    placement: 'left',
+                    html: true,
+                    title:"Cambiar el estatus del documento",					
+                    content: function() {                           
+                        var message = '   <button type="button" class="btn btn-small btn-danger" onclick="confirmationDialog(\'CambiarEstatus\',1)">Recibido</button>'
+                        message += '   <button type="button" class="btn btn-small btn-warning" onclick="confirmationDialog(\'CambiarEstatus\',2)">Turnado</button>'
+                        message += '   <button type="button" class="btn btn-small btn-success" onclick="confirmationDialog(\'CambiarEstatus\',3)">Atendido</button>';                        
+                        return message;
+                    }
+                });
+                
+                $(':not(#anything)').on('click', function (e) {
+                    $('.popover-link-status').each(function () {
+                        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                            $(this).popover('hide');
+                            return;
+                        }
+                    });
+                });
+                
+                $('.label_estatus_detail_class').attr('title', 'Cambiar el estatus del documento');
+            }            
+            
             if (data.id_estatus == '1' || data.id_estatus == '2') {            
                 if(data.dias_restantes){
                     $('.label_estatus_detail_class').after('<span class="label label-important label_vigencia_detail">Vigencia: '+data.vigencia+' días / Días restantes: '+data.dias_restantes+'</span>');
                 } 
-            }   
+            }
             
             // Asunto
             $('#detail-asunto').append('<h5>Asunto</h5>'
@@ -274,21 +300,21 @@ $(document).ready(function() {
     
 function switchList(id_estatus){
     switch (id_estatus) {
-        case "1":
-        case "2":   userData.estatus = "1,2";
+        case 1:
+        case 2:   userData.estatus = "1,2";
                     $('#myNav li:eq(0) a').tab('show');
                     break;
-        case "3":   userData.estatus = "3";
+        case 3:   userData.estatus = "3";
                     $('#myNav li:eq(1) a').tab('show');
                     break;
-        case "4":
-        case "5":   userData.estatus = "4,5";
+        case 4:
+        case 5:   userData.estatus = "4,5";
                     $('#myNav li:eq(2) a').tab('show');
                     break;
     }
     
     $("#itemListL1").unhighlight();
-    $('#itemListL1').load("view/components/itemList.php?method=GET");            
+    $('#itemListL1').load("view/components/itemList.php?method=POST");            
 }
 
 // BOF Notas
@@ -344,10 +370,34 @@ function loadNotes() {
 }
 // EOF Notas
 
- function saveNewNote(){    
+function saveNewNote(){    
     var n = $('textarea#nueva_nota').val();
     $.post("model/components/newNote.php", {id_documento: userData.selectedDocumentId, nota: n, id_usuario: userData.id_usuario}, function(data){
         $('#agregar_notas').popover('hide');
         loadNotes();
+    });
+}
+
+function changeStatus(id_estatus) {
+    $.post("model/components/changeStatus.php", {'id_documento': documentData.id_documento, 'id_estatus': id_estatus}, function(data){
+        // 1. Ocultar el PopOver
+        $('.label_estatus_detail_class').popover('hide');
+        
+        // 2. Cambiar los datos del Label y del itemList
+        var lastStatusId = documentData.id_estatus;
+        var lastStatus = documentData.estatus;
+        documentData.id_estatus = data.id_estatus;
+        documentData.estatus = data.estatus;
+        $('.label_estatus_detail_class').removeClass('label-important label-warning label-success').addClass('label-'+data.label_estatus);            
+        $('.label_estatus_detail_class').text(data.estatus);
+        $('.label_estatus_detail_class').prepend('<i class="icon-refresh icon-white"></i> ');
+        $('.label_estatus_detail_class').css('cursor', 'pointer');
+        
+        // 3. Cargar el itemList del nuevo estatus        
+        switchList(id_estatus);
+        
+        // Bitácora
+        var objeto = "Estatus anterior: "+lastStatusId+" - "+lastStatus+" -> Nuevo estatus: "+id_estatus+" - "+documentData.estatus;
+		setBitacora(userData.id_usuario, userData.usuario, documentData.id_documento, documentData.numero_documento, 'cambiar_estatus', objeto);
     });
 }

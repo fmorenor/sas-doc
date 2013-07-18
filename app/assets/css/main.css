@@ -196,7 +196,7 @@ header {
 #itemDetail{
 	display: none;
 	position: absolute;
-	top:103px;
+	top:107px;
 	left: 400px;
 	
 	/*background-color: #FFFFFF;	*/
@@ -255,7 +255,7 @@ header {
 #newDocument, #bitacoraWindow{
 	display: none;
 	position: absolute;
-	top:103px;
+	top:107px;
 	
 	/*background-color: #FFFFFF;	*/
 	background-image: url(../img/bg/diagonal_lines.png);
@@ -429,3 +429,16 @@ header {
   font-weight: bold;
 }
 /* POPOVER */
+
+/* BITÁCORA */
+#bitacoraGrid{
+  font-size: 0.9em;
+}
+.slick-row.odd {
+    background: none repeat scroll 0 0 #F3F3F3;
+}
+.slick-row:hover {
+    background: none repeat scroll 0 0 #F0F0F0;
+    z-index: 10;
+}
+/* BITÁCORA */

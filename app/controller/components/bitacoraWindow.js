@@ -14,7 +14,9 @@
 		// Cerrar ventana		
 		$('#closeBitacoraButton').bind("click", function(){
 			$('#bitacoraWindow').slideUp(function(){
-					toggleModal();
+					if ($('#newDocument').length == 0) { // Ocultar el modal si no existe newDocument
+						toggleModal();
+					}
 					$('#bitacoraWindow').remove();
 					userData.bitacoraGridData = null;
 			}); 
@@ -37,7 +39,7 @@
 	
 	var options = {
 	  enableCellNavigation: false,
-	  enableColumnReorder: false,
+	  enableColumnReorder: true,
 	  editable: false,
 	  rowHeight: 30,
 	};

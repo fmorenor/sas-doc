@@ -115,7 +115,7 @@
             }
             
             $(document).ready(function() {
-                $('#myGridL1').height(($(document).height() - $('#encabezado').height() - 65)+'px');    
+                $('#myGridL1').height(($(document).height() - $('#encabezado').height() - 68)+'px');    
                 $.throbber.show();
                 $('.ui-throbber').css('left', ($('#myGridL1').width() / 2)-20+'px');
                 

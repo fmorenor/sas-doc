@@ -2,10 +2,6 @@ var userDataL1 = new Array();
 
 $(document).ready(function(){
     
-    // PRAGMA BORRAR!!! Sólo como prueba el id_usuario de Bibiana
-    userData.id_usuario = 2; 
-    userData.id_privilegios = 1;
-    
     // Cargar la vista de la lista de meses    
     $('#itemListL1').load("view/components/itemList.php?method=POST&id_usuario="+userData.id_usuario+"&estatus="+userData.estatus);
     

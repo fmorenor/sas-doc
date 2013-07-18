@@ -72,7 +72,7 @@
 
 <script>
   $(document).ready(function() {
-    $('#myGridL1').height(($(document).height() - $('#encabezado').height() - 30)+'px');    
+    $('#myGridL1').height(($(document).height() - $('#encabezado').height() - 35)+'px');    
   });
   function getListWidth() {
     return $('#itemListL1').width() - 20;

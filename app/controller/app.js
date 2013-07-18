@@ -20,7 +20,7 @@ var documentData;
          + '<span class="caret"></span>'
          + '</a>'
          + '<ul class="dropdown-menu pull-right">'
-         + '<li><a href="javascript:void(0)" onclick="confirmationDialog(\'VerBitacora\')">Ver bit&aacute;cora</a></li>'
+         + '<li><a href="javascript:void(0)" onclick="confirmationDialog(\'VerBitacora\')">Ver la bit&aacute;cora del sistema</a></li>'
          + '</ul>'
          + '</div> ';
          toolsButton = (userData.id_privilegios == '1') ? toolsButton : '';
@@ -117,7 +117,7 @@ var documentData;
 	});
  });
  
- function createNewDocumentWindow(type) {
+function createNewDocumentWindow(type) {
    // Si existe el div itemDetail se procede a ocultarlo y a destruirlo. Despues se crea la ventana "newDocument"	 
    if ($('#itemDetail').length > 0) {
        
@@ -229,7 +229,7 @@ function loadDocument(id) {
 		
 	$('#itemDetail').css('left', $('#itemListL1').width());
 	$('#itemDetail').width($(document).width() - $('#itemListL1').width() - 45); // 45px por el padding en el CSS
-	$('#itemDetail').height($(window).height() - 150); // 145px por el top y el padding en el CSS
+	$('#itemDetail').height($(window).height() - 155); // 145px por el top y el padding en el CSS
 	
 	$('#itemDetail').slideDown({
 		duration: 750,
@@ -247,25 +247,27 @@ function loadDocument(id) {
 
 function newDocument(type) {
 	// Crear ventana newDocument si no existe
-	if ($('#newDocument').length == 0) {		
-		toggleModal();
-		$('#content1').append('<div id="newDocument"></div>');
-		
-		var newDocumentMargin = 20;
-		$('#newDocument').width($(window).width() - (newDocumentMargin * 4)); // 80px para dejar un espacio a ambos lados
-		$('#newDocument').height($(window).height() - 140); // 160px por el top y el padding en el CSS
-		$('#newDocument').css('left', newDocumentMargin);
-		
-		$('#newDocument').slideDown({
-			duration: 850,
-			specialEasing: {
-			   width: 'linear',
-			   height: 'easeOutBounce'
-			},
-			complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
-			   $('#newDocument').load("view/components/newDocument"+type+".php");
-			}
-		});	
+	if ($('#newDocument').length == 0) {
+         if ($('#bitacoraWindow').length == 0) { // Mostrar el modal si no existe bitacoraWindow
+            toggleModal();
+         }
+         $('#content1').append('<div id="newDocument"></div>');
+         
+         var newDocumentMargin = 20;
+         $('#newDocument').width($(window).width() - (newDocumentMargin * 4)); // 80px para dejar un espacio a ambos lados
+         $('#newDocument').height($(window).height() - 140); // 160px por el top y el padding en el CSS
+         $('#newDocument').css('left', newDocumentMargin);
+         
+         $('#newDocument').slideDown({
+             duration: 850,
+             specialEasing: {
+                width: 'linear',
+                height: 'easeOutBounce'
+             },
+             complete: function(){ // PRAGMA, puede ser "complete" o "start", depende del efecto deseado...
+                $('#newDocument').load("view/components/newDocument"+type+".php");
+             }
+         });	
 	}
 }
 
@@ -279,6 +281,7 @@ function deleteDocument() {
        // Borrar documento y refrescar el listado y los contadores
        $.post("model/components/deleteDocument.php", {'id_documento': userData.selectedDocumentId}, function(){
           $('#content1').load("view/main-container.php");
+          // Bitácora
           setBitacora(userData.id_usuario, userData.usuario, documentData.id_documento, documentData.numero_documento, 'eliminar_documento');
        });
    });       
@@ -290,8 +293,10 @@ function closeNewDocument(id_documento) {
    }
    
    $('#newDocument').slideUp(function(){
-           toggleModal();
-           $('#newDocument').remove();			
+         if ($('#bitacoraWindow').length == 0) { // Mostrar el modal si no existe bitacoraWindow
+            toggleModal();
+         }
+         $('#newDocument').remove();			
    });
    
    // Abrir el documento anterior
@@ -332,6 +337,10 @@ function confirmationDialog(eventType, id){
                         text = "En la bit&aacute;cora del sistema podr&aacute;s ver las actividades de los usuarios que pertenecen a tu &aacute;rea de trabajo.";                        
                         text += "<br /><br />Por favor conf&iacute;rma tus datos.";
                         break;
+      case 'CambiarEstatus':   title = "&iquest;Est&aacute;s segur@ de esto?";
+                        text = "Se cambiar&aacute; el estatus del documento y esta acci&oacute;n quedar&aacute; registrada en la bit&aacute;cora.";                        
+                        text += "<br /><br />Si estas segur@ por favor conf&iacute;rmalo.";
+                        break;
    }
    
    var dcm = '<div id="dialog-confirmation-modal" title="'+title+'" style="display: none">'     
@@ -370,7 +379,7 @@ function confirmationDialog(eventType, id){
       }
    });
    
-   function confirmationCheck(id) {
+   function confirmationCheck(elem) {
       $.post('../login/model/verify-user.php',{
          username: userData.usuario,
          password: $('#confirmationPassword').val()
@@ -382,12 +391,14 @@ function confirmationDialog(eventType, id){
             switch (eventType) {
                case 'Eliminar':  deleteDocument();
                                  break;
-               case 'EliminarNota':  deleteNote(id);
+               case 'EliminarNota':  deleteNote(elem);
                                  break;
-               case 'EliminarAdjunto':  deleteAdjunto(id);
+               case 'EliminarAdjunto':  deleteAdjunto(elem);
                                  break;
                case 'VerBitacora':  getBitacora(userData.id_usuario);
-                                 break;               
+                                 break;
+               case 'CambiarEstatus':  changeStatus(elem);
+                                 break;
             }
          }
       }).fail(function() {
@@ -411,8 +422,12 @@ function setBitacora(id_usuario, usuario, id_documento, numero_documento, evento
 
 function getBitacora(id_usuario) {
    // Crear ventana newDocument si no existe
-   if ($('#bitacoraWindow').length == 0) {		
-       toggleModal();
+   if ($('#bitacoraWindow').length == 0) {
+      
+      if ($('#newDocument').length == 0) { // Mostrar el modal si no existe newDocument
+         toggleModal();
+      }
+      
        $('#content1').append('<div id="bitacoraWindow"></div>');
        
        var bitacoraWindowMargin = 20;

@@ -1,8 +1,11 @@
 .slick-cell {
-    background: white !important;
     border-color: transparent !important;
     line-height: 19px !important;
-  }
+}
+
+.itemList .slick-cell {
+    background: white !important;
+}
   
 .element-cell {
     border-color: transparent !important;

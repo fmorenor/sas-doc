@@ -5,7 +5,7 @@
     <div class="detail-title">
         <h4>
             <span id="numero_documento"></span>          
-            <span class="label label_estatus_detail_class pull-right"></span>
+            <span class="label label_estatus_detail_class pull-right popover-link-status"></span>
         </h4>
     </div>
     

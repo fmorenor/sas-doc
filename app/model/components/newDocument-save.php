@@ -187,7 +187,7 @@
         if( $AUT->authenticate( $login ,utf8_encode( $password ) ) ) {            
             // Datos del usuario
             $r = $AUT->user_info($user);
-            $nombre_completo = utf8_decode($r[0]['displayname'][0]);
+            $nombre_completo = $r[0]['displayname'][0];
                     
             // Si no existe el usuario, como es válido, se agrega a la base de datos
             // El grupo del usuario no se agrega, este se agregará la primera vez que el usuario se loguee

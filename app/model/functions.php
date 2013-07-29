@@ -21,5 +21,22 @@
         }
         return $ret;
     }
+    
+    function getServer(){
+        if (!isset($_SERVER['REQUEST_URI']))
+            {
+                $_SERVER['REQUEST_URI'] = substr($_SERVER['PHP_SELF'],0 );
+                if (isset($_SERVER['QUERY_STRING'])) { 
+                 $_SERVER['REQUEST_URI'].='?'.$_SERVER['QUERY_STRING']; 
+                }
+            }
+    
+        if ($_SERVER['SERVER_PORT'] != "") $server_port = ":".$_SERVER['SERVER_PORT'];
+        $url = "http://".$_SERVER["SERVER_NAME"].$server_port.$_SERVER["REQUEST_URI"];
+        $pos = strpos($url,"app/");
+        $url = substr($url, 0, $pos);
+        
+        return $url;
+    }
 
 ?>

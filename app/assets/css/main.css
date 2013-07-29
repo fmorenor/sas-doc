@@ -141,6 +141,20 @@ header {
 	margin-left: 60px;
 }
 
+.welcome-message .popover{
+  color: #000000;
+  width: 260px;
+  font-size: 1.2em;
+  line-height: 1.4em;
+}
+
+.badge-pendientes{
+  padding: 1px 4px 0px !important;  
+  position: relative;
+  top: 2px;
+  right: 5px;
+  visibility: hidden;
+}
 
 /* LEVEL 1 */
 
@@ -362,6 +376,11 @@ header {
 .label-search-style{
 	padding: 4px 10px 0 0;
     text-align: right;
+	max-width: 255px;
+	font-size: 13px;
+	white-space:nowrap; 
+	overflow:hidden;
+	text-overflow:ellipsis;
 }
 
 #searchClear, #searchClear2{
@@ -428,6 +447,15 @@ header {
 .popover-title{
   font-weight: bold;
 }
+
+.popover-content {
+  max-height:  500px;
+  overflow: auto;
+}
+
+.popover-content .table{
+  margin-bottom: 10px;
+}
 /* POPOVER */
 
 /* BITÁCORA */
@@ -442,3 +470,26 @@ header {
     z-index: 10;
 }
 /* BITÁCORA */
+
+/* DROPDOWN */
+.dropdown-menu > .selected > a, .dropdown-menu > .selected > a:focus {
+    background-color: #CCCCCC;
+    background-image: linear-gradient(to bottom, #CCCCCC,#AAAAAA);
+    background-repeat: repeat-x;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a {
+    background-color: #999999;
+    background-image: linear-gradient(to bottom, #999999, #666666);
+    background-repeat: repeat-x;
+    color: #FFFFFF;
+    outline: 0 none;
+    text-decoration: none;
+}
+
+#sorting{
+  width: 240px;
+}
+/* DROPDOWN */

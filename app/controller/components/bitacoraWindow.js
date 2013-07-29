@@ -8,7 +8,7 @@
 		//$('#bitacoraTable').load('model/components/bitacoraWindow.php?id_usuario='+userData.id_usuario+'&id_privilegios='+userData.id_privilegios);
 		
 		$.get('model/components/bitacoraWindow.php',{'id_usuario':userData.id_usuario,'id_privilegios':userData.id_privilegios}, function(data) {
-			loadGrid(data);
+			loadGridBitacora(data);
 		});
 		
 		// Cerrar ventana		
@@ -25,57 +25,89 @@
 	});
 	
 	/// BOF Slickgrid	
-	var dataView;
-	var grid;
-	var columns = [
-	  {id: 'id_usuario', name: 'ID Usuario', field : 'id_usuario',width : 2, selectable : false},
-	  {id: 'usuario', name: 'Usuario que realizó la acción', field : 'usuario', selectable : false},
-	  {id: 'id_documento', name: 'ID Documento afectado', field : 'id_documento', selectable : false},
-	  {id: 'numero_documento', name: 'Documento afectado', field : 'numero_documento', selectable : false},
-	  {id: 'evento', name: 'Evento', field : 'evento', selectable : false},
-	  {id: 'objeto', name: 'Elementos', field : 'objeto', selectable : false},
-	  {id: 'fecha_evento', name: 'Fecha', field : 'fecha_evento', selectable : false}
+	var dataViewBitacora;
+	var gridBitacora;
+	var columnsBitacora = [
+	  {id: 'id_usuario', name: 'ID Usuario', field : 'id_usuario',width : 2, selectable : false, sortable : true},
+	  {id: 'usuario', name: 'Usuario que realizó la acción', field : 'usuario', selectable : false, sortable : true},
+	  {id: 'id_documento', name: 'ID Documento afectado', field : 'id_documento', selectable : false, sortable : true},
+	  {id: 'numero_documento', name: 'Documento afectado', field : 'numero_documento', selectable : false, sortable : true},
+	  {id: 'evento', name: 'Evento', field : 'evento', selectable : false, sortable : true},
+	  {id: 'objeto', name: 'Elementos', field : 'objeto', selectable : false, sortable : true},
+	  {id: 'fecha_evento', name: 'Fecha', field : 'fecha_evento', selectable : false, sortable : true}
 	];
 	
 	var options = {
-	  enableCellNavigation: false,
-	  enableColumnReorder: true,
-	  editable: false,
-	  rowHeight: 30,
+		enableCellNavigation: false,
+		enableColumnReorder: true,
+		multiColumnSort: true,
+		editable: false,
+		rowHeight: 30,
 	};
 	
-	function loadGrid(data){
+	function loadGridBitacora(data){
 		userData.bitacoraGridData = data;
 		
 		/// BOF Slickgrid						
 		var groupItemMetadataProvider = new Slick.Data.GroupItemMetadataProvider();
-		dataView = new Slick.Data.DataView({
+		dataViewBitacora = new Slick.Data.DataView({
 		  groupItemMetadataProvider: groupItemMetadataProvider,
 		  inlineFilters: true
 		});
-		grid = new Slick.Grid("#bitacoraGrid", dataView, columns, options);
+		gridBitacora = new Slick.Grid("#bitacoraGrid", dataViewBitacora, columnsBitacora, options);
 	  
 		// register the group item metadata provider to add expand/collapse group handlers
-		grid.registerPlugin(groupItemMetadataProvider);    
-		grid.registerPlugin(new Slick.AutoTooltips());
+		gridBitacora.registerPlugin(groupItemMetadataProvider);    
+		gridBitacora.registerPlugin(new Slick.AutoTooltips());
 		
 		// wire up model events to drive the grid
-		dataView.onRowCountChanged.subscribe(function (e, args) {
-		  grid.updateRowCount();
-		  grid.autosizeColumns();
-		  grid.render();
+		dataViewBitacora.onRowCountChanged.subscribe(function (e, args) {
+		  gridBitacora.updateRowCount();
+		  gridBitacora.autosizeColumns();
+		  gridBitacora.render();
 		});
 	  
-		dataView.onRowsChanged.subscribe(function (e, args) {
-		  grid.invalidateRows(args.rows);
-		  grid.autosizeColumns();
-		  grid.render();
-		});			
+		dataViewBitacora.onRowsChanged.subscribe(function (e, args) {
+		  gridBitacora.invalidateRows(args.rows);
+		  gridBitacora.autosizeColumns();
+		  gridBitacora.render();
+		});
+		
+		gridBitacora.onSort.subscribe(function (e, args) {
+			var cols = args.sortCols;
+	  
+			dataViewBitacora.sort(function (dataRow1, dataRow2) {
+			 for (var i = 0, l = cols.length; i < l; i++) {
+				var field = cols[i].sortCol.field;
+				var sign = cols[i].sortAsc ? 1 : -1;
+				var value1 = dataRow1[field].toString().toUpperCase();
+				var value2 = dataRow2[field].toString().toUpperCase();
+				
+				var letter = /[A-E]/gi;
+				var result1 = value1.match(letter);
+				var result2 = value2.match(letter);						
+				if (!result1) {
+					value1 = (value1.replace(/[^0-9.]/g,'') * 100);
+				}
+				if (!result2) {
+					value2 = (value2.replace(/[^0-9.]/g,'') * 100);
+				}
+				
+				var result = (value1 == value2 ? 0 : (value1 > value2 ? 1 : -1)) * sign;
+				if (result != 0) {
+				  return result;
+				}
+			  }
+			  return 0;
+			});
+			gridBitacora.invalidate();
+			gridBitacora.render();
+		});
 	  
 		// initialize the model after all the events have been hooked up
-		dataView.beginUpdate();
-		dataView.setItems(data.rows);
-		dataView.endUpdate();
+		dataViewBitacora.beginUpdate();
+		dataViewBitacora.setItems(data.rows);
+		dataViewBitacora.endUpdate();
 	}
 	
 	function exportExcel() {

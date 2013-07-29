@@ -42,7 +42,7 @@
 			// Set Dates
 			if (documentData.fecha_emision != '0000-00-00 00:00:00') {
 				$( "#fecha_emision" ).datepicker('setDate', documentData.fecha_emision.substring(0,10));
-				$('#hora_emision').timepicker('setTime',  documentData.fecha_emision.substring(12,20));
+				$('#hora_emision').timepicker('setTime',  documentData.fecha_emision.substring(11));
 			}
 			
 			// EOF Campos de fecha 

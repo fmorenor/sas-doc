@@ -76,11 +76,11 @@
 			}
 			if (documentData.fecha_recepcion != '0000-00-00 00:00:00') {
 				$( "#fecha_recepcion" ).datepicker('setDate', documentData.fecha_recepcion.substring(0,10));
-				$('#hora_recepcion').timepicker('setTime',  documentData.fecha_recepcion.substring(12,20));
+				$('#hora_recepcion').timepicker('setTime',  documentData.fecha_recepcion.substring(11));
 			}
 			if (documentData.fecha_recepcion2 != '0000-00-00 00:00:00') {
 				$( "#fecha_recepcion2" ).datepicker('setDate', documentData.fecha_recepcion2.substring(0,10));
-				$('#hora_recepcion2').timepicker('setTime',  documentData.fecha_recepcion2.substring(12,20));
+				$('#hora_recepcion2').timepicker('setTime',  documentData.fecha_recepcion2.substring(11));
 			}
 			
 			// EOF Campos de fecha 
@@ -360,6 +360,8 @@
 				// console.log(data.msg);
 				// Bitácora
 				setBitacora(userData.id_usuario, userData.usuario, data.id_documento, data.numero_documento, 'actualizar');
+				// Correo de notificación
+				$.post("model/components/sendNotification.php", {'id_documento': data.id_documento});	
 			});
 		}		
 		
@@ -386,7 +388,8 @@
 					table_notas += "    <td><a class='btn btn-mini btn-danger' title='Eliminar esta nota' href='javascript:confirmationDialog(\"EliminarNota\", "+obj.id+")'><i class='icon-trash icon-white'></i></a></td>";  
 					table_notas += "</tr>";
 				});
-				table_notas +="</table>";  
+				table_notas +="</table>";
+				table_notas +="<a class='btn btn-small pull-right' href='javascript:void(0)' onclick='$(\"#notas_anteriores\").popover(\"hide\")'>Cerrar</a><br />"; 
 				
 				$('#notas_anteriores').popover({
 					placement: 'left',

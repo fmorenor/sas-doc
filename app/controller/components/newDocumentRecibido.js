@@ -290,6 +290,9 @@
 				// console.log(data.msg);
 				// Bitácora
 				setBitacora(userData.id_usuario, userData.usuario, data.id_documento, data.numero_documento, 'insertar');
+				
+				// Correo de notificación
+				$.post("model/components/sendNotification.php", {'id_documento': data.id_documento});				
 			});
 		}
 		

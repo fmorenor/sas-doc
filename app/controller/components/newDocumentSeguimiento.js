@@ -250,6 +250,8 @@
 				// console.log(data.msg);
 				// Bitácora
 				setBitacora(userData.id_usuario, userData.usuario, data.id_documento, data.numero_documento, 'insertar_seguimiento', 'Seguimiento a -> '+userData.selectedDocumentId);
+				// Correo de notificación
+				$.post("model/components/sendNotification.php", {'id_documento': data.id_documento});
 			});
 		}
 		

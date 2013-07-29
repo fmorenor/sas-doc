@@ -21,7 +21,7 @@
                             <li>Emisión: <%=fecha_emision%></li>
                             <li>Recepción: <%=fecha_recepcion%></li>
                         <% } else if(id_estatus == '5'){ %>                            
-                            <li>Recep. docto. origen: <%=fecha_recepcion%></li>
+                            <li class="textBreak listWrap">Recep. docto. origen: <%=fecha_recepcion%></li>
                             <li>Seguimiento: <%=fecha_emision%></li>
                         <% } else { %>
                             <li>Emisión: <%=fecha_emision%></li>
@@ -131,11 +131,19 @@
                         searchInput: userData.searchInput
                        }
                 })
-                .done(function(data){                    
+                .done(function(data){
+                    
+                    sortedData = data;
+                    
+                    // Ordenamiento, solo si ya se eligió un tipo
+                    if (userData.sortProp) {
+                        sortedData.sort(compare); 
+                    }
+                    
                      $.throbber.hide();
                  
                      if (data.length > 0) {
-                         grid = new Slick.Grid("#myGridL1", data, columns, options);
+                         grid = new Slick.Grid("#myGridL1", sortedData, columns, options);
                          
                          $(".cell-main-subtitle").dotdotdot();
                          grid.onViewportChanged.subscribe(function(e,args){
@@ -160,6 +168,7 @@
             
             function getListWidth() {
                 return $('#itemListL1').width() - 20;
-            }    
+            }
+            
         </script>
     </body>

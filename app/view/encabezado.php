@@ -4,7 +4,7 @@
 			<!--<button class="btn btn-new-document"><i class="icon-plus"></i> Nuevo</button>-->			
 			<div class="btn-group">
 				<button id="btn-new-document" class="btn btn-new-document"><i class="icon-plus"></i> Nuevo documento</button>
-				<button class="btn btn-new-document dropdown-toggle" data-toggle="dropdown">
+				<button class="btn btn-new-document dropdown-toggle" data-toggle="dropdown" title="Más opciones para nuevos documentos...">
 				<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">

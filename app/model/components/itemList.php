@@ -160,7 +160,7 @@
 					'nombre_remitente' => ($row['id_remitente'] > 0) ? $row['nombre_remitente_cat'] : $row['nombre_remitente'],
 					'id_destinatario' => $row['id_destinatario'],
 					'nombre_destinatario' => $row['nombre_destinatario'],
-					'destinatario_documento_enviado' => $row['destinatario_documento_enviado'],
+					'destinatario_documento_enviado' => $row['destinatario_documento_enviado'],					
 					'id_asignado_a' => $row['id_asignado_a'],
 					'nombre_asignado_a' => $row['nombre_asignado_a'],
 					'id_asignado_por' => $row['id_asignado_por'],
@@ -172,7 +172,12 @@
 					'estatus' => ($row['estatus'] == 'Seguimiento') ? 'Seguim.' : $row['estatus'],
 					'label_estatus' => $label_estatus,
 					'thumb' => $thumb,
-					'order' => $orderBy
+					'order' => $orderBy,
+					'sort_numero_documento' => strtoupper(trim($row['numero_documento'])),
+					'sort_asunto' => strtoupper(trim($row['asunto'])),
+					'sort_remitente' => ($row['id_remitente'] > 0) ? strtoupper(trim($row['nombre_remitente_cat'])) : strtoupper(trim($row['nombre_remitente'])),
+					'sort_destinatario' => ($row['id_estatus'] == '1' || $row['id_estatus'] == '2' || $row['id_estatus'] == '3') ? (($row['nombre_destinatario']) ? strtoupper(trim($row['nombre_destinatario'])) : "0") : (($row['destinatario_documento_enviado']) ? strtoupper(trim($row['destinatario_documento_enviado'])) : "0"),
+					'sort_dias_restantes' => ($dias_restantes >= 0) ? $dias_restantes : (($dias_restantes * -1) + 1000),
 					);
 		
 	}	

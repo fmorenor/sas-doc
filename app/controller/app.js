@@ -1,5 +1,6 @@
 var userData;
 var documentData;
+var sortedData;
 
  $(document).ready(function() {
    
@@ -12,6 +13,18 @@ var documentData;
     // BOF Encabezado 
 	$('#encabezado').load('view/encabezado.php', function(){
          var nombre_completo = (userData.nombre_completo == null) ? userData.usuario : userData.nombre_completo;
+         
+         var pendientesBadge = '<a id="popover-pendientes" href="javascript:void(0)" rel="desc">'
+         + '<span class="badge badge-important badge-pendientes"></span>'
+         + '</a>';
+         
+         $.post("model/components/documentosPendientes.php", {'id_privilegios': userData.id_privilegios, 'id_usuario': userData.id_usuario}, function(data){
+            userData.documentos_pendientes = data.count_pendientes;
+            $('.badge-pendientes').text(userData.documentos_pendientes);
+            $('.badge-pendientes').attr('title', 'No. de documentos pendientes de atender');
+            $('.badge-pendientes').css('visibility', 'visible');
+            $('#popover-pendientes').popover('show');
+         });
          
          // Botón de Herramientas
          var toolsButton = '<div class="btn-group">'
@@ -26,7 +39,33 @@ var documentData;
          toolsButton = (userData.id_privilegios == '1') ? toolsButton : '';
          
          // Mensaje de bienvenida
-         $('.welcome-message').html("Bienvenid@<br /><div class='nombre'>"+nombre_completo+"</div>"+toolsButton+"<a href='../login/view/logout.php?rnd="+Math.random()+"' class='btn btn-mini btn-inverse'><i class='icon-user icon-white'></i> Salir</a>");
+         $('.welcome-message').html("Bienvenid@<br /><div class='nombre'>"+nombre_completo+"</div>"+pendientesBadge+toolsButton+"<a href='../login/view/logout.php?rnd="+Math.random()+"' class='btn btn-mini btn-inverse'><i class='icon-user icon-white'></i> Salir</a>");
+         
+         $('#popover-pendientes').popover({
+            placement: 'bottom',
+            html: true,
+            //trigger: 'manual',
+            title:"&iexcl;Documentos pendientes de atender!",					
+            content: function() {                           
+               var message = 'Hay '+userData.documentos_pendientes+' documentos que tienen una vigencia'
+               + ' establecida para su atenci&oacute;n y siguen pendientes.'
+               + '<br /><br />Por favor atenderlos a la brevedad.'
+               + '<br /><br /><a href="javascript:void(0)" class="btn btn-mini" onClick="sortPendientes()"><i class="icon-arrow-down"></i> Ordenar por d&iacute;as restantes</a>'
+               + '<a href="javascript:void(0)" class="btn btn-mini pull-right" onClick="$(\'#popover-pendientes\').popover(\'hide\');">Cerrar</a>';
+                return message;
+            }
+         });
+         
+         $(':not(#anything)').on('click', function (e) {
+            $('#popover-pendientes').each(function () {
+                //the 'is' for buttons that trigger popups
+                //the 'has' for icons and other elements within a button that triggers a popup
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('hide');
+                    return;
+                }
+            });
+        });
          
          $('#btn-new-document').click(function(){
              createNewDocumentWindow('Recibido');
@@ -107,6 +146,32 @@ var documentData;
          $('#btn-delete-document').click(function(){
             confirmationDialog('Eliminar');
 		});
+         
+         // Funciones de hover en menu de ordenamiento 
+         $('#sorting li a').hover(
+            function(){
+               if($(this).attr('rel') == 'asc'){
+                  $(this).find('i').removeClass('icon-chevron-down').addClass('icon-arrow-up');
+                  $(this).attr('title', 'Ordenar de manera ascendente');
+               } else {
+                  $(this).find('i').removeClass('icon-chevron-up').addClass('icon-arrow-down');
+                  $(this).attr('title', 'Ordenar de manera descendente');                  
+               }
+            },
+            function(){
+               $(this).find('i').removeClass('icon-arrow-up');
+               $(this).find('i').removeClass('icon-arrow-down');
+               $(this).attr('title', '');
+               
+               if($(this).parent().hasClass('selected')){
+                  if($(this).attr('rel') == 'desc'){
+                     $(this).find('i').addClass('icon-chevron-up');
+                  } else {
+                     $(this).find('i').addClass('icon-chevron-down');
+                  }
+               }
+            }
+         );
 		
 	});
 	// EOF Nav Container
@@ -447,5 +512,54 @@ function getBitacora(id_usuario) {
        });	
    }
 }
+
+function sortList(elem, direction) {
+   if(typeof(direction)==='undefined') direction = $(elem).attr('rel');
+   userData.sortProp = $(elem).attr('id');      
+   
+   $(elem).parent().parent().find('li').removeClass('selected');
+   $(elem).parent().parent().find('i').removeClass('icon-arrow-down');
+   $(elem).parent().parent().find('i').removeClass('icon-arrow-up');
+   $(elem).parent().parent().find('i').removeClass('icon-chevron-down');
+   $(elem).parent().parent().find('i').removeClass('icon-chevron-up');
+   $(elem).parent().parent().find('i').removeClass('icon-white');
+   
+   if(direction == 'asc'){
+      userData.sortDirect = 1;
+      // Despues de establecer el ordenamiento se cambian las flechas para mostrar el estatus actual
+      $(elem).attr('rel','desc');      
+      $(elem).find('i').addClass('icon-chevron-up icon-white');
+      $(elem).parent().addClass('selected');
+   } else {
+      userData.sortDirect = -1;
+      // Despues de establecer el ordenamiento se cambian las flechas para mostrar el estatus actual
+      $(elem).attr('rel','asc');
+      $(elem).find('i').addClass('icon-chevron-down icon-white');            
+      $(elem).parent().addClass('selected');
+   }
+   
+   // Ordenamiento 
+   sortedData.sort(compare);
+   
+   grid = new Slick.Grid("#myGridL1", sortedData, columns, options);
+}
+
+function sortPendientes() {
+   //if (userData.estatus != '1,2') {
+      userData.estatus = '1,2';
+      $('#itemListL1').load("view/components/itemList.php?method=GET");
+   //}   
+   $('#myNav li:eq(0) a').tab('show');
+   sortList($('#sort_dias_restantes'), 'desc');
+   $('#popover-pendientes').popover('hide');
+}
+
+function compare(a,b) {
+   if (a[userData.sortProp] < b[userData.sortProp])
+      return (-1 * userData.sortDirect);
+   if (a[userData.sortProp] > b[userData.sortProp])
+     return (1 * userData.sortDirect);
+   return 0;
+}   
 
  

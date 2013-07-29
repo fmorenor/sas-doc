@@ -7,6 +7,25 @@
               <li><a href="#" data-toggle="tab" rel="3" >Atendidos</a></li>
               <li><a href="#" data-toggle="tab" rel="4,5">Enviados</a></li>             
             </ul>
+            
+            <!-- Ordenamiento -->
+            <div class="btn-group">
+              <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#" title="Ordenar los documentos">
+                <i class="icon-arrow-down"></i> 
+                <i class="icon-arrow-up"></i>  
+                <span class="caret"></span>
+              </a>
+              <ul id="sorting" class="dropdown-menu pull-right">
+                <li><a href="javascript:void(0)" rel="desc" id="sort_numero_documento" onclick="sortList(this)"><i></i> Número de documento</a></li>
+                <li><a href="javascript:void(0)" rel="desc" id="sort_asunto" onclick="sortList(this)"><i></i> Asunto</a></li>
+                <li><a href="javascript:void(0)" rel="desc" id="sort_remitente" onclick="sortList(this)"><i></i> Remitente</a></li>
+                <li><a href="javascript:void(0)" rel="desc" id="sort_destinatario" onclick="sortList(this)"><i></i> Destinatario</a></li>
+                <li><a href="javascript:void(0)" rel="desc" id="sort_dias_restantes" onclick="sortList(this)"><i></i> Días restantes para atención</a></li>
+                <li><a href="javascript:void(0)" rel="desc" id="fecha_emision" onclick="sortList(this)"><i></i> Fecha de emisión</a></li>
+                <li class="selected"><a href="javascript:void(0)" rel="asc" id="fecha_recepcion" onclick="sortList(this)"><i class="icon-chevron-down icon-white"></i> Fecha de recepción</a></li>
+              </ul>
+            </div>
+            
             <!-- Búsqueda general -->
             <form class="navbar-search pull-right" action="javascript:search()" id="searchGroup1">
                 <div class="input-append">
@@ -16,7 +35,7 @@
                     </input>
                     <div class="btn-group">                        
                         <button class="btn" type="submit" title="Buscar..." id="searchButton"><i class="icon-search"></i></button>
-                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <button class="btn dropdown-toggle" title="Más métodos de búsqueda..." data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu pull-right">

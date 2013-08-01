@@ -18,19 +18,19 @@
 			loadPreviousNotes();			
 						
 			// BOF Campos de fecha 			
-			$( "#fecha_emision" ).datepicker({
+			$( "#fecha_emision_generado" ).datepicker({
 				defaultDate: 0,
 				minDate: new Date(2008, 1 - 1, 1),
 				maxDate: 0,
 				changeMonth: true,
 				changeYear: true,
-				onClose: function( selectedDate ) {
-					$( "#fecha_recepcion" ).datepicker( "option", "minDate", selectedDate );
-					$( "#fecha_recepcion2" ).datepicker( "option", "minDate", selectedDate );
-				}
+				//onClose: function( selectedDate ) {
+				//	$( "#fecha_recepcion" ).datepicker( "option", "minDate", selectedDate );
+				//	$( "#fecha_recepcion2" ).datepicker( "option", "minDate", selectedDate );
+				//}
 			});
 			
-			$( "#fecha_emision" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+			$( "#fecha_emision_generado" ).datepicker( "option", "dateFormat", "yy-mm-dd");
 			
 			// Horas
 			$('#hora_emision').timepicker({
@@ -41,7 +41,7 @@
 			
 			// Set Dates
 			if (documentData.fecha_emision != '0000-00-00 00:00:00') {
-				$( "#fecha_emision" ).datepicker('setDate', documentData.fecha_emision.substring(0,10));
+				$( "#fecha_emision_generado" ).datepicker('setDate', documentData.fecha_emision.substring(0,10));
 				$('#hora_emision').timepicker('setTime',  documentData.fecha_emision.substring(11));
 			}
 			
@@ -262,6 +262,8 @@
 			// Si el estatus del doccumento padre es 4 o 5 (generado o seguimiento) la fecha a guardar será fecha emisión
 			// si tiene otro estatus será fecha_recepcion
 			//formData['fecha_padre'] = (documentData.id_estatus == "4" || documentData.id_estatus == "5") ? documentData.fecha_emision : documentData.fecha_recepcion;
+			
+			formData['fecha_emision'] = $('#fecha_emision_generado').val();
 			
 			// Enviar los datos del formulario por POST
 			var posting = $.post( url, formData);			

@@ -69,12 +69,12 @@
                         </div>
                         
                          <div class="control-group">
-                            <label class="control-label" for="fecha_emision"><strong>Fecha de seguimiento *</strong></label>
+                            <label class="control-label" for="fecha_emision_seguimiento"><strong>Fecha de seguimiento *</strong></label>
                             <div class="controls">
                                 
                                 <div class="input-prepend" style="float: left; width:50%">
                                     <span class="add-on"><i class="icon-calendar"></i></span>
-                                    <input type="text" id="fecha_emision" class="input-small" placeholder="<?php echo getToday(); ?>" required>                                    
+                                    <input type="text" id="fecha_emision_seguimiento" class="input-small" placeholder="<?php echo getToday(); ?>" required>                                    
                                 </div>                                
                                 <div class="input-prepend bootstrap-timepicker" style="width:50%">                                    
                                     <span class="add-on"><i class="icon-time"></i></span>

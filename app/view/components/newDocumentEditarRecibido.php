@@ -71,21 +71,21 @@
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="fecha_emision"><strong>Fecha emisión *</strong></label>
+                            <label class="control-label" for="fecha_emision_recibido"><strong>Fecha emisión *</strong></label>
                             <div class="controls">
                                 <div class="input-prepend">
                                     <span class="add-on"><i class="icon-calendar"></i></span>
-                                    <input type="text" id="fecha_emision" class="input-large" placeholder="<?php echo getToday(); ?>" required>
+                                    <input type="text" id="fecha_emision_recibido" class="input-large" placeholder="<?php echo getToday(); ?>" required>
                                 </div>
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="fecha_recepcion"><strong>Fecha recepción *</strong></label>
+                            <label class="control-label" for="fecha_recepcion_recibido"><strong>Fecha recepción *</strong></label>
                             <div class="controls">
                                 
                                  <div class="input-prepend" style="float: left; width:50%">
                                     <span class="add-on"><i class="icon-calendar"></i></span>
-                                    <input type="text" id="fecha_recepcion" class="input-small" placeholder="<?php echo getToday(); ?>" required>                                    
+                                    <input type="text" id="fecha_recepcion_recibido" class="input-small" placeholder="<?php echo getToday(); ?>" required>                                    
                                 </div>                                
                                 <div class="input-prepend bootstrap-timepicker" style="width:50%">                                    
                                     <span class="add-on"><i class="icon-time"></i></span>
@@ -95,12 +95,12 @@
                             </div>
                         </div>
                          <div class="control-group">
-                            <label class="control-label" for="fecha_recepcion2">Recep. oficialia partes</label>
+                            <label class="control-label" for="fecha_recepcion2_recibido">Recep. oficialia partes</label>
                             <div class="controls">
                                 
                                 <div class="input-prepend" style="float: left; width:50%">
                                     <span class="add-on"><i class="icon-calendar"></i></span>
-                                    <input type="text" id="fecha_recepcion2" class="input-small" placeholder="<?php echo getToday(); ?>">                                    
+                                    <input type="text" id="fecha_recepcion2_recibido" class="input-small" placeholder="<?php echo getToday(); ?>">                                    
                                 </div>                                
                                 <div class="input-prepend bootstrap-timepicker" style="width:50%">                                    
                                     <span class="add-on"><i class="icon-time"></i></span>

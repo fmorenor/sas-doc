@@ -19,43 +19,43 @@
 			loadPreviousNotes();			
 						
 			// BOF Campos de fecha 
-			$( "#fecha_recepcion" ).datepicker({
+			$( "#fecha_recepcion_recibido" ).datepicker({
 				defaultDate: 0,
 				minDate: new Date(2008, 1 - 1, 1),
 				maxDate: 0,
 				changeMonth: true,
 				changeYear: true,
 				onClose: function( selectedDate ) {
-					$( "#fecha_emision" ).datepicker( "option", "maxDate", selectedDate );
+					$( "#fecha_emision_recibido" ).datepicker( "option", "maxDate", selectedDate );
 				}
 			});
 			
-			$( "#fecha_emision" ).datepicker({
+			$( "#fecha_emision_recibido" ).datepicker({
 				defaultDate: 0,
 				minDate: new Date(2008, 1 - 1, 1),
 				maxDate: 0,
 				changeMonth: true,
 				changeYear: true,
 				onClose: function( selectedDate ) {
-					$( "#fecha_recepcion" ).datepicker( "option", "minDate", selectedDate );
-					$( "#fecha_recepcion2" ).datepicker( "option", "minDate", selectedDate );
+					$( "#fecha_recepcion_recibido" ).datepicker( "option", "minDate", selectedDate );
+					$( "#fecha_recepcion2_recibido" ).datepicker( "option", "minDate", selectedDate );
 				}
 			});
 			
-			$( "#fecha_recepcion2" ).datepicker({
+			$( "#fecha_recepcion2_recibido" ).datepicker({
 				defaultDate: 0,
 				minDate: new Date(2008, 1 - 1, 1),
 				maxDate: 0,
 				changeMonth: true,
 				changeYear: true,
 				onClose: function( selectedDate ) {
-					//$( "#fecha_emision" ).datepicker( "option", "maxDate", selectedDate );
+					//$( "#fecha_emision_recibido" ).datepicker( "option", "maxDate", selectedDate );
 				}
 			});		
 			
-			$( "#fecha_emision" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-			$( "#fecha_recepcion" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-			$( "#fecha_recepcion2" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+			$( "#fecha_emision_recibido" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+			$( "#fecha_recepcion_recibido" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+			$( "#fecha_recepcion2_recibido" ).datepicker( "option", "dateFormat", "yy-mm-dd");
 			
 			// Horas
 			$('#hora_recepcion').timepicker({
@@ -72,15 +72,15 @@
 			
 			// Set Dates
 			if (documentData.fecha_emision != '0000-00-00 00:00:00') {
-				$( "#fecha_emision" ).datepicker('setDate', documentData.fecha_emision.substring(0,10));
+				$( "#fecha_emision_recibido" ).datepicker('setDate', documentData.fecha_emision.substring(0,10));
 			}
 			if (documentData.fecha_recepcion != '0000-00-00 00:00:00') {
-				$( "#fecha_recepcion" ).datepicker('setDate', documentData.fecha_recepcion.substring(0,10));
-				$('#hora_recepcion').timepicker('setTime',  documentData.fecha_recepcion.substring(11));
+				$( "#fecha_recepcion_recibido" ).datepicker('setDate', documentData.fecha_recepcion.substring(0,10));
+				$('#hora_recepcion_recibido').timepicker('setTime',  documentData.fecha_recepcion.substring(11));
 			}
 			if (documentData.fecha_recepcion2 != '0000-00-00 00:00:00') {
-				$( "#fecha_recepcion2" ).datepicker('setDate', documentData.fecha_recepcion2.substring(0,10));
-				$('#hora_recepcion2').timepicker('setTime',  documentData.fecha_recepcion2.substring(11));
+				$( "#fecha_recepcion2_recibido" ).datepicker('setDate', documentData.fecha_recepcion2.substring(0,10));
+				$('#hora_recepcion2_recibido').timepicker('setTime',  documentData.fecha_recepcion2.substring(11));
 			}
 			
 			// EOF Campos de fecha 
@@ -337,6 +337,11 @@
 			// Si el estatus del doccumento padre es 4 o 5 (generado o seguimiento) la fecha a guardar será fecha emisión
 			// si tiene otro estatus será fecha_recepcion
 			//formData['fecha_padre'] = (documentData.id_estatus == "4" || documentData.id_estatus == "5") ? documentData.fecha_emision : documentData.fecha_recepcion;
+			
+			// Se crean parametros genericos para los campos de fecha, los cuales se llaman direfente en cada módulo
+            formData['fecha_emision'] = $('#fecha_emision_recibido').val();
+			formData['fecha_recepcion'] = $('#fecha_recepcion_recibido').val();
+			formData['fecha_recepcion2'] = $('#fecha_recepcion2_recibido').val();
 			
 			// Enviar los datos del formulario por POST
 			var posting = $.post( url, formData);			

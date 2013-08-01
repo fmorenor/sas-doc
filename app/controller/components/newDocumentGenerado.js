@@ -7,18 +7,18 @@
         });
          
         // BOF Campos de fecha 			
-        $( "#fecha_emision" ).datepicker({
+        $( "#fecha_emision_generado" ).datepicker({
             defaultDate: 0,
             minDate: new Date(2008, 1 - 1, 1),
             maxDate: 0,
             changeMonth: true,
             changeYear: true,
-            onClose: function( selectedDate ) {
-                $( "#fecha_recepcion" ).datepicker( "option", "minDate", selectedDate );
-                $( "#fecha_recepcion2" ).datepicker( "option", "minDate", selectedDate );
-            }
+            //onClose: function( selectedDate ) {
+            //    $( "#fecha_recepcion" ).datepicker( "option", "minDate", selectedDate );
+            //    $( "#fecha_recepcion2" ).datepicker( "option", "minDate", selectedDate );
+            //}
         });			
-        $( "#fecha_emision" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+        $( "#fecha_emision_generado" ).datepicker( "option", "dateFormat", "yy-mm-dd");
         
         $('#hora_emision').timepicker({
             minuteStep: 1,
@@ -167,6 +167,9 @@
 			formData['id_usuario'] = userData.id_usuario;			
 			formData['remitente_nombre'] = $('#s2id_remitente a.select2-choice span').text();
 			formData['destinatario_nombre'] = $('#s2id_destinatario a.select2-choice span').text();
+            
+            // Se crean parametros genericos para los campos de fecha, los cuales se llaman direfente en cada módulo
+            formData['fecha_emision'] = $('#fecha_emision_generado').val();
 				
 			// Enviar los datos del formulario por POST
 			var posting = $.post( url, formData);			

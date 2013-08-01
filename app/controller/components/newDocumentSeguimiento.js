@@ -12,18 +12,18 @@
 			});
 			 
 			// BOF Campos de fecha 			
-			$( "#fecha_emision" ).datepicker({
+			$( "#fecha_emision_seguimiento" ).datepicker({
 				defaultDate: 0,
 				minDate: new Date(2008, 1 - 1, 1),
 				maxDate: 0,
 				changeMonth: true,
 				changeYear: true,
-				onClose: function( selectedDate ) {
-					$( "#fecha_recepcion" ).datepicker( "option", "minDate", selectedDate );
-					$( "#fecha_recepcion2" ).datepicker( "option", "minDate", selectedDate );
-				}
+				//onClose: function( selectedDate ) {
+				//	$( "#fecha_recepcion" ).datepicker( "option", "minDate", selectedDate );
+				//	$( "#fecha_recepcion2" ).datepicker( "option", "minDate", selectedDate );
+				//}
 			});			
-			$( "#fecha_emision" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+			$( "#fecha_emision_seguimiento" ).datepicker( "option", "dateFormat", "yy-mm-dd");
 			
 			$('#hora_emision').timepicker({
 				minuteStep: 1,
@@ -227,6 +227,9 @@
 			// Si el estatus del doccumento padre es 4 o 5 (generado o seguimiento) la fecha a guardar será fecha emisión
 			// si tiene otro estatus será fecha_recepcion
 			formData['fecha_padre'] = (documentData.id_estatus == "4" || documentData.id_estatus == "5") ? documentData.fecha_emision : documentData.fecha_recepcion;
+			
+			// Se crean parametros genericos para los campos de fecha, los cuales se llaman direfente en cada módulo
+            formData['fecha_emision'] = $('#fecha_emision_seguimiento').val();
 			
 			// Enviar los datos del formulario por POST
 			var posting = $.post( url, formData);			
